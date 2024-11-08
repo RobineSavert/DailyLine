@@ -1,29 +1,35 @@
 import {
-  createUserWithEmailAndPassword,
+  createUserWithEmailAndPassword, getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 import { defineStore } from 'pinia';
 import { auth } from '../js/firebase';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useLinesStore } from './LinesStore';
+import {useMessageStore} from "@/stores/store-messages";
+
 
 export const useAuthStore = defineStore('authStore', () => {
   const user = ref({});
   const router = useRouter();
-  const errorMessage = ref('')
+  const messageStore = useMessageStore();
   const linesStore = useLinesStore();
+  const isLoggedIn = ref(false)
   const init = () => {
     onAuthStateChanged(auth, (userDetails) => {
       if (userDetails) {
         const uid = userDetails.uid;
         user.value = { email: userDetails.email, uid };
+        isLoggedIn.value = true;
         router.push({ name: 'lines' });
         linesStore.getLines();
       } else {
         user.value = {};
+        isLoggedIn.value = false;
         router.replace({ name: 'auth' });
         linesStore.clearLines();
       }
@@ -35,7 +41,7 @@ export const useAuthStore = defineStore('authStore', () => {
           const user = userCredential.user;
         })
         .catch((error) => {
-          errorMessage.value = error.message;
+          messageStore.addMessage( { title: error.message, type: 'danger' });
         });
   };
 
@@ -45,7 +51,7 @@ export const useAuthStore = defineStore('authStore', () => {
           const user = userCredential.user;
         })
         .catch((error) => {
-          errorMessage.value = error.message;
+          messageStore.addMessage({ title: error.message, type: 'danger' });
         });
   };
 
@@ -60,12 +66,27 @@ export const useAuthStore = defineStore('authStore', () => {
       });
   };
 
+  const auth = getAuth();
+
+  const resetPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+        .then(() => {
+          messageStore.addMessage({ title: 'auth.forgot_password_success' });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          messageStore.addMessage({ title: errorMessage, type: 'danger' });
+        });
+  }
+
   return {
     registerUser,
     loginUser,
     logoutUser,
+    resetPassword,
     init,
     user,
-    errorMessage
+    isLoggedIn
   };
 });

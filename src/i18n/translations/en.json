@@ -2,5 +2,25 @@
   "locale": {
     "en": "English",
     "nl": "Dutch"
+  },
+  "title": "Daily Line",
+  "intro": "Write a single line.. every day..",
+  "auth": {
+    "login": {
+      "title": "Log in",
+      "button": "Log in",
+      "form": {
+        "email": "E-mail address",
+        "password": "Password"
+      }
+    },
+    "register": {
+      "title": "Create",
+      "button": "Create",
+      "form": {
+        "email": "E-mail address",
+        "password": "Password"
+      }
+    }
   }
 }

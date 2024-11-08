@@ -4,6 +4,7 @@ import LinesView from '../Views/LinesView.vue';
 import StatsView from '../Views/StatsView.vue';
 import EditLineView from '../Views/EditLineView.vue';
 import AuthView from '../Views/AuthView.vue';
+import ForgotPassword from "@/Views/ForgotPassword.vue";
 import Tr from "@/i18n/translation"
 
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
     path: '/auth',
     component: AuthView,
     name: 'auth'
+  },
+  {
+    path: '/forgot-password',
+    component: ForgotPassword,
+    name: 'forgot-password'
   }
 ];
 
@@ -37,10 +43,9 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
-  if (!to.name) {
-    // Redirect to auth als er geen naam is
-    return next({ name: 'auth' });
-  }
+  console.log(to.name) //forgot-password
+
+
 
   const locale = to.params.locale || Tr.defaultLocale;
 

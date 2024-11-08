@@ -1,8 +1,7 @@
 <template>
-  <NavBar />
-  <div class="container px-2">
-    <RouterView />
-  </div>
+  <NavBar v-if="isLoggedIn" />
+
+  <RouterView></RouterView>
 
   <Modal v-if="eventBus.state.showModal">
     <template #title>
@@ -23,9 +22,14 @@ import { onMounted } from 'vue';
 import NavBar from './components/Layout/NavBar.vue';
 import { useAuthStore } from './stores/AuthStore';
 import Modal from "@/components/Modal.vue";
-const authStore = useAuthStore();
+import {storeToRefs} from "pinia";
+import Alert from "@/components/Alert.vue"
+import Card from "@/components/Card.vue"
 
-  onMounted(() => {
-    authStore.init();
-  });
+const authStore = useAuthStore();
+const { isLoggedIn } = storeToRefs(useAuthStore())
+
+onMounted(() => {
+  authStore.init();
+});
 </script>

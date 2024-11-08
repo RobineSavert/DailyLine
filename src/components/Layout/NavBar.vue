@@ -6,6 +6,9 @@
         <RouterLink :to="{ name: 'lines', params: { locale: Tr.currentLocale } }" class="navbar-item is-size-4 is-family-monospace">
           Lines
         </RouterLink>
+        <RouterLink :to="{ name: 'forgot-password' }">
+          forgot password
+        </RouterLink>
 
         <a
           role="button"

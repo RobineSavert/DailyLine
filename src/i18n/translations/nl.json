@@ -2,5 +2,25 @@
   "locale": {
     "en": "Engels",
     "nl": "Nederlands"
+  },
+  "title": "Daily Line",
+  "intro": "Schrijf een enkele regel.. elke dag..",
+  "auth": {
+    "login": {
+      "title": "Inloggen",
+      "button": "Inloggen",
+      "form": {
+        "email": "E-mail adres",
+        "password": "Wachtwoord"
+      }
+    },
+    "register": {
+      "title": "Registreren",
+      "button": "Account aanmaken",
+      "form": {
+        "email": "E-mail adres",
+        "password": "Wachtwoord"
+      }
+    }
   }
 }

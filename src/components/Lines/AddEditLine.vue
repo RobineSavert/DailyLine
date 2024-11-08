@@ -3,15 +3,15 @@
     <div class="field">
       <label class="label has-text-white" v-if="label">{{ label }}</label>
       <div class="control">
-        <textarea
-          class="textarea"
+        <input
+          class="form-control"
           :placeholder="placeholder"
           :value="modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
           maxlength="100"
           v-autofocus
           ref="textareaRef"
-        ></textarea>
+        />
       </div>
     </div>
 

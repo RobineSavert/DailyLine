@@ -1,0 +1,18 @@
+
+@mixin icon ($icon) {
+    font-family: "bootstrap-icons", sans-serif; 
+    content: #{'"\\' + $icon + '"'}
+}
+
+@mixin box($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin text-truncate($width){
+    width: $width;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 24px;
+}

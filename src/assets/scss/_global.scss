@@ -1,0 +1,124 @@
+$widths: 10, 15, 20, 30;
+
+.mw-48{
+  min-width: 48px;
+}
+
+select:not([disabled]), .form-check-input:not([disabled]){
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+#wrapper {
+  @extend .d-flex;
+
+  #content-wrapper {
+    background-color: $gray-100;
+    overflow-x: hidden;
+    @extend .w-100;
+
+    #content {
+      flex: 1 0 auto;
+    }
+  }
+}
+
+.stickyTop{
+  top: 0;
+  position: sticky;
+}
+
+button.hiddenScrollToTop{
+  display: none;
+}
+
+.showScrollToTop{
+  z-index: 3;
+  display: unset;
+}
+
+.container,
+.container-fluid {
+  padding-left: $grid-gutter-width;
+  padding-right: $grid-gutter-width;
+}
+
+.no-hover:hover{
+  cursor: default;
+}
+
+.scroll-to-top {
+  right: 1rem;
+  bottom: 1rem;
+  @include box(2.75rem);
+  @extend .text-center;
+  @extend .text-white;
+  @extend .position-fixed;
+  background: fade-out($gray-800, .35);
+  line-height: 40px;
+  border: none;
+
+  &:focus,
+  &:hover {
+    @extend .text-white;
+  }
+
+  &:hover {
+    background: $gray-800;
+  }
+
+  svg {
+    font-weight: 800;
+  }
+}
+
+*:focus {
+  box-shadow: none !important;
+}
+
+.navbar-search {
+  width: 25rem;
+
+  input {
+    @include rfs(0.85rem);
+    @extend .h-auto;
+  }
+}
+
+.input-group {
+  height: 38px;
+
+  .form-select {
+    @include rfs(0.85rem);
+    border: transparent !important
+  }
+
+  .btn {
+    height: 38px;
+    line-height: 1;
+  }
+}
+
+.text-sm {
+  @include rfs(0.8rem)
+}
+
+
+@each $width in $widths {
+  .w-#{$width} {
+    width: #{$width}#{"%"} !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .equal-height-row .card {
+    height: 100% !important;
+  }
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+textarea { border-color: transparent }

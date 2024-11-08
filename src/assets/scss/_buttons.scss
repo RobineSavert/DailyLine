@@ -1,0 +1,122 @@
+$height: 37px;
+$line-height: calc($height/1.75);
+
+
+.btn-circle {
+  border-radius: 100%;
+  @include box(2.5rem);
+  @include rfs(1rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0.5;
+
+  &.btn-sm {
+    @include box(1.8rem);
+    font-size: 0.75rem;
+
+    .icon {
+      margin-top: 1px;
+      margin-left: 1px;
+
+      .bi {
+        margin: 0
+      }
+    }
+
+  }
+
+  &.btn-lg {
+    @include box(3.5rem);
+    font-size: 1.35rem;
+  }
+
+  .icon {
+    margin-top: 0.125em;
+  }
+}
+
+.btn-icon-split {
+  padding: 0;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  height: $height;
+
+  .icon {
+    margin-bottom: 0;
+    background: fade-out($black, .85);
+    padding: $btn-padding-y $btn-padding-x;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-bottom: 0;
+    }
+  }
+
+  .text {
+    display: inline-block;
+    padding: $btn-padding-y $btn-padding-x;
+    color: #fff;
+    line-height: $line-height;
+  }
+
+  &.btn-sm {
+    height: $height * 0.9;
+    .icon,
+    .text {
+      padding: $btn-padding-y-sm $btn-padding-x-sm;
+    }
+    .icon {
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+  &.btn-lg {
+    height: $height * 1.25;
+    .icon {
+      padding: $btn-padding-y-lg $btn-padding-x-lg;
+      display: flex;
+      align-items: center;
+    }
+    .text {
+      padding: $btn-padding-y-lg $btn-padding-x-lg;
+      line-height: $line-height * 1.2;
+    }
+  }
+}
+
+
+.input-group>.input-group-append>.btn, 
+.input-group>.input-group-append>.input-group-text, 
+.input-group>.input-group-prepend:first-child>.btn:not(:first-child), 
+.input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child), 
+.input-group>.input-group-prepend:not(:first-child)>.btn, 
+.input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+.btn {
+  &-primary,
+  &-secondary {
+    @extend .text-white;
+  }
+  &:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
+
+  .btn-check:checked + & {
+    color: #FFFFFF;
+  }
+
+  &.dropdown-toggle:disabled {
+    background-color: var(--bs-secondary-bg) !important;
+  }
+}

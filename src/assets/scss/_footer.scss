@@ -1,0 +1,10 @@
+footer.sticky-footer {
+  @extend .py-3;
+  @extend .px-0;
+  flex-shrink: 0;
+
+  .copyright {
+    line-height: 1;
+    @include rfs(0.8rem);
+  }
+}

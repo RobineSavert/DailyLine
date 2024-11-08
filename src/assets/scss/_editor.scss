@@ -1,0 +1,31 @@
+.tox {
+  .tox-tbtn svg {
+    fill: var(--bs-gray-800) !important;
+  }
+
+  .tox-tbtn:active,
+  .tox-tbtn:hover,
+  .tox-tbtn--enabled,
+  .tox-tbtn--enabled:hover,
+  .tox-collection--grid .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+    background: var(--bs-gray-300) !important;
+  }
+
+  .tox-dialog__body-nav-item--active {
+    color: $primary !important;
+    border-bottom: 2px solid $primary  !important;
+  }
+
+  .tox-button:hover:not(:disabled),
+  .tox-button {
+    color: #FFFFFF  !important;
+    background-color: $gray-600  !important;
+    border-color: $gray-600  !important;
+  }
+
+}
+
+
+.tox-dialog__body-nav-item.tox-tab.tox-dialog__body-nav-item--active {
+  background-color: transparent !important;
+}

@@ -1,0 +1,39 @@
+@import "_variables.scss";
+
+@import "../../../node_modules/bootstrap/scss/_functions.scss";
+@import "../../../node_modules/bootstrap/scss/_variables.scss";
+@import "../../../node_modules/bootstrap/scss/_variables-dark.scss";
+@import "../../../node_modules/bootstrap/scss/_maps.scss";
+@import "../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../node_modules/bootstrap/scss/_utilities.scss";
+@import "../../../node_modules/bootstrap/scss/_helpers.scss";
+@import "../../../node_modules/bootstrap/scss/utilities/_api.scss";
+
+
+$custom-colors: (
+  "tertiary": $purple
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+.bg-tertiary{background-color: var(--bs-purple);}
+.btn-tertiary{background-color: var(--bs-purple);}
+.text-tertiary{color: var(--bs-purple);}
+
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+@import "_mixins.scss";
+@import "_global.scss";
+@import "_utilities.scss";
+
+@import "_dropdowns.scss";
+@import "_navs.scss";
+@import "_buttons.scss";
+@import "_icons.scss";
+@import "_cards.scss";
+@import "_error.scss";
+@import "_footer.scss";
+@import "_badges.scss";
+@import "_tabs.scss";
+@import "_form.scss";
+@import "_editor.scss";

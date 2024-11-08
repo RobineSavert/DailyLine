@@ -1,0 +1,39 @@
+.bi {
+  fill:currentColor;
+  @include box(1em);
+  font-size:1em;
+  margin-bottom:.125em;
+  vertical-align:middle;
+
+  .nav-item & {
+    @extend .mb-0;
+  }
+
+  &.bi--size-2x {
+    font-size: 1.33333333rem;
+    @include box(1.5rem)
+  }
+
+  &--variant-success{color:var(--bs-success)}
+  &--variant-warning{color:var(--bs-warning)}
+  &--variant-danger{color:var(--bs-danger)}
+  &--variant-info{color:var(--bs-info)}
+  &--variant-primary{color:var(--bs-primary)}
+  &--variant-secondary{color:var(--bs-secondary)}
+  &--variant-dark{color:var(--bs-dark)}
+  &--variant-light{color:var(--bs-light)}
+  &.bi--size-sm{font-size:.75em}&size-md{font-size:1.25rem}
+  &.bi--size-lg{font-size:1.33333333rem}
+  &.bi--size-2x{font-size:2rem}
+  &.bi--size-3x{font-size:3rem}
+  &.bi--size-4x{font-size:4rem}
+  &.bi--size-5x{font-size:5rem}
+  &.bi--animation-cylon{animation:bi-animation-cylon-92f062d4 .75s ease-in-out infinite alternate}
+  &.bi--animation-cylon-vertical{animation:bi-animation-cylon-vertical-92f062d4 .75s ease-in-out infinite alternate}
+  &.bi--animation-fade{animation:bi-animation-fade-92f062d4 .75s ease-in-out infinite alternate}
+  &.bi--animation-spin{animation:bi-animation-spin-92f062d4 2s linear infinite normal}
+  &.bi--animation-spin-reverse{animation:bi-animation-spin-92f062d4 2s linear infinite reverse}
+  &.bi--animation-spin-pulse{animation:bi-animation-spin-92f062d4 1s steps(8) infinite normal}
+  &.bi--animation-spin-reverse-pulse{animation:bi-animation-spin-92f062d4 1s steps(8) infinite reverse}
+  &.bi--animation-throb{animation:bi-animation-throb-92f062d4 .75s ease-in-out infinite alternate}@keyframes bi-animation-cylon-92f062d4{0%{transform:translate(-25%)}to{transform:translate(25%)}}@keyframes bi-animation-cylon-vertical-92f062d4{0%{transform:translateY(25%)}to{transform:translateY(-25%)}}@keyframes bi-animation-fade-92f062d4{0%{opacity:.1}to{opacity:1}}@keyframes bi-animation-spin-92f062d4{0%{transform:rotate(0)}to{transform:rotate(359deg)}}@keyframes bi-animation-throb-92f062d4{0%{opacity:.5;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+}

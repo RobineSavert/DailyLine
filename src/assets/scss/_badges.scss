@@ -1,0 +1,17 @@
+$badge-colors: (
+    "primary": #ed751f,
+    "secondary": #858796, 
+    "success": #1cc88a,
+    "info": #36b9cc,
+    "warning": #f6c23e,
+    "danger": #e74a3b,
+    "light": #f8f9fc,
+    "dark": #5a5c69,
+);
+
+@each $name, $color in $badge-colors {
+  .badge-#{$name} {
+    background-color: $color;
+    color: #fff;
+  }
+}

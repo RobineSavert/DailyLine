@@ -1,0 +1,60 @@
+.card {
+  .card-header {
+    .dropdown {
+      line-height: 1;
+
+      .dropdown-menu {
+        line-height: 1.5;
+      }
+    }
+
+    &[data-bs-toggle="collapse"] {
+      @extend .text-decoration-none;
+      @extend .position-relative;
+      padding: 0.75rem 3.25rem 0.75rem 1.25rem;
+
+      &::after {
+        @extend .position-absolute;
+        @extend .end-0;
+        @extend .top-0;
+        @extend .pe-3;
+        line-height: 51px;
+        font-weight: 900;
+        @include icon(f282);
+        color: $gray-400;
+      }
+
+      &.collapsed {
+        border-radius: $card-border-radius;
+
+        &::after {
+          @include icon(f285);
+        }
+      }
+    }
+
+  }
+
+  .card-footer {
+    @extend .py-4;
+  }
+
+  &.card-icon {
+    @extend .overflow-hidden;
+    @extend .ps-0;
+
+    .card-icon-aside {
+      @extend .d-flex;
+      @extend .align-items-center;
+      @extend .justify-content-center;
+      @include rfs(3rem);
+      @extend .text-white-50;
+      padding: 2.5rem;
+
+      i,
+      svg {
+        @include box(3rem);
+      }
+    }
+  }
+}

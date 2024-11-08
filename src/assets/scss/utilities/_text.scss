@@ -1,0 +1,51 @@
+
+@font-face {
+  font-family: 'segoe';
+  src: url('/../font/segoeui-webfont.woff2') format('woff2'),
+  url('/../font/segoeui-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+$text-sizes: (
+    "xs": .7rem, 
+    "lg": 1.2rem, 
+);
+
+$gray-scales: (
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900,
+);
+
+@each $name, $size in $text-sizes {
+  .text-#{$name} {
+    font-size: $size
+  }
+}
+
+@each $name, $scale in $gray-scales {
+  .text-gray-#{$name} {
+    color: $scale !important;
+  }
+}
+
+.font-weight-bold {
+  font-weight: 700!important;
+}
+
+.icon-circle {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

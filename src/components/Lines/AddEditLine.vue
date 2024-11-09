@@ -1,41 +1,39 @@
 <template>
-  <div class="my-4 p-4" :class="`has-background-${bgColor}-dark`">
-    <div class="field">
-      <label class="label has-text-white" v-if="label">{{ label }}</label>
-      <div class="control">
-        <textarea
-            class="form-control"
-            :placeholder="placeholder"
-            :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
-            maxlength="100"
-            v-autofocus
-            ref="textareaRef"
-            :disabled="isDisabled"
-        ></textarea>
-      </div>
+    <textarea
+        class="form-control"
+        :placeholder="$t(placeholder)"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        maxlength="300"
+        v-autofocus
+        ref="textareaRef"
+        rows="12"
+        :disabled="isDisabled"
+    ></textarea>
+
       <p v-if="isDisabled" class="has-text-warning">
-        Je kunt opnieuw sturen over: {{ countdown }}
+        {{ $t('countdown.description')}} {{ countdown }}
       </p>
-    </div>
+
 
     <div class="field is-grouped is-grouped-right">
       <div class="control">
         <slot name="button"></slot>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { vAutofocus } from '@/directives/vAutofocus';
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const props = defineProps({
   modelValue: { type: String, required: true },
   bgColor: { type: String, default: 'danger' },
   label: { type: String },
-  placeholder: { type: String, default: 'Type Something ....' },
+  placeholder: { type: String, default: 'lines.placeholder' },
   isDisabled: { type: Boolean, default: false },
   countdown: { type: String, default: '' }
 });

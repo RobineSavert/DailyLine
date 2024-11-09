@@ -1,67 +1,27 @@
 <template>
-    <AddEditLine
-        v-model="newLine"
-        ref="addEditLineRef"
-        :is-disabled="isDisabled"
-        :countdown="countdown"
-    >
-      <template #button>
-        <button
-            :disabled="!newLine || isDisabled"
-            class="button is-link is-danger"
-            @click.prevent="addLine"
-        >
-          Add New Line
-        </button>
-      </template>
-    </AddEditLine>
+    <h1>{{ $t('lines.title') }}</h1>
 
-    <progress class="progress is-large is-info" max="100" v-if="!linesStore.linesLoaded" />
-
-    <template v-else>
-      <div v-for="line in lines" :key="line.id">
-        <SingleLine @deleteLine="checkLinesAndUpdate" :line="line" />
-      </div>
-
-    </template>
-
-    <div
-        class="has-text-centered py-6 is-size-4 has-text-grey-light is-family-monospace"
-        v-if="!lines.length && linesStore.linesLoaded"
-    >
-      No lines added here yet!
-
+    <div v-for="line in lines" :key="line.id" class="mt-4">
+      <SingleLine @deleteLine="checkLinesAndUpdate" :line="line" />
     </div>
 
-
-
+    <div v-if="!lines.length && linesStore.linesLoaded">
+      <h4>{{ $t('lines.no_lines') }}</h4>
+    </div>
 </template>
 
 <script setup>
   import { ref, onMounted } from 'vue';
   import SingleLine from '../components/Lines/SingleLine.vue';
-  import AddEditLine from '../components/Lines/AddEditLine.vue';
   import { useLinesStore } from '@/stores/LinesStore';
   import { storeToRefs } from 'pinia';
   import { useCharactersLimit } from '@/composables/useCharactersLimit';
 
   const linesStore = useLinesStore();
-  const addEditLineRef = ref(null);
   const { lines } = storeToRefs(linesStore);
   const newLine = ref('');
   const isDisabled = ref(false);
   const countdown = ref('');
-  const hasExistingLine = ref(false);
-
-
-  const addLine = () => {
-    linesStore.addLine(newLine.value);
-    newLine.value = '';
-    addEditLineRef.value.focusTextArea();
-    hasExistingLine.value = true;
-    sendText();
-  };
-
 
   useCharactersLimit(newLine);
 
@@ -86,13 +46,7 @@
     }
   }
 
-  const sendText = () => {
-    const now = new Date().getTime();
-    localStorage.setItem('textareaTimestamp', now);
-    isDisabled.value = true;
-    calculateCountdown(now + 24 * 60 * 60 * 1000);
-    setInterval(() => calculateCountdown(now + 24 * 60 * 60 * 1000), 1000);
-  };
+
 
   // Function to calculate and display countdown
   const calculateCountdown = (expiryTime) => {

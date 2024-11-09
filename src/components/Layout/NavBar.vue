@@ -39,6 +39,7 @@ const { t } = useI18n();
 const navItems = computed(() => [
   { key: 'line-button', icon: 'blockquote-right', name: 'lines', translation: 'navbar.lines' },
   { key: 'person-button', icon: 'person-fill', name: 'account', translation: 'navbar.account' },
+  { key: 'add-line-button', icon: 'vector-pen', name: 'add', translation: 'navbar.add' },
   { key: 'stats-button', icon: 'bar-chart-fill', name: 'stats', translation: 'navbar.stats' },
   { key: 'settings-button', icon: 'gear-fill', name: 'settings', translation: 'navbar.settings' }
 ]);

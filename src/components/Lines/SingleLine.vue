@@ -1,22 +1,25 @@
 <template>
-
-  <div class="card mb-4">
-    <div class="card-content">
-      <div class="content">
-        {{ line.content }}
-        <div class="columns has-text-grey-light mt-3">
-          <small class="column">{{ formattedDate }}</small>
-          <small class="column has-text-right">{{ characterLength }}</small>
-        </div>
+  <Card :panel-collapsable="false" :variant="'none'" :card-footer="true">
+    <template v-slot:title>
+      <div class="d-flex justify-content-between">
+        <small>{{ formattedDate }}</small>
+        <small>{{ characterLength }}</small>
       </div>
-    </div>
-    <footer class="card-footer">
-      <RouterLink :to="{ name: 'editLine', params: { id: line.id } }" class="card-footer-item"
-        >Edit</RouterLink
-      >
-      <a href="#" class="card-footer-item" @click.prevent="openModal">Delete</a>
-    </footer>
-  </div>
+    </template>
+    <template v-slot:body>
+      {{ line.content }}
+    </template>
+    <template v-slot:footer>
+      <div class="d-flex justify-content-between">
+      <RouterLink :to="{ name: 'editLine', params: { id: line.id } }" class="text-sm">
+        {{ $t('lines.edit') }}
+      </RouterLink>
+      <a href="#" class="text-sm" @click.prevent="openModal">
+        {{ $t('lines.delete') }}
+      </a>
+      </div>
+    </template>
+  </Card>
 </template>
 
 <script setup>
@@ -25,6 +28,8 @@ import { computed, reactive } from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import eventBus from "@/eventBus";
 import { useI18n } from 'vue-i18n';
+import Card from "@/components/Card.vue";
+import Tabs from "@/components/Tabs.vue";
 
 const props = defineProps({
   line: {
@@ -44,15 +49,15 @@ const formattedDate = computed(() => {
 
 const characterLength = computed(() => {
   const lineLength = props.line.content.length;
-  const description = lineLength > 1 ? 'characters' : 'character';
+  const description = lineLength > 1 ? 'chars' : 'char';
   return `${props.line.content.length} ${description}`;
 });
 
 
 function openModal() {
-  const title = t("dashboard.versionInfomodal.versionInfomodalTitle");
-  const body = t("dashboard.versionInfomodal.versionInfomodalBody");
-  const buttonText = t("dashboard.versionInfomodal.versionInfomodalButtonText");
+  const title = t("lines.delete_modal.title");
+  const body = t("lines.delete_modal.body");
+  const buttonText = t("buttons.delete");
   eventBus.showModal(title, body, null, buttonText, '', false, true, true, 'card-list', deleteLine);
 }
 

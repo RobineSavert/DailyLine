@@ -3,6 +3,15 @@
     "en": "Engels",
     "nl": "Nederlands"
   },
+  "buttons": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "add_new": "Voeg nieuwe regel toe",
+    "save_line": "Sla regel op",
+    "delete": "Verwijderen",
+    "account_update": "Account updaten",
+    "edit_account": "Account bewerken"
+  },
   "title": "Daily Line",
   "intro": "Schrijf een enkele regel.. elke dag..",
   "auth": {
@@ -31,8 +40,34 @@
   "navbar": {
     "lines": "Regels",
     "account": "Account",
-    "stats": "Statistieken",
+    "add": "Toevoegen",
+    "stats": "Stats",
     "settings": "Instellingen",
     "logout": "Uitloggen"
+  },
+  "lines": {
+    "title": "Regels",
+    "no_lines": "Nog geen regels toegevoegd!",
+    "edit": "bewerk",
+    "delete": "verwijder",
+    "edit_line_title": "Regel bewerken",
+    "delete_modal": {
+      "title": "Regel verwijderen",
+      "body": "Weet je zeker dat je deze regel wilt verwijderen?"
+    },
+    "placeholder": "Typ iets ...."
+  },
+  "account": {
+    "title": "Account",
+    "logout": "Uitloggen"
+  },
+  "countdown": {
+    "description": "Je kunt een nieuwe regel schrijven over: "
+  },
+  "stats": {
+    "stat": "Statistiek",
+    "value": "Aantal",
+    "total_lines": "Regels",
+    "total_chars": "Karakters"
   }
 }

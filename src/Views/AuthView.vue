@@ -3,23 +3,18 @@
     <div class="container">
       <div class="row justify-content-center pt-4">
         <div class="col-xl-5 col-lg-12">
-          <Card :panel-i-d="'loginPanel'" :noPadding="true" :panel-collapsable="false" :panel-header="false" :variant="'none'" class="o-hidden border-0 shadow-lg">
+          <Card :panel-i-d="'loginPanel'" :noPadding="true" :panel-collapsable="false" :panel-header="false" :variant="'none'">
             <template v-slot:body>
               <div class="row align-items-center">
-
                   <div class="text-center vertical-align p-5">
-
                     <h1 class="h4 text-gray-900 mb-3">
                       {{ t('title')}}
                     </h1>
-
                     <p class="text-sm mb-5">
                       {{ t('intro')}}
                     </p>
-
                     <Tabs :id="'auth-tabs'" :tabs="tabs" />
                   </div>
-
               </div>
             </template>
           </Card>
@@ -27,7 +22,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>

@@ -8,6 +8,7 @@ import ForgotPassword from "@/Views/ForgotPassword.vue";
 import Tr from "@/i18n/translation"
 import AccountView from "@/Views/AccountView.vue";
 import SettingsView from "@/Views/SettingsView.vue";
+import AddLine from "@/Views/AddLine.vue";
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
     path: '/:locale?/settings',
     component: SettingsView,
     name: 'settings'
+  },
+  {
+    path: '/:locale?/add',
+    component: AddLine,
+    name: 'add'
   }
 ];
 

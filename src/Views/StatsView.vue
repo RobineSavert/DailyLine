@@ -3,18 +3,18 @@
     <table class="table is-fullwidth">
       <thead>
         <tr>
-          <th>Stat</th>
-          <th>Value</th>
+          <th>{{ $t('stats.stat') }}</th>
+          <th>{{ $t('stats.value') }}</th>
         </tr>
       </thead>
 
       <tbody>
         <tr>
-          <td>Total lines Count</td>
+          <td>{{ $t('stats.total_lines') }}</td>
           <td>{{ linesCount }}</td>
         </tr>
         <tr>
-          <td>Total Characters Count</td>
+          <td>{{ $t('stats.total_chars') }}</td>
           <td>{{ totalCharactersCount }}</td>
         </tr>
       </tbody>

@@ -23,9 +23,11 @@ export const useAuthStore = defineStore('authStore', () => {
     onAuthStateChanged(auth, (userDetails) => {
       if (userDetails) {
         const uid = userDetails.uid;
-        user.value = { email: userDetails.email, uid };
+        const displayName = userDetails.displayName;
+        const photoURL = userDetails.photoURL;
+        user.value = { email: userDetails.email, uid, displayName, photoURL  };
         isLoggedIn.value = true;
-        router.push({ name: 'lines' });
+        router.push({ name: 'lines'});
         linesStore.getLines();
       } else {
         user.value = {};

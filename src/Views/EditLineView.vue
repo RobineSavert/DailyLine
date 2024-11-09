@@ -1,16 +1,18 @@
 <template>
+  <h1>{{ $t('lines.edit_line_title')}}</h1>
   <AddEditLine
     v-model="lineContent"
     ref="addEditLineRef"
     bgColor="link"
+    class="mt-4"
     label="Edit line"
     placeholder="Edit line"
   >
     <template #button>
-      <button class="button" @click.prevent="$router.back()">Cancel</button>
-      <!-- <RouterLink class="button" :to="{ name: 'notes' }">Cancel</RouterLink> -->
-
-      <button :disabled="!lineContent" class="button is-link" @click.prevent="onLineSave">Save line</button>
+      <div class="d-flex align-items-center justify-content-between mt-4">
+        <ButtonCancel :content="'buttons.cancel'" @click="$router.back()" />
+        <ButtonPrimary :content="'buttons.save_line'" :disabled="!lineContent" @click="onLineSave" />
+      </div>
     </template>
   </AddEditLine>
 </template>
@@ -20,6 +22,8 @@
   import { useRoute, useRouter } from 'vue-router';
   import { ref } from 'vue';
   import { useLinesStore } from '@/stores/LinesStore';
+  import ButtonCancel from "@/components/Buttons/ButtonCancel.vue";
+  import ButtonPrimary from "@/components/Buttons/ButtonPrimary.vue";
 
   const route = useRoute();
   const router = useRouter();

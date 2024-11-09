@@ -1,19 +1,18 @@
 <template>
-  <div class="d-flex flex-nowrap justify-content-around align-items-center nav-link" data-v-step="2">
-    <BootstrapIcon icon="translate" />
-    <select @change="switchLanguage" class="form-select ms-3 text-sm" aria-label="Language switcher">
-      <option
-        v-for="sLocale in supportedLocales"
-        :key="`locale-${sLocale}`"
-        :value="sLocale"
-        :selected="locale === sLocale"
-      >
-        {{ t(`locale.${sLocale}`) }}
-      </option>
-    </select>
-  </div>
-
-
+  <nav class="navbar" role="navigation">
+    <div class="container-fluid justify-content-end">
+        <select @change="switchLanguage" class="form-select w-auto text-sm" aria-label="Language switcher">
+          <option
+              v-for="sLocale in supportedLocales"
+              :key="`locale-${sLocale}`"
+              :value="sLocale"
+              :selected="locale === sLocale"
+          >
+            {{ t(`locale.${sLocale}`) }}
+          </option>
+        </select>
+    </div>
+  </nav>
 </template>
 
 <script>

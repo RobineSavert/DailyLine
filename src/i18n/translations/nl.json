@@ -21,6 +21,18 @@
         "email": "E-mail adres",
         "password": "Wachtwoord"
       }
+    },
+    "forgot_password": {
+      "form": {
+        "email": "E-mail adres"
+      }
     }
+  },
+  "navbar": {
+    "lines": "Regels",
+    "account": "Account",
+    "stats": "Statistieken",
+    "settings": "Instellingen",
+    "logout": "Uitloggen"
   }
 }

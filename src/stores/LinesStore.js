@@ -33,6 +33,7 @@ export const useLinesStore = defineStore('linesStore', () => {
   const getLines = async () => {
     linesCollectionRef = collection(db, 'users', authStore.user.uid, 'lines');
     linesCollectionQuery = query(linesCollectionRef, orderBy('date', 'desc'));
+
     // const querySnapshot = await getDocs(collection(db, 'notes'));
     // querySnapshot.forEach((doc) => {
     //   let note = {
@@ -89,7 +90,9 @@ export const useLinesStore = defineStore('linesStore', () => {
   };
 
   const deleteLine = async (lineId) => {
-    await deleteDoc(doc(linesCollectionRef, lineId));
+    await deleteDoc(doc(linesCollectionRef, lineId)).then(() => {
+      getLines();
+    })
   };
 
   const updateLine = async (id, content) => {

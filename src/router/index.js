@@ -6,6 +6,8 @@ import EditLineView from '../Views/EditLineView.vue';
 import AuthView from '../Views/AuthView.vue';
 import ForgotPassword from "@/Views/ForgotPassword.vue";
 import Tr from "@/i18n/translation"
+import AccountView from "@/Views/AccountView.vue";
+import SettingsView from "@/Views/SettingsView.vue";
 
 const routes = [
   {
@@ -33,6 +35,16 @@ const routes = [
     path: '/forgot-password',
     component: ForgotPassword,
     name: 'forgot-password'
+  },
+  {
+    path: '/:locale?/account',
+    component: AccountView,
+    name: 'account'
+  },
+  {
+    path: '/:locale?/settings',
+    component: SettingsView,
+    name: 'settings'
   }
 ];
 
@@ -43,10 +55,6 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
-  console.log(to.name) //forgot-password
-
-
-
   const locale = to.params.locale || Tr.defaultLocale;
 
   if (Tr.currentLocale && Tr.currentLocale.toLowerCase() !== locale.toLowerCase()) {

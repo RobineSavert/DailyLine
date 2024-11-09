@@ -1,8 +1,12 @@
 <template>
+  <div class="container">
+    <div class="row">
+      <div class="clearfix py-4 mb-5">
+        <RouterView></RouterView>
+      </div>
+    </div>
+  </div>
   <NavBar v-if="isLoggedIn" />
-
-  <RouterView></RouterView>
-
   <Modal v-if="eventBus.state.showModal">
     <template #title>
       {{ eventBus.state.modalTitle }}
@@ -25,6 +29,7 @@ import Modal from "@/components/Modal.vue";
 import {storeToRefs} from "pinia";
 import Alert from "@/components/Alert.vue"
 import Card from "@/components/Card.vue"
+import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
 
 const authStore = useAuthStore();
 const { isLoggedIn } = storeToRefs(useAuthStore())

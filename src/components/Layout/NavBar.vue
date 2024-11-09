@@ -1,70 +1,100 @@
 <template>
-  <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
-    <div class="container px-2">
-      <div class="navbar-brand">
-        <LanguageSwitcher />
-        <RouterLink :to="{ name: 'lines', params: { locale: Tr.currentLocale } }" class="navbar-item is-size-4 is-family-monospace">
-          Lines
-        </RouterLink>
-        <RouterLink :to="{ name: 'forgot-password' }">
-          forgot password
-        </RouterLink>
-
-        <a
-          role="button"
-          class="navbar-burger"
-          :class="{ 'is-active': showNavBarMenu }"
-          @click.prevent="showNavBarMenu = !showNavBarMenu"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" :class="{ 'is-active': showNavBarMenu }" class="navbar-menu">
-        <div class="navbar-start" v-if="authStore.user.uid">
-          <button class="button is-info is-small mt-3 ml-3" @click.prevent="onLogout">
-            Logout {{ authStore.user.email }}
-          </button>
-        </div>
-        <div class="navbar-end">
-          <RouterLink :to="{ name: 'lines', params: { locale: Tr.currentLocale } }" active-class="is-active" class="navbar-item">
-            Lines
+  <nav class="navbar navbar-light bg-white border navbar-expand fixed-bottom">
+    <ul class="navbar-nav nav-justified w-100">
+      <li class="nav-item" v-for="(navItem, index) in navItems" :key="index">
+        <template v-if="!navItem.isLogout">
+          <RouterLink
+              class="nav-link position-relative"
+              :to="{ name: navItem.name, params: { locale: Tr.currentLocale } }"
+              active-class="active"
+          >
+            <div class="nav-icon"><BootstrapIcon :icon="navItem.icon" size="3x" /></div>
           </RouterLink>
-
-
-            <RouterLink :to="{ name: 'stats', params: { locale: Tr.currentLocale } }">Stats</RouterLink>
-
-
-        </div>
-      </div>
-    </div>
+          {{ t(navItem.translation) }}
+        </template>
+        <template v-else>
+          <a class="nav-link position-relative" @click.prevent="onLogout">
+            <div class="nav-icon"><BootstrapIcon :icon="navItem.icon" size="3x" /></div>
+            {{ t(navItem.translation) }}
+          </a>
+        </template>
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
-  import { useAuthStore } from '@/stores/AuthStore';
-  import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-  import Tr from "@/i18n/translation"
-  const showNavBarMenu = ref(false);
-  const authStore = useAuthStore();
+import { computed, ref } from 'vue';
+import { useAuthStore } from '@/stores/AuthStore';
+import Tr from "@/i18n/translation";
+import { useI18n } from "vue-i18n";
 
-  const onLogout = () => {
-    authStore.logoutUser();
-  };
+const authStore = useAuthStore();
+const onLogout = () => {
+  authStore.logoutUser();
+};
+
+const { t } = useI18n();
+
+const navItems = computed(() => [
+  { key: 'line-button', icon: 'blockquote-right', name: 'lines', translation: 'navbar.lines' },
+  { key: 'person-button', icon: 'person-fill', name: 'account', translation: 'navbar.account' },
+  { key: 'stats-button', icon: 'bar-chart-fill', name: 'stats', translation: 'navbar.stats' },
+  { key: 'settings-button', icon: 'gear-fill', name: 'settings', translation: 'navbar.settings' }
+]);
 </script>
 
-<style scoped>
-  @media (max-width: 1023px) {
-    .navbar-menu {
-      position: absolute;
-      left: 0;
-      right: 0;
-    }
-  }
+
+<style>
+
+:root {
+  --rs-white: #ffffff;
+  --rs-primary: #f472b7;
+  --rs-secondary: #9b64d3;
+}
+
+.navbar.fixed-bottom .nav-link {
+  font-weight: 600;
+}
+
+.navbar.fixed-bottom .nav-link .nav-icon {
+  text-align: center;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 1.25rem;
+  margin-bottom: 0.5rem;
+  max-width: 6rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar.fixed-bottom .nav-link .nav-icon svg {
+  height: 1.5rem;
+}
+
+.navbar.fixed-bottom .nav-link.active .nav-icon,
+.navbar.fixed-bottom .nav-link:hover .nav-icon {
+  background: var(--rs-primary);
+  background: -moz-linear-gradient(
+      150deg,
+      var(--rs-primary) 20%,
+      var(--rs-secondary) 90%
+  );
+  background: -webkit-linear-gradient(
+      150deg,
+      var(--rs-primary) 20%,
+      var(--rs-secondary) 90%
+  );
+  background: linear-gradient(
+      150deg,
+      var(--rs-primary) 20%,
+      var(--rs-secondary) 90%
+  );
+}
+
+.navbar.fixed-bottom .nav-link.active .nav-icon svg,
+.navbar.fixed-bottom .nav-link:hover .nav-icon svg {
+  stroke: var(--rs-white);
+}
+
 </style>

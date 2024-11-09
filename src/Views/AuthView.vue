@@ -36,7 +36,6 @@ import { computed } from 'vue';
 import LoginView from "@/Views/LoginView.vue";
 import RegisterView from "@/Views/RegisterView.vue";
 import Card from "@/components/Card.vue";
-import Alert from "@/components/Alert.vue";
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()

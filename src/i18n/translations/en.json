@@ -21,6 +21,18 @@
         "email": "E-mail address",
         "password": "Password"
       }
+    },
+    "forgot_password": {
+      "form": {
+        "email": "E-mail address"
+      }
     }
+  },
+  "navbar": {
+    "lines": "Lines",
+    "account": "Account",
+    "stats": "Stats",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

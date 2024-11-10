@@ -14,7 +14,7 @@ import {useMessageStore} from "@/stores/store-messages";
 
 
 export const useAuthStore = defineStore('authStore', () => {
-  const user = ref({});
+  const user = ref({}); // De gebruiker wordt opgeslagen als een `ref`
   const router = useRouter();
   const messageStore = useMessageStore();
   const linesStore = useLinesStore();
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('authStore', () => {
         const uid = userDetails.uid;
         const displayName = userDetails.displayName;
         const photoURL = userDetails.photoURL;
-        user.value = { email: userDetails.email, uid, displayName, photoURL  };
+        user.value = { email: userDetails.email, uid, displayName, photoURL };
         isLoggedIn.value = true;
         router.push({ name: 'lines'});
         linesStore.getLines();
@@ -60,7 +60,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
-
+        user.value = null;
         // Sign-out successful.
       })
       .catch((error) => {
@@ -82,11 +82,17 @@ export const useAuthStore = defineStore('authStore', () => {
         });
   }
 
+  const updateUser = (newUserData) => {
+    user.value = { ...user.value, ...newUserData };
+  };
+
+
   return {
     registerUser,
     loginUser,
     logoutUser,
     resetPassword,
+    updateUser,
     init,
     user,
     isLoggedIn

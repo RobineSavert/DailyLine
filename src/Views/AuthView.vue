@@ -27,8 +27,8 @@
 <script setup>
 import Tabs from '@/components/Tabs.vue'
 import { computed } from 'vue';
-import LoginView from "@/Views/LoginView.vue";
-import RegisterView from "@/Views/RegisterView.vue";
+import LoginView from "@/Views/Auth/LoginView.vue";
+import RegisterView from "@/Views/Auth/RegisterView.vue";
 import Card from "@/components/Card.vue";
 import { useI18n } from 'vue-i18n'
 

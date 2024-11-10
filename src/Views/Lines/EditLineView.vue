@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-  import AddEditLine from '../components/Lines/AddEditLine.vue';
+  import AddEditLine from '@/components/Lines/AddEditLine.vue';
   import { useRoute, useRouter } from 'vue-router';
   import { ref } from 'vue';
   import { useLinesStore } from '@/stores/LinesStore';

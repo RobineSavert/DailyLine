@@ -2,22 +2,16 @@
   <nav class="navbar navbar-light bg-white border navbar-expand fixed-bottom">
     <ul class="navbar-nav nav-justified w-100">
       <li class="nav-item" v-for="(navItem, index) in navItems" :key="index">
-        <template v-if="!navItem.isLogout">
           <RouterLink
               class="nav-link position-relative"
               :to="{ name: navItem.name, params: { locale: Tr.currentLocale } }"
               active-class="active"
           >
             <div class="nav-icon"><BootstrapIcon :icon="navItem.icon" size="3x" /></div>
+            <span class="text-xs">
+              {{ t(navItem.translation) }}
+            </span>
           </RouterLink>
-          {{ t(navItem.translation) }}
-        </template>
-        <template v-else>
-          <a class="nav-link position-relative" @click.prevent="onLogout">
-            <div class="nav-icon"><BootstrapIcon :icon="navItem.icon" size="3x" /></div>
-            {{ t(navItem.translation) }}
-          </a>
-        </template>
       </li>
     </ul>
   </nav>
@@ -25,23 +19,16 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { useAuthStore } from '@/stores/AuthStore';
 import Tr from "@/i18n/translation";
 import { useI18n } from "vue-i18n";
-
-const authStore = useAuthStore();
-const onLogout = () => {
-  authStore.logoutUser();
-};
 
 const { t } = useI18n();
 
 const navItems = computed(() => [
   { key: 'line-button', icon: 'blockquote-right', name: 'lines', translation: 'navbar.lines' },
-  { key: 'person-button', icon: 'person-fill', name: 'account', translation: 'navbar.account' },
   { key: 'add-line-button', icon: 'vector-pen', name: 'add', translation: 'navbar.add' },
-  { key: 'stats-button', icon: 'bar-chart-fill', name: 'stats', translation: 'navbar.stats' },
-  { key: 'settings-button', icon: 'gear-fill', name: 'settings', translation: 'navbar.settings' }
+  { key: 'settings-button', icon: 'gear-fill', name: 'settings', translation: 'navbar.settings' },
+  { key: 'person-button', icon: 'person-fill', name: 'account', translation: 'navbar.account' },
 ]);
 </script>
 
@@ -54,16 +41,11 @@ const navItems = computed(() => [
   --rs-secondary: #9b64d3;
 }
 
-.navbar.fixed-bottom .nav-link {
-  font-weight: 600;
-}
-
 .navbar.fixed-bottom .nav-link .nav-icon {
   text-align: center;
   height: 2.5rem;
   padding: 0.5rem;
   border-radius: 1.25rem;
-  margin-bottom: 0.5rem;
   max-width: 6rem;
   margin-left: auto;
   margin-right: auto;

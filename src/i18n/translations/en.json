@@ -10,7 +10,10 @@
     "save_line": "Save line",
     "delete": "Delete",
     "account_update": "Update account",
-    "edit_account": "Edit account"
+    "edit_account": "Edit account",
+    "update_password": "Update password",
+    "update_email": "Update e-mail address",
+    "update_display_name": "Update display name"
   },
   "title": "Daily Line",
   "intro": "Write a single line.. every day..",
@@ -59,7 +62,16 @@
   },
   "account": {
     "title": "Account",
-    "logout": "Logout"
+    "logout": "Logout",
+    "update_success": "Account is updated",
+    "edit_display_name_title": "Edit display name",
+    "edit_email_title": "Edit e-mail address",
+    "edit_password_title": "Edit password",
+    "email": "E-mail address",
+    "display_name": "Display name",
+    "password": "Password",
+    "stats": "Statistics",
+    "view_stats": "View your statistics"
   },
   "countdown": {
     "description": "You can add another line in: "

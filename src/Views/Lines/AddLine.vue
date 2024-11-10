@@ -21,8 +21,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import SingleLine from '../components/Lines/SingleLine.vue';
-import AddEditLine from '../components/Lines/AddEditLine.vue';
+import AddEditLine from '@/components/Lines/AddEditLine.vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import { storeToRefs } from 'pinia';
 import { useCharactersLimit } from '@/composables/useCharactersLimit';

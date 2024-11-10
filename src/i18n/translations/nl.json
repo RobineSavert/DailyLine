@@ -10,7 +10,10 @@
     "save_line": "Sla regel op",
     "delete": "Verwijderen",
     "account_update": "Account updaten",
-    "edit_account": "Account bewerken"
+    "edit_account": "Account bewerken",
+    "update_password": "Wachtwoord bijwerken",
+    "update_email": "E-mail adres bijwerken",
+    "update_display_name": "Schermnaam bijwerken"
   },
   "title": "Daily Line",
   "intro": "Schrijf een enkele regel.. elke dag..",
@@ -59,7 +62,16 @@
   },
   "account": {
     "title": "Account",
-    "logout": "Uitloggen"
+    "logout": "Uitloggen",
+    "update_success": "Account is bijgewerkt",
+    "edit_display_name_title": "Bewerk display naam",
+    "edit_email_title": "Bewerk e-mail adres",
+    "edit_password_title": "Bewerk wachtwoord",
+    "email": "E-mail",
+    "display_name": "Schermnaam",
+    "password": "Wachtwoord",
+    "stats": "Statistieken",
+    "view_stats": "Bekijk de statistieken"
   },
   "countdown": {
     "description": "Je kunt een nieuwe regel schrijven over: "

@@ -1,14 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 import LinesView from '../Views/LinesView.vue';
-import StatsView from '../Views/StatsView.vue';
-import EditLineView from '../Views/EditLineView.vue';
+import EditLineView from '../Views/Lines/EditLineView.vue';
 import AuthView from '../Views/AuthView.vue';
 import ForgotPassword from "@/Views/ForgotPassword.vue";
-import Tr from "@/i18n/translation"
 import AccountView from "@/Views/AccountView.vue";
 import SettingsView from "@/Views/SettingsView.vue";
-import AddLine from "@/Views/AddLine.vue";
+import AddLine from "@/Views/Lines/AddLine.vue";
+import editDisplayName from "@/Views/Account/editDisplayName.vue";
+import editEmail from "@/Views/Account/editEmail.vue"
+import editPassword from "@/Views/Account/editPassword.vue"
+import StatsView from '../Views/Account/StatsView.vue';
+import Tr from "@/i18n/translation"
 
 const routes = [
   {
@@ -41,6 +44,21 @@ const routes = [
     path: '/:locale?/account',
     component: AccountView,
     name: 'account'
+  },
+  {
+    path: '/:locale?/edit-display-name',
+    component: editDisplayName,
+    name: 'editDisplayName'
+  },
+  {
+    path: '/:locale?/edit-email',
+    component: editEmail,
+    name: 'editEmail'
+  },
+  {
+    path: '/:locale?/edit-password',
+    component: editPassword,
+    name: 'editPassword'
   },
   {
     path: '/:locale?/settings',
@@ -77,7 +95,6 @@ router.beforeEach(async (to, from, next) => {
     await Tr.switchLanguage(to.params.locale);
   }
 
-  // Ga verder met de navigatie
   next();
 });
 

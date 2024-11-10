@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="clearfix py-4 mb-5">
+      <div class="clearfix pt-3 pb-5 mb-5">
         <RouterView></RouterView>
       </div>
     </div>

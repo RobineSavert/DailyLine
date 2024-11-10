@@ -1,5 +1,5 @@
 <template>
-    <Button :content="content" variant="primary" :icon="icon" @click="$emit('click')" />
+    <Button :disabled="disabled" :content="content" variant="primary" :icon="icon" @click="$emit('click')" />
 </template>
 
 <script setup>

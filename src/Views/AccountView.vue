@@ -1,85 +1,97 @@
 <template>
+  <Alert />
   <h1>{{ $t('account.title')}}</h1>
 
-  <template v-if="!showEditForm">
-    <ul class="list-group my-4">
-      <li class="list-group-item">Display name: {{ user.displayName}}</li>
-      <li class="list-group-item">Photo: {{ user.photoURL}}</li>
-    </ul>
-
-    <Button class="w-auto"
-            :icon="'vector-pen'"
-            @click="showEdit"
-            :content="'buttons.edit_account'" />
-  </template>
+<!--  <div class="img-circle mx-auto my-4">-->
+<!--    <img :src="user.photoURL" alt="..." />-->
+<!--  </div>-->
 
 
+  <Card :panel-collapsable="false" :variant="'none'" v-for="(accountItem, index) in accountItems" :key="index">
+    <template v-slot:title>
+      <div class="d-flex justify-content-between">
+        <span>{{ t(accountItem.title) }}</span>
+        <RouterLink :to="{ name: accountItem.link, params: {locale: route.params.locale} }">
+          <BootstrapIcon :icon="'vector-pen'" />
+        </RouterLink>
+      </div>
+    </template>
+    <template v-slot:body>
+      {{ accountItem.body }}
+    </template>
+  </Card>
 
-  <form @submit.prevent="onSubmit" v-if="showEditForm">
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput" placeholder="een naam" v-model="newUser.displayName">
-      <label for="floatingInput">
-        display name
-      </label>
-    </div>
-    <div class="form-floating">
-      <input type="text" class="form-control" id="floatingPassword" placeholder="een url" v-model="newUser.photoURL">
-      <label for="floatingPassword">
-        photo
-      </label>
-    </div>
-
-    <Alert :variant="'danger'" />
-
-    <div class="my-3 row justify-content-center">
-      <Button class="w-auto"
-              :icon="'person-fill'"
-              :content="'buttons.account_update'" />
-    </div>
-  </form>
-
-<div class="d-flex justify-content-center my-4">
-
-  <a @click="onLogout" class="text-danger">{{ $t('account.logout')}}</a>
-</div>
-
-
+  <div class="d-flex justify-content-center my-4">
+    <a @click="onLogout" class="text-danger">{{ $t('account.logout')}}</a>
+  </div>
 </template>
 <script setup>
 import {useAuthStore} from "@/stores/AuthStore";
-import {useAccountStore} from "@/stores/AccountStore";
+import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
 import Alert from "@/components/Alert.vue";
-import Button from "@/components/Buttons/Button.vue";
-import {reactive, ref} from "vue";
+import {useAccountStore} from "@/stores/AccountStore";
+import Card from "@/components/Card.vue";
+import {computed} from "vue";
+import {useI18n} from "vue-i18n";
+import {useRoute} from "vue-router";
 
-
+const { getUser } = useAccountStore();
+const { t } = useI18n()
 const authStore = useAuthStore();
-const accountStore = useAccountStore();
 const { user } = useAuthStore();
+const route = useRoute()
 
-let showEditForm = ref(false)
+getUser();
+
 const onLogout = () => {
   authStore.logoutUser();
 };
 
-const newUser = reactive({
-  displayName: '',
-  photoURL: ''
-});
 
-function showEdit(){
-  showEditForm.value = true
+const accountItems = computed(() => [
+  {
+    key: 'email-card',
+    title: 'account.email',
+    link: 'editEmail',
+    body: user.email
+  },
+  {
+    key: 'displayname-card',
+    title: 'account.display_name',
+    link: 'editDisplayName',
+    body: user.displayName
+  },
+  {
+    key: 'password-card',
+    title: 'account.password',
+    link: 'editPassword',
+    body: '******'
+  },
+  {
+    key: 'stats-card',
+    title: 'account.stats',
+    link: 'stats',
+    body: t('account.view_stats')
+  },
+]);
+
+</script>
+
+<style>
+.img-circle {
+  border-radius: 50%;
+  position: relative;
+  height: 117px;
+  width: 117px;
+  overflow: hidden;
 }
 
+.img-circle img {
+  position: absolute;
+  left: 50%;
+  width: auto;
+  height: 117px;
+  transform: translateX(-50%);
+}
 
-const onSubmit = () => {
-  if (!newUser.displayName || !newUser.photoURL) {
-    alert('Please change something');
-    return;
-  }
-
-  accountStore.updateAccount(newUser);
-  showEditForm.value = false;
-
-};
-</script>
+</style>

@@ -6,12 +6,15 @@
       :countdown="countdown"
   >
     <template #button>
-      <ButtonPrimary
-          icon="send-fill"
-          :disabled="!newLine || isDisabled"
-          @click="addLine"
-          class="my-4"
-          :content="'buttons.add_new'" />
+      <div class="d-flex justify-content-end">
+        <ButtonPrimary
+            icon="send-fill"
+            :disabled="!newLine || isDisabled"
+            @click="addLine"
+            class="my-4"
+            :content="'buttons.add_new'" />
+      </div>
+
     </template>
   </AddEditLine>
 
@@ -26,7 +29,7 @@ import { useLinesStore } from '@/stores/LinesStore';
 import { storeToRefs } from 'pinia';
 import { useCharactersLimit } from '@/composables/useCharactersLimit';
 import ButtonPrimary from "@/components/Buttons/ButtonPrimary.vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const linesStore = useLinesStore();
 const addEditLineRef = ref(null);
@@ -37,6 +40,7 @@ const countdown = ref('');
 const hasExistingLine = ref(false);
 
 const router = useRouter();
+const route = useRoute();
 
 const addLine = () => {
   linesStore.addLine(newLine.value);
@@ -44,7 +48,7 @@ const addLine = () => {
   addEditLineRef.value.focusTextArea();
   hasExistingLine.value = true;
   sendText();
-  router.push({name: 'lines'})
+  router.push({name: 'lines', params: {locale: route.params.locale} })
 };
 
 

@@ -15,12 +15,13 @@ import {
 } from 'firebase/firestore';
 import {auth, db} from '../js/firebase';
 import { useAuthStore } from './AuthStore';
+import {useMessageStore} from "@/stores/store-messages";
 
 export const useLinesStore = defineStore('linesStore', () => {
   const lines = ref([]);
   const linesLoaded = ref(false);
   const authStore = useAuthStore();
-
+  const messageStore = useMessageStore();
   let linesCollectionRef;
   let linesCollectionQuery;
   let linesSnapshot = null;
@@ -91,6 +92,7 @@ export const useLinesStore = defineStore('linesStore', () => {
     //notes.value.unshift(note);
 
     await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
+      messageStore.addMessage({ title: 'lines.add_line_success' });
       linesLoaded.value = true
     })
   };
@@ -100,6 +102,7 @@ export const useLinesStore = defineStore('linesStore', () => {
 
     await deleteDoc(doc(linesCollectionRef, lineId)).then(() => {
       getLines().then(() => {
+        messageStore.addMessage({ title: 'lines.delete_line_success' });
         linesLoaded.value = true
       })
     })
@@ -111,6 +114,7 @@ export const useLinesStore = defineStore('linesStore', () => {
     await updateDoc(doc(linesCollectionRef, id), {
       content
     }).then(() => {
+      messageStore.addMessage({ title: 'lines.edit_line_success' });
       linesLoaded.value = true
     })
   };

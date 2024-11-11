@@ -1,33 +1,69 @@
 <template>
-  <div class="d-flex justify-content-between">
-    <h1>{{ $t('lines.title') }}</h1>
-    <DatePicker @update-date="handleDateUpdate" :id="'info-Datepicker'" />
-  </div>
+  <Alert />
+
+  <h1>{{ $t('lines.title') }}</h1>
 
   <Spinner v-if="!linesLoaded" />
 
   <template v-else>
+    <TableCard
+        :items="filteredLines"
+        :panel-i-d="'lineTable'"
+        :table-name="'lines.title'"
+    >
+      <template v-slot:searchTableComponent>
+        <TableSearchFilterComponent
+            :items="filteredLines"
+            :can-filter="false"
+            :search-placeholder="'table.placeholder'"
+            @SearchInput="searchInput"
+            @SearchFilters="searchFilters"
+        />
 
-    <div v-if="filteredLines.length > 0">
-      <div v-for="line in filteredLines" :key="line.id" class="mt-4">
-        <SingleLine @deleteLine="checkLinesAndUpdate" :line="line" />
-      </div>
-    </div>
+      </template>
+      <template v-slot:mainTable>
+        <TableComponent
+            :items="filteredLines"
+            :fields="fields"
+            :key="filteredLines"
+            :pagination-name="'table.paginationName'"
+            :searchByKeys="['date', 'content']"
+            :sort-by="'date'"
+            :empty-table-name="'table.no_data'"
+            :filter="searchInputFilter"
+            :appliedFilters="appliedFilters"
+        >
+          <template v-slot:date="row">
+            <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
+            <DateComponent :value="row.value" />
+            </RouterLink>
+          </template>
 
-    <div v-else class="mt-4">
-      <span class="fst-italic">{{ $t('lines.no_lines_on_date') }}</span>
-    </div>
+          <template v-slot:content="row">
+            <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
+            {{ row.value }}
+            </RouterLink>
+          </template>
+        </TableComponent>
+      </template>
+    </TableCard>
   </template>
 </template>
 
 <script setup>
 import {ref, onMounted, computed} from 'vue';
-  import SingleLine from '../components/Lines/SingleLine.vue';
-  import { useLinesStore } from '@/stores/LinesStore';
-  import { storeToRefs } from 'pinia';
-  import { useCharactersLimit } from '@/composables/useCharactersLimit';
-  import DatePicker from "@/components/DatePicker.vue";
-  import Spinner from "@/components/Spinner.vue";
+import { useLinesStore } from '@/stores/LinesStore';
+import { storeToRefs } from 'pinia';
+import { useCharactersLimit } from '@/composables/useCharactersLimit';
+import Spinner from "@/components/Spinner.vue";
+import TableComponent from "@/components/Table/TableComponent.vue";
+import TableCard from "@/components/Table/TableCard.vue";
+import DateComponent from "@/components/Table/DateComponent.vue";
+import { useI18n } from "vue-i18n";
+import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComponent.vue";
+import eventBus from "@/eventBus";
+import { useRoute } from "vue-router";
+import Alert from "@/components/Alert.vue";
 
   const linesStore = useLinesStore();
   const { lines, linesLoaded } = storeToRefs(linesStore);
@@ -36,18 +72,26 @@ import {ref, onMounted, computed} from 'vue';
   const countdown = ref('');
   const selectedDate = ref('')
   const lineContent = ref('');
+  const { t } = useI18n();
+const route = useRoute()
 
   useCharactersLimit(newLine);
 
-  const filteredLines = computed(() => {
-    if (!selectedDate.value) return lines.value;
+const filteredLines = computed(() => {
+  if (!selectedDate.value) return lines.value.map(line => ({
+    ...line,
+    date: new Date(parseInt(line.date)).toISOString()
+  }));
 
-    return lines.value.filter((line) => {
-      const lineDate = new Date(parseInt(line.date)).toDateString();
-      const selectedDateString = new Date(parseInt(selectedDate.value)).toDateString();
-      return lineDate === selectedDateString;
-    });
-  });
+  return lines.value.filter((line) => {
+    const lineDate = new Date(parseInt(line.date)).toDateString();
+    const selectedDateString = new Date(parseInt(selectedDate.value)).toDateString();
+    return lineDate === selectedDateString;
+  }).map(line => ({
+    ...line,
+    date: new Date(parseInt(line.date)).toISOString()
+  }));
+});
 
   function checkLinesAndUpdate(){
     linesStore.getLines();
@@ -112,4 +156,36 @@ const handleDateUpdate = (timestamp) => {
   selectedDate.value = timestamp;
   lineContent.value = linesStore.getLineByDate(timestamp);
 };
+
+const fields = computed(() => [
+  {
+    key: "date",
+    label: t("table.columnHeaders.date"),
+    sortable: true
+  },
+  {
+    key: "content",
+    label: t("table.columnHeaders.content"),
+    sortable: true
+  },
+  {
+    key: "button",
+    label: ""
+  }
+])
+
+let searchInputFilter = ref("");
+let appliedFilters = ref({});
+
+function searchInput(filter){
+  searchInputFilter.value = filter
+}
+
+function searchFilters(filtersForSearch){
+  appliedFilters.value = filtersForSearch
+}
+
+const emit = defineEmits(['delete-line'])
+
+
 </script>

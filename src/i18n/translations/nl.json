@@ -15,6 +15,22 @@
     "update_email": "E-mail adres bijwerken",
     "update_display_name": "Schermnaam bijwerken"
   },
+  "table": {
+    "columnHeaders": {
+      "date": "Datum",
+      "content": "Regel"
+    },
+    "no_data": "Geen regels toegevoegd",
+    "search": "Zoeken",
+    "placeholder": "Zoeken",
+    "paginationName": "regels",
+    "pagination": {
+      "showing_results": "Toon",
+      "to": "tot",
+      "of": "van",
+      "entries": "rijen"
+    }
+  },
   "title": "Daily Line",
   "intro": "Schrijf een enkele regel.. elke dag..",
   "auth": {
@@ -60,7 +76,10 @@
     },
     "placeholder": "Typ iets ....",
     "add_line": "Voeg een regel toe",
-    "no_lines_on_date": "Er is geen regel op de gekozen datum."
+    "no_lines_on_date": "Er is geen regel op de gekozen datum.",
+    "add_line_success": "De regel is toegevoegd..",
+    "edit_line_success": "De regel is bewerkt..",
+    "delete_line_success": "De regel is verwijderd.."
   },
   "account": {
     "title": "Account",

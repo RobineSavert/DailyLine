@@ -15,6 +15,22 @@
     "update_email": "Update e-mail address",
     "update_display_name": "Update display name"
   },
+  "table": {
+    "columnHeaders": {
+      "date": "Date",
+      "content": "Line"
+    },
+    "no_data": "No lines added...",
+    "search": "Search",
+    "placeholder": "Search",
+    "paginationName": "lines",
+    "pagination": {
+      "showing_results": "Display",
+      "to": "to",
+      "of": "from",
+      "entries": "rows"
+    }
+  },
   "title": "Daily Line",
   "intro": "Write a single line.. every day..",
   "auth": {
@@ -60,7 +76,10 @@
     },
     "placeholder": "Type something ....",
     "add_line": "Add new line",
-    "no_lines_on_date": "There is no line added for this date.."
+    "no_lines_on_date": "There is no line added for this date..",
+    "add_line_success": "The line has been added...",
+    "edit_line_success": "The line has been updated..",
+    "delete_line_success": "The line has been deleted.."
   },
   "account": {
     "title": "Account",

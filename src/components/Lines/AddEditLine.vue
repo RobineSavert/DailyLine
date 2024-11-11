@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ $t('lines.add_line')}}</h1>
+  <h1 v-if="!isEdit">{{ $t('lines.add_line')}}</h1>
     <textarea
         class="form-control"
         :placeholder="$t(placeholder)"
@@ -16,12 +16,8 @@
         {{ $t('countdown.description')}} {{ countdown }}
       </p>
 
-
-    <div class="field is-grouped is-grouped-right">
-      <div class="control">
         <slot name="button"></slot>
-      </div>
-    </div>
+
 </template>
 
 <script setup>
@@ -36,7 +32,8 @@ const props = defineProps({
   label: { type: String },
   placeholder: { type: String, default: 'lines.placeholder' },
   isDisabled: { type: Boolean, default: false },
-  countdown: { type: String, default: '' }
+  countdown: { type: String, default: '' },
+  isEdit: { type: Boolean, default: false }
 });
 
 const emit = defineEmits(['update:modelValue']);

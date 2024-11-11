@@ -67,7 +67,7 @@ const props = defineProps({
   },
   showBorderLeft: {
     type: Boolean,
-    default: true
+    default: false
   }
 });
 

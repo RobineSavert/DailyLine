@@ -37,7 +37,6 @@ const { lines } = storeToRefs(linesStore);
 const newLine = ref('');
 const isDisabled = ref(false);
 const countdown = ref('');
-const hasExistingLine = ref(false);
 
 const router = useRouter();
 const route = useRoute();
@@ -46,7 +45,6 @@ const addLine = () => {
   linesStore.addLine(newLine.value);
   newLine.value = '';
   addEditLineRef.value.focusTextArea();
-  hasExistingLine.value = true;
   sendText();
   router.push({name: 'lines', params: {locale: route.params.locale} })
 };

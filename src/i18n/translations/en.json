@@ -13,7 +13,8 @@
     "edit_account": "Edit account",
     "update_password": "Update password",
     "update_email": "Update e-mail address",
-    "update_display_name": "Update display name"
+    "update_display_name": "Update display name",
+    "forgot_password": "Update password"
   },
   "table": {
     "columnHeaders": {
@@ -134,6 +135,8 @@
   },
   "settings": {
     "title": "Settings",
-    "language": "Language"
+    "language": "Language",
+    "app_version": "App version",
+    "latest_change": "Laatste wijzigingen"
   }
 }

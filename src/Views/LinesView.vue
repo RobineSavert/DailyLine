@@ -3,7 +3,7 @@
 
   <div class="d-flex justify-content-between align-items-center">
     <h1>{{ $t('lines.title') }}</h1>
-    <BootstrapIcon :icon="'search'" @click="showSearch()"/>
+    <BootstrapIcon :icon="'search'" @click="showSearch()" size="2x" class="me-2" />
   </div>
 
   <Spinner v-if="!linesLoaded" />
@@ -15,15 +15,14 @@
         :table-name="'lines.title'"
     >
       <template v-slot:searchTableComponent>
-        <TableSearchFilterComponent
-            v-if="showSearchBar"
-            :items="filteredLines"
-            :can-filter="false"
-            :search-placeholder="'table.placeholder'"
-            @SearchInput="searchInput"
-            @SearchFilters="searchFilters"
-        />
-
+          <TableSearchFilterComponent
+              v-if="showSearchBar"
+              :items="filteredLines"
+              :can-filter="false"
+              :search-placeholder="'table.placeholder'"
+              @SearchInput="searchInput"
+              @SearchFilters="searchFilters"
+          />
       </template>
       <template v-slot:mainTable>
         <TableComponent
@@ -33,6 +32,7 @@
             :pagination-name="'table.paginationName'"
             :searchByKeys="['date', 'content']"
             :sort-by="'date'"
+            :show-items-per-page="2"
             :empty-table-name="'table.no_data'"
             :filter="searchInputFilter"
             :appliedFilters="appliedFilters"

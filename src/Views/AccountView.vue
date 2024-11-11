@@ -1,25 +1,33 @@
 <template>
   <Alert />
-  <h1>{{ $t('account.title')}}</h1>
+  <div class="mb-4">
+    <h1>{{ $t('account.title')}}</h1>
+  </div>
+
 
 <!--  <div class="img-circle mx-auto my-4">-->
 <!--    <img :src="user.photoURL" alt="..." />-->
 <!--  </div>-->
 
+<div class="row">
+  <div class="col-12 col-md-6" v-for="(accountItem, index) in accountItems" :key="index">
+    <Card :panel-collapsable="false" :variant="'none'">
+      <template v-slot:title>
+        <div class="d-flex justify-content-between">
+          <span>{{ t(accountItem.title) }}</span>
+          <RouterLink :to="{ name: accountItem.link, params: {locale: route.params.locale} }">
+            <BootstrapIcon :icon="'vector-pen'" />
+          </RouterLink>
+        </div>
+      </template>
+      <template v-slot:body>
+        {{ accountItem.body }}
+      </template>
+    </Card>
+  </div>
 
-  <Card :panel-collapsable="false" :variant="'none'" v-for="(accountItem, index) in accountItems" :key="index">
-    <template v-slot:title>
-      <div class="d-flex justify-content-between">
-        <span>{{ t(accountItem.title) }}</span>
-        <RouterLink :to="{ name: accountItem.link, params: {locale: route.params.locale} }">
-          <BootstrapIcon :icon="'vector-pen'" />
-        </RouterLink>
-      </div>
-    </template>
-    <template v-slot:body>
-      {{ accountItem.body }}
-    </template>
-  </Card>
+</div>
+
 
   <div class="d-flex justify-content-center my-4">
     <a @click="onLogout" class="text-danger">{{ $t('account.logout')}}</a>

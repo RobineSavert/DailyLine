@@ -12,19 +12,7 @@ import BootstrapIcons from 'bootstrap-icons/bootstrap-icons.svg?raw'
 
 const app = createApp(App);
 
-router.beforeEach((to, from) => {
-  const authStore = useAuthStore();
 
-  const isAuthenticated = authStore.user.uid ? true : false;
-
-  if (isAuthenticated && to.name === 'auth') {
-    return { name: 'lines' };
-  }
-
-  if (!isAuthenticated && to.name !== 'auth') {
-    return { name: 'auth' };
-  }
-});
 
 const pinia = createPinia();
 injectBootstrapIcons(BootstrapIcons)

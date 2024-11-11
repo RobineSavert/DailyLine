@@ -1,17 +1,6 @@
 <template>
   <div class="row align-items-center" v-show="totalAmountOfPages > 1">
-    <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-    <span class="font-weight-bold">
-       {{ $t('table.pagination.showing_results') }}
-       {{ (startVar + 1) }}
-       {{ $t('table.pagination.to') }}
-       {{ endVar }}
-       {{ $t('table.pagination.of') }}
-       {{ props.items.length }}
-       {{ $t(paginationName) }}
-    </span>
-    </div>
-    <div class="col-lg-6 col-12 justify-content-end">
+    <div class="col-md-6 col-12 justify-content-md-end justify-content-center d-flex mb-4 mb-md-0 order-md-1 order-0">
       <nav aria-label="navigation">
         <ul class="pagination">
           <li class="page-item">
@@ -31,9 +20,9 @@
           </li>
 
           <li
-            v-for="item in amountOfPagesToShowBefore"
-            :key="page - amountOfPagesToShowBefore + item"
-            class="page-item"
+              v-for="item in amountOfPagesToShowBefore"
+              :key="page - amountOfPagesToShowBefore + item"
+              class="page-item"
           >
             <a class="page-link" @click="() => goToPage(page - amountOfPagesToShowBefore + item - 1)">{{ page - amountOfPagesToShowBefore + item -1 }}</a>
           </li>
@@ -45,9 +34,9 @@
           </li>
 
           <li
-            v-for="item in amountOfPagesToShowAhead"
-            :key="item + page"
-            class="page-item"
+              v-for="item in amountOfPagesToShowAhead"
+              :key="item + page"
+              class="page-item"
           >
             <a class="page-link" @click="goToPage(item + page)">{{ item + page }}</a>
           </li>
@@ -70,6 +59,18 @@
         </ul>
       </nav>
     </div>
+    <div class="col-md-6 col-12 justify-content-md-start justify-content-center d-flex order-md-0 order-1">
+      <span class="text-sm">
+         {{ $t('table.pagination.showing_results') }}
+         {{ (startVar + 1) }}
+         {{ $t('table.pagination.to') }}
+         {{ endVar }}
+         {{ $t('table.pagination.of') }}
+         {{ props.items.length }}
+         {{ $t(paginationName) }}
+      </span>
+    </div>
+
   </div>
 
 </template>
@@ -211,7 +212,6 @@ let amountOfPagesToShowBefore = computed(() =>  {
   .pagination {
     margin: 2px 0;
     white-space: nowrap;
-    justify-content: flex-end;
     cursor: pointer;
   }
 </style>

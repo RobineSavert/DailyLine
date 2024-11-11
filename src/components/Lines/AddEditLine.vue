@@ -1,5 +1,8 @@
 <template>
-  <h1 v-if="!isEdit">{{ $t('lines.add_line')}}</h1>
+  <div class="mb-4">
+    <h1 v-if="!isEdit">{{ $t('lines.add_line')}}</h1>
+  </div>
+
     <textarea
         class="form-control"
         :placeholder="$t(placeholder)"
@@ -8,7 +11,7 @@
         maxlength="300"
         v-autofocus
         ref="textareaRef"
-        rows="8"
+        rows="5"
         :disabled="isDisabled"
     ></textarea>
 

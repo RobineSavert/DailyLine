@@ -13,7 +13,8 @@
     "edit_account": "Account bewerken",
     "update_password": "Wachtwoord bijwerken",
     "update_email": "E-mail adres bijwerken",
-    "update_display_name": "Schermnaam bijwerken"
+    "update_display_name": "Schermnaam bijwerken",
+    "forgot_password": "Wachtwoord bijwerken"
   },
   "table": {
     "columnHeaders": {
@@ -134,6 +135,8 @@
   },
   "settings": {
     "title": "Instellingen",
-    "language": "Taal"
+    "language": "Taal",
+    "app_version": "Versie app",
+    "latest_change": "Laatste wijzigingen"
   }
 }

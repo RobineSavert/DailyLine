@@ -12,7 +12,7 @@
     <div class="my-3 row justify-content-center">
       <Button class="w-auto"
               :icon="'key-fill'"
-              :content="'auth.forgot_password.button'" />
+              :content="'buttons.forgot_password'" />
 
     </div>
     <a @click.prevent="backToLogin" class="cursor-pointer text-sm">Back to login</a>

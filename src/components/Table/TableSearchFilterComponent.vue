@@ -1,6 +1,6 @@
 <template>
     <div class="row align-items-center">
-        <div class="mb-3 mb-md-0 col-md-4">
+        <div class="my-3 col-12">
             <form class="form-inline">
                 <div class="input-group">
                     <input v-model="filter" @input="inputSearch(filter)" type="text"

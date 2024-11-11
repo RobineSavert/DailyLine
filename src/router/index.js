@@ -12,6 +12,7 @@ import editEmail from "@/Views/Account/editEmail.vue"
 import editPassword from "@/Views/Account/editPassword.vue"
 import StatsView from '../Views/Account/StatsView.vue';
 import Tr from "@/i18n/translation"
+import {useAuthStore} from "@/stores/AuthStore";
 
 const routes = [
   {
@@ -81,7 +82,9 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const locale = to.params.locale || Tr.defaultLocale;
 
-  if (Tr.currentLocale && Tr.currentLocale.toLowerCase() !== locale.toLowerCase()) {
+  console.log(Tr.currentLocale)
+
+  if (Tr.currentLocale) {
     const isSupportedLocale = Tr.isLocaleSupported(locale);
 
     if (isSupportedLocale) {

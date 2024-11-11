@@ -18,7 +18,7 @@
     <template #button>
       <div class="d-flex align-items-center justify-content-between mt-4">
         <Button :icon="'trash-fill'" :content="'buttons.delete'" @click="onShowDeleteModal" />
-        <ButtonSave :content="'buttons.save_line'" :disabled="!lineContent" @click="onLineSave" />
+        <ButtonSave :content="'buttons.save_line'" :disabled="isDisabled" @click="onLineSave" />
       </div>
     </template>
   </AddEditLine>
@@ -27,7 +27,7 @@
 <script setup>
   import AddEditLine from '@/components/Lines/AddEditLine.vue';
   import { useRoute, useRouter } from 'vue-router';
-  import { ref } from 'vue';
+  import {computed, ref} from 'vue';
   import { useLinesStore } from '@/stores/LinesStore';
   import eventBus from "@/eventBus";
   import {useI18n} from "vue-i18n";
@@ -44,6 +44,8 @@
   const lineContent = ref('');
 
   lineContent.value = linesStore.getLineContentById(route.params.id);
+
+  let newLine = ref(lineContent.value)
 
   const onLineSave = () => {
     linesStore.updateLine(route.params.id, lineContent.value);
@@ -67,4 +69,10 @@
       router.push({name: 'lines', params: {locale: route.params.locale} })
     });
   };
+
+  const isDisabled = computed(() => {
+    return (
+        lineContent.value === newLine.value || lineContent.value === ''
+    );
+  });
 </script>

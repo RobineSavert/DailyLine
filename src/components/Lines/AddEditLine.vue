@@ -8,7 +8,7 @@
         maxlength="300"
         v-autofocus
         ref="textareaRef"
-        rows="12"
+        rows="8"
         :disabled="isDisabled"
     ></textarea>
 
@@ -38,6 +38,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 const textareaRef = ref(null);
+const isDisabled = ref(false);
 
 const focusTextArea = () => {
   textareaRef.value.focus();

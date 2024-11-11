@@ -6,15 +6,16 @@
     </RouterLink>
   </div>
   <div class="mt-3">
-    <table class="table is-fullwidth">
-      <thead>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
         <tr>
           <th>{{ $t('stats.stat') }}</th>
           <th>{{ $t('stats.value') }}</th>
         </tr>
-      </thead>
+        </thead>
 
-      <tbody>
+        <tbody>
         <tr>
           <td>{{ $t('stats.total_lines') }}</td>
           <td>{{ linesCount }}</td>
@@ -23,9 +24,9 @@
           <td>{{ $t('stats.total_chars') }}</td>
           <td>{{ totalCharactersCount }}</td>
         </tr>
-      </tbody>
-    </table>
-
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -44,3 +45,8 @@
 
   useCharactersLimit(feedback, 50);
 </script>
+<style>
+.table > :not(caption) > * > *{
+  color: #6e707e;
+}
+</style>

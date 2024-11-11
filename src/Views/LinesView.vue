@@ -1,30 +1,53 @@
 <template>
+  <div class="d-flex justify-content-between">
     <h1>{{ $t('lines.title') }}</h1>
+    <DatePicker @update-date="handleDateUpdate" :id="'info-Datepicker'" />
+  </div>
 
-    <div v-for="line in lines" :key="line.id" class="mt-4">
-      <SingleLine @deleteLine="checkLinesAndUpdate" :line="line" />
+  <Spinner v-if="!linesLoaded" />
+
+  <template v-else>
+
+    <div v-if="filteredLines.length > 0">
+      <div v-for="line in filteredLines" :key="line.id" class="mt-4">
+        <SingleLine @deleteLine="checkLinesAndUpdate" :line="line" />
+      </div>
     </div>
 
-    <div v-if="!lines.length && linesStore.linesLoaded">
-      <h4>{{ $t('lines.no_lines') }}</h4>
+    <div v-else class="mt-4">
+      <span class="fst-italic">{{ $t('lines.no_lines_on_date') }}</span>
     </div>
+  </template>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue';
+import {ref, onMounted, computed} from 'vue';
   import SingleLine from '../components/Lines/SingleLine.vue';
   import { useLinesStore } from '@/stores/LinesStore';
   import { storeToRefs } from 'pinia';
   import { useCharactersLimit } from '@/composables/useCharactersLimit';
+  import DatePicker from "@/components/DatePicker.vue";
+  import Spinner from "@/components/Spinner.vue";
 
   const linesStore = useLinesStore();
-  const { lines } = storeToRefs(linesStore);
+  const { lines, linesLoaded } = storeToRefs(linesStore);
   const newLine = ref('');
   const isDisabled = ref(false);
   const countdown = ref('');
+  const selectedDate = ref('')
+  const lineContent = ref('');
 
   useCharactersLimit(newLine);
 
+  const filteredLines = computed(() => {
+    if (!selectedDate.value) return lines.value;
+
+    return lines.value.filter((line) => {
+      const lineDate = new Date(parseInt(line.date)).toDateString();
+      const selectedDateString = new Date(parseInt(selectedDate.value)).toDateString();
+      return lineDate === selectedDateString;
+    });
+  });
 
   function checkLinesAndUpdate(){
     linesStore.getLines();
@@ -46,9 +69,6 @@
     }
   }
 
-
-
-  // Function to calculate and display countdown
   const calculateCountdown = (expiryTime) => {
     const now = new Date().getTime();
     const remaining = expiryTime - now;
@@ -63,14 +83,12 @@
     }
   };
 
-  // Function to reset the timer
   const resetTimer = () => {
     isDisabled.value = false;
     countdown.value = '';
     localStorage.removeItem('textareaTimestamp');
   };
 
-  // Initialize countdown and disable state on mount
   onMounted(() => {
     const savedTimestamp = localStorage.getItem('textareaTimestamp');
     const storedLines = lines.value; // Dynamically get lines from store
@@ -89,4 +107,9 @@
       }
     }
   });
+
+const handleDateUpdate = (timestamp) => {
+  selectedDate.value = timestamp;
+  lineContent.value = linesStore.getLineByDate(timestamp);
+};
 </script>

@@ -58,7 +58,9 @@
       "title": "Regel verwijderen",
       "body": "Weet je zeker dat je deze regel wilt verwijderen?"
     },
-    "placeholder": "Typ iets ...."
+    "placeholder": "Typ iets ....",
+    "add_line": "Voeg een regel toe",
+    "no_lines_on_date": "Er is geen regel op de gekozen datum."
   },
   "account": {
     "title": "Account",
@@ -81,5 +83,34 @@
     "value": "Aantal",
     "total_lines": "Regels",
     "total_chars": "Karakters"
+  },
+
+  "weekdays": {
+    "sun": "Zo",
+    "mon": "Ma",
+    "tue": "Di",
+    "wed": "Wo",
+    "thur": "Do",
+    "fri": "Vr",
+    "sat": "Za"
+  },
+  "months": {
+    "jan": "Januari",
+    "feb": "Februari",
+    "march": "Maart",
+    "april": "April",
+    "may": "Mei",
+    "june": "Juni",
+    "july": "Juli",
+    "aug": "Augustus",
+    "sept": "September",
+    "oct": "Oktober",
+    "nov": "November",
+    "dec": "December"
+  },
+  "pick_a_year": "Voer een jaar in",
+  "pick": "Kies",
+  "datepicker": {
+    "placeholder": "Kies een datum"
   }
 }

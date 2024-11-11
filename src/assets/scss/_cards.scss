@@ -35,10 +35,6 @@
 
   }
 
-  .card-footer {
-    @extend .py-4;
-  }
-
   &.card-icon {
     @extend .overflow-hidden;
     @extend .ps-0;

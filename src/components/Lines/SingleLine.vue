@@ -3,7 +3,7 @@
     <template v-slot:title>
       <div class="d-flex justify-content-between">
         <small>{{ formattedDate }}</small>
-        <small>{{ characterLength }}</small>
+<!--        <small>{{ characterLength }}</small>-->
       </div>
     </template>
     <template v-slot:body>
@@ -11,12 +11,14 @@
     </template>
     <template v-slot:footer>
       <div class="d-flex justify-content-between">
-      <RouterLink :to="{ name: 'editLine', params: { id: line.id } }" class="text-sm">
-        {{ $t('lines.edit') }}
-      </RouterLink>
       <a href="#" class="text-sm" @click.prevent="openModal">
-        {{ $t('lines.delete') }}
+<!--        {{ $t('lines.delete') }}-->
+        <BootstrapIcon :icon="'trash-fill'" />
       </a>
+        <RouterLink :to="{ name: 'editLine', params: { id: line.id } }" class="text-sm">
+          <!--        {{ $t('lines.edit') }}-->
+          <BootstrapIcon :icon="'pencil-fill'" />
+        </RouterLink>
       </div>
     </template>
   </Card>
@@ -29,7 +31,7 @@ import { useLinesStore } from '@/stores/LinesStore';
 import eventBus from "@/eventBus";
 import { useI18n } from 'vue-i18n';
 import Card from "@/components/Card.vue";
-import Tabs from "@/components/Tabs.vue";
+import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
 
 const props = defineProps({
   line: {

@@ -13,13 +13,14 @@ import {
   orderBy,
   limit
 } from 'firebase/firestore';
-import { db } from '../js/firebase';
+import {auth, db} from '../js/firebase';
 import { useAuthStore } from './AuthStore';
 
 export const useLinesStore = defineStore('linesStore', () => {
   const lines = ref([]);
   const linesLoaded = ref(false);
   const authStore = useAuthStore();
+
   let linesCollectionRef;
   let linesCollectionQuery;
   let linesSnapshot = null;
@@ -42,6 +43,8 @@ export const useLinesStore = defineStore('linesStore', () => {
     //   };
     //   notes.value.push(note);
     // });
+
+
 
     linesSnapshot = onSnapshot(linesCollectionQuery, (querySnapshot) => {
       let linesData = [];
@@ -79,6 +82,7 @@ export const useLinesStore = defineStore('linesStore', () => {
 
   const addLine = async (lineContent) => {
     const currentDate = new Date().getTime().toString();
+    linesLoaded.value = false
     // const note = {
     //   id: currentDate,
     //   content: noteContent
@@ -86,20 +90,37 @@ export const useLinesStore = defineStore('linesStore', () => {
 
     //notes.value.unshift(note);
 
-    await addDoc(linesCollectionRef, { content: lineContent, date: currentDate });
+    await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
+      linesLoaded.value = true
+    })
   };
 
   const deleteLine = async (lineId) => {
+    linesLoaded.value = false
+
     await deleteDoc(doc(linesCollectionRef, lineId)).then(() => {
-      getLines();
+      getLines().then(() => {
+        linesLoaded.value = true
+      })
     })
   };
 
   const updateLine = async (id, content) => {
+    linesLoaded.value = false
+
     await updateDoc(doc(linesCollectionRef, id), {
       content
-    });
+    }).then(() => {
+      linesLoaded.value = true
+    })
   };
+
+
+  const getLineByDate = computed(() => {
+    return (timestamp) => {
+      return lines.value.find((line) => parseInt(line.date) === timestamp) || null;
+    };
+  });
 
   return {
     lines,
@@ -110,6 +131,7 @@ export const useLinesStore = defineStore('linesStore', () => {
     totalCharactersCount,
     totalLinesCount,
     getLines,
+    getLineByDate,
     linesLoaded,
     clearLines
   };

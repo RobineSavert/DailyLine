@@ -58,7 +58,9 @@
       "title": "Delete line",
       "body": "Are you sure you want to delete this line?"
     },
-    "placeholder": "Type something ...."
+    "placeholder": "Type something ....",
+    "add_line": "Add new line",
+    "no_lines_on_date": "There is no line added for this date.."
   },
   "account": {
     "title": "Account",
@@ -81,5 +83,34 @@
     "value": "Count",
     "total_lines": "Lines",
     "total_chars": "Characters"
+  },
+
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thur": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "aug": "August",
+      "sept": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "pick_a_year": "Pick a year",
+    "pick": "Pick",
+  "datepicker": {
+    "placeholder": "Pick a date"
   }
 }

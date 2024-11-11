@@ -1,4 +1,5 @@
 <template>
+  <h1>{{ $t('lines.add_line')}}</h1>
     <textarea
         class="form-control"
         :placeholder="$t(placeholder)"

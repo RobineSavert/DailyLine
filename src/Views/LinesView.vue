@@ -1,7 +1,10 @@
 <template>
   <Alert />
 
-  <h1>{{ $t('lines.title') }}</h1>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>{{ $t('lines.title') }}</h1>
+    <BootstrapIcon :icon="'search'" @click="showSearch()"/>
+  </div>
 
   <Spinner v-if="!linesLoaded" />
 
@@ -13,6 +16,7 @@
     >
       <template v-slot:searchTableComponent>
         <TableSearchFilterComponent
+            v-if="showSearchBar"
             :items="filteredLines"
             :can-filter="false"
             :search-placeholder="'table.placeholder'"
@@ -64,6 +68,7 @@ import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComp
 import eventBus from "@/eventBus";
 import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
+import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
 
   const linesStore = useLinesStore();
   const { lines, linesLoaded } = storeToRefs(linesStore);
@@ -74,6 +79,7 @@ import Alert from "@/components/Alert.vue";
   const lineContent = ref('');
   const { t } = useI18n();
 const route = useRoute()
+let showSearchBar = ref(false)
 
   useCharactersLimit(newLine);
 
@@ -187,5 +193,8 @@ function searchFilters(filtersForSearch){
 
 const emit = defineEmits(['delete-line'])
 
+function showSearch() {
+  showSearchBar.value = !showSearchBar.value; // Verander dit naar =
+}
 
 </script>

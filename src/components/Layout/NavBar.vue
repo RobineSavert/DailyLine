@@ -7,8 +7,10 @@
               :to="{ name: navItem.name, params: { locale: Tr.currentLocale } }"
               active-class="active"
           >
-            <div class="nav-icon"><BootstrapIcon :icon="navItem.icon" size="3x" /></div>
-            <span class="text-xs">
+            <div class="nav-icon">
+              <BootstrapIcon :icon="navItem.icon" :variant="'primary'" size="2x" />
+            </div>
+            <span class="text-xs text-primary">
               {{ t(navItem.translation) }}
             </span>
           </RouterLink>
@@ -33,51 +35,51 @@ const navItems = computed(() => [
 </script>
 
 
-<style>
+<style lang="scss">
+
 
 :root {
   --rs-white: #ffffff;
-  --rs-primary: #f472b7;
-  --rs-secondary: #9b64d3;
+  --rs-primary: #c77986;
+  --rs-secondary: #d7a0a9;
 }
 
-.navbar.fixed-bottom .nav-link .nav-icon {
-  text-align: center;
-  height: 2.5rem;
-  padding: 0.5rem;
-  border-radius: 1.25rem;
-  max-width: 6rem;
-  margin-left: auto;
-  margin-right: auto;
+.navbar {
+  &.fixed-bottom {
+    .nav-link {
+      .nav-icon {
+        padding: 0.5rem;
+        border-radius: 1.25rem;
+      }
+
+      &.active .nav-icon,
+      &:hover .nav-icon {
+        background: var(--rs-primary);
+        background: -moz-linear-gradient(
+            150deg,
+            var(--rs-primary) 20%,
+            var(--rs-secondary) 90%
+        );
+        background: -webkit-linear-gradient(
+            150deg,
+            var(--rs-primary) 20%,
+            var(--rs-secondary) 90%
+        );
+        background: linear-gradient(
+            150deg,
+            var(--rs-primary) 20%,
+            var(--rs-secondary) 90%
+        );
+
+        svg {
+          color: #fff;
+        }
+
+      }
+    }
+
+  }
 }
 
-.navbar.fixed-bottom .nav-link .nav-icon svg {
-  height: 1.5rem;
-}
-
-.navbar.fixed-bottom .nav-link.active .nav-icon,
-.navbar.fixed-bottom .nav-link:hover .nav-icon {
-  background: var(--rs-primary);
-  background: -moz-linear-gradient(
-      150deg,
-      var(--rs-primary) 20%,
-      var(--rs-secondary) 90%
-  );
-  background: -webkit-linear-gradient(
-      150deg,
-      var(--rs-primary) 20%,
-      var(--rs-secondary) 90%
-  );
-  background: linear-gradient(
-      150deg,
-      var(--rs-primary) 20%,
-      var(--rs-secondary) 90%
-  );
-}
-
-.navbar.fixed-bottom .nav-link.active .nav-icon svg,
-.navbar.fixed-bottom .nav-link:hover .nav-icon svg {
-  stroke: var(--rs-white);
-}
 
 </style>

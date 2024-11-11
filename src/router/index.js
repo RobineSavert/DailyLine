@@ -16,60 +16,72 @@ import {useAuthStore} from "@/stores/AuthStore";
 
 const routes = [
   {
-    path: "/:locale?",
-    beforeEnter: Tr.routeMiddleware,
-    component: LinesView,
-    name: 'lines',
-  },
-  {
-    path: '/:locale?/edit-line/:id',
-    component: EditLineView,
-    name: 'editLine'
-  },
-  {
-    path: '/:locale?/stats',
-    component: StatsView,
-    name: 'stats'
-  },
-  {
     path: '/auth',
     component: AuthView,
-    name: 'auth'
+    name: 'auth',
+    meta: { layout: 'auth' }
   },
   {
     path: '/forgot-password',
     component: ForgotPassword,
-    name: 'forgot-password'
+    name: 'forgot-password',
+    meta: { layout: 'auth' }
   },
   {
     path: '/:locale?/account',
     component: AccountView,
-    name: 'account'
+    name: 'account',
+    meta: { layout: 'main' }
+  },
+
+  {
+    path: "/:locale?",
+    beforeEnter: Tr.routeMiddleware,
+    component: LinesView,
+    name: 'lines',
+    meta: { layout: 'main' }
+  },
+  {
+    path: '/:locale?/edit-line/:id',
+    component: EditLineView,
+    name: 'editLine',
+    meta: { layout: 'main' }
+  },
+  {
+    path: '/:locale?/stats',
+    component: StatsView,
+    name: 'stats',
+    meta: { layout: 'main' }
   },
   {
     path: '/:locale?/edit-display-name',
     component: editDisplayName,
-    name: 'editDisplayName'
+    name: 'editDisplayName',
+    meta: { layout: 'main' }
   },
   {
     path: '/:locale?/edit-email',
     component: editEmail,
-    name: 'editEmail'
+    name: 'editEmail',
+    meta: { layout: 'main' }
   },
   {
     path: '/:locale?/edit-password',
     component: editPassword,
-    name: 'editPassword'
+    name: 'editPassword',
+    meta: { layout: 'main' }
   },
   {
     path: '/:locale?/settings',
     component: SettingsView,
-    name: 'settings'
+    name: 'settings',
+    meta: { layout: 'main' }
   },
   {
     path: '/:locale?/add',
     component: AddLine,
-    name: 'add'
+    name: 'add',
+    meta: { layout: 'main' }
   }
 ];
 

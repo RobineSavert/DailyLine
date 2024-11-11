@@ -28,7 +28,7 @@
 
 
   </form>
-  <a @click.prevent="showResetPW" class="cursor-pointer text-sm">forgot password</a>
+  <a @click.prevent="showResetPW" class="cursor-pointer text-xs text-light">forgot password</a>
 </div>
 
 </template>

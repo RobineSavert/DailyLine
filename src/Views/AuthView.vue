@@ -1,23 +1,15 @@
 <template>
   <div class="bg-gradient-primary vh-100 d-flex align-items-center justify-content-center">
     <div class="container">
-      <div class="row justify-content-center pt-4">
-        <div class="col-xl-5 col-lg-12">
-          <Card :panel-i-d="'loginPanel'" :noPadding="true" :panel-collapsable="false" :panel-header="false" :variant="'none'">
-            <template v-slot:body>
-              <div class="row align-items-center">
-                  <div class="text-center vertical-align p-5">
-                    <h1 class="h4 text-gray-900 mb-3">
-                      {{ t('title')}}
-                    </h1>
-                    <p class="text-sm mb-5">
-                      {{ t('intro')}}
-                    </p>
-                    <Tabs :id="'auth-tabs'" :tabs="tabs" />
-                  </div>
-              </div>
-            </template>
-          </Card>
+      <div class="row align-items-center auth-tabs">
+        <div class="text-center vertical-align p-5">
+          <h1 class="h4 text-light mb-3">
+            {{ t('title') }}
+          </h1>
+          <p class="text-sm text-light mb-5">
+            {{ t('intro') }}
+          </p>
+          <Tabs :id="'auth-tabs'" :tabs="tabs" />
         </div>
       </div>
     </div>
@@ -26,17 +18,34 @@
 
 <script setup>
 import Tabs from '@/components/Tabs.vue'
-import { computed } from 'vue';
+import {computed} from 'vue';
 import LoginView from "@/Views/Auth/LoginView.vue";
 import RegisterView from "@/Views/Auth/RegisterView.vue";
-import Card from "@/components/Card.vue";
-import { useI18n } from 'vue-i18n'
+import {useI18n} from 'vue-i18n'
 
-const { t } = useI18n()
+const {t} = useI18n()
 
 
 const tabs = computed(() => [
-  { key: 'login-tab', component: LoginView, icon: 'key-fill', translation: 'auth.login.title' },
-  { key: 'register-tab', component: RegisterView, icon: 'person-fill', translation: 'auth.register.title' },
+  {key: 'login-tab', component: LoginView, icon: 'key-fill', translation: 'auth.login.title'},
+  {key: 'register-tab', component: RegisterView, icon: 'person-fill', translation: 'auth.register.title'},
 ])
 </script>
+
+<style lang="scss">
+  .auth-tabs .nav-tabs{
+    border: 0 !important;
+
+    .nav-link {
+      border: 0 !important;
+      background: transparent;
+      color: #fff;
+
+      &.active {
+        background: transparent;
+        color: #fff;
+        border-bottom: 1px solid #fff !important;
+      }
+    }
+  }
+</style>

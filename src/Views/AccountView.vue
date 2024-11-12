@@ -30,7 +30,7 @@
 
 
   <div class="d-flex justify-content-center my-4">
-    <a @click="onLogout" class="text-danger">{{ $t('account.logout')}}</a>
+    <a @click="onLogout" class="text-danger btn-link">{{ $t('account.logout')}}</a>
   </div>
 </template>
 <script setup>

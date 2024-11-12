@@ -60,10 +60,9 @@
   "navbar": {
     "lines": "Regels",
     "account": "Account",
+    "dashboard": "Dashboard",
     "add": "Toevoegen",
-    "stats": "Stats",
-    "settings": "Instellingen",
-    "logout": "Uitloggen"
+    "settings": "Instellingen"
   },
   "lines": {
     "title": "Regels",

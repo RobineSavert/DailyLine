@@ -60,10 +60,9 @@
   "navbar": {
     "lines": "Lines",
     "account": "Account",
+    "dashboard": "Dashboard",
     "add": "Add",
-    "stats": "Stats",
-    "settings": "Settings",
-    "logout": "Logout"
+    "settings": "Settings"
   },
   "lines": {
     "title": "Lines",

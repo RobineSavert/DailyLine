@@ -32,7 +32,6 @@
             :pagination-name="'table.paginationName'"
             :searchByKeys="['date', 'content']"
             :sort-by="'date'"
-            :show-items-per-page="2"
             :empty-table-name="'table.no_data'"
             :filter="searchInputFilter"
             :appliedFilters="appliedFilters"

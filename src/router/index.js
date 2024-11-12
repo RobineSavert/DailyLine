@@ -12,7 +12,7 @@ import editEmail from "@/Views/Account/editEmail.vue"
 import editPassword from "@/Views/Account/editPassword.vue"
 import StatsView from '../Views/Account/StatsView.vue';
 import Tr from "@/i18n/translation"
-import {useAuthStore} from "@/stores/AuthStore";
+import DashboardView from "@/Views/DashboardView.vue";
 
 const routes = [
   {
@@ -33,10 +33,15 @@ const routes = [
     name: 'account',
     meta: { layout: 'main' }
   },
-
   {
     path: "/:locale?",
     beforeEnter: Tr.routeMiddleware,
+    component: DashboardView,
+    name: 'dashboard',
+    meta: { layout: 'main' }
+  },
+  {
+    path: "/:locale?",
     component: LinesView,
     name: 'lines',
     meta: { layout: 'main' }
@@ -93,8 +98,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const locale = to.params.locale || Tr.defaultLocale;
-
-  console.log(Tr.currentLocale)
 
   if (Tr.currentLocale) {
     const isSupportedLocale = Tr.isLocaleSupported(locale);

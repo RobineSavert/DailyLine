@@ -1,10 +1,7 @@
 <template>
   <h1>Dashboard</h1>
 
-
-<Spinner v-if="!linesLoaded" />
-
-
+  <Spinner v-if="!linesLoaded" />
 
   <template v-else>
     <h3>Latest 5 lines</h3>
@@ -17,22 +14,20 @@
       See more
     </RouterLink>
 
+    <hr/>
 
-  <hr/>
-
-  <template v-if="quotes.length">
-  <div class="quote-fade">
-    <figure class="text-center" :key="currentQuote.key">
-      <blockquote class="blockquote">
-        <p>{{ currentQuote.quote }}</p>
-      </blockquote>
-      <figcaption class="blockquote-footer">
-        {{ currentQuote.author }} in <cite title="Source Title">{{ currentQuote.media }}</cite>
-      </figcaption>
-    </figure>
-  </div>
-
-  </template>
+    <template v-if="quotes.length">
+      <div class="quote-fade">
+        <figure class="text-center" :key="currentQuote.key">
+          <blockquote class="blockquote">
+            <p>{{ currentQuote.quote }}</p>
+          </blockquote>
+          <figcaption class="blockquote-footer">
+            {{ currentQuote.author }} in <cite title="Source Title">{{ currentQuote.media }}</cite>
+          </figcaption>
+        </figure>
+      </div>
+    </template>
   </template>
 </template>
 

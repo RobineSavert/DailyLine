@@ -31,49 +31,48 @@ const routes = [
     path: '/:locale?/account',
     component: AccountView,
     name: 'account',
-    meta: { layout: 'main' }
+    meta: {layout: 'account'}
+  },
+  {
+    path: '/:locale?/account/edit-display-name',
+    component: editDisplayName,
+    name: 'editDisplayName',
+    meta: { layout: 'account' }
+  },
+  {
+    path: '/:locale?/account/edit-email',
+    component: editEmail,
+    name: 'editEmail',
+    meta: { layout: 'account' }
+  },
+  {
+    path: '/:locale?/account/edit-password',
+    component: editPassword,
+    name: 'editPassword',
+    meta: { layout: 'account' }
+  },
+  {
+    path: '/:locale?/account/stats',
+    component: StatsView,
+    name: 'stats',
+    meta: { layout: 'account' }
   },
   {
     path: "/:locale?",
-    beforeEnter: Tr.routeMiddleware,
     component: DashboardView,
     name: 'dashboard',
     meta: { layout: 'main' }
   },
   {
-    path: "/:locale?",
+    path: "/:locale?/lines",
     component: LinesView,
     name: 'lines',
-    meta: { layout: 'main' }
+    meta: {layout: 'lines'}
   },
   {
-    path: '/:locale?/edit-line/:id',
+    path: '/:locale?/lines/edit-line/:id',
     component: EditLineView,
     name: 'editLine',
-    meta: { layout: 'main' }
-  },
-  {
-    path: '/:locale?/stats',
-    component: StatsView,
-    name: 'stats',
-    meta: { layout: 'main' }
-  },
-  {
-    path: '/:locale?/edit-display-name',
-    component: editDisplayName,
-    name: 'editDisplayName',
-    meta: { layout: 'main' }
-  },
-  {
-    path: '/:locale?/edit-email',
-    component: editEmail,
-    name: 'editEmail',
-    meta: { layout: 'main' }
-  },
-  {
-    path: '/:locale?/edit-password',
-    component: editPassword,
-    name: 'editPassword',
     meta: { layout: 'main' }
   },
   {
@@ -94,6 +93,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 });
+
 
 
 router.beforeEach(async (to, from, next) => {

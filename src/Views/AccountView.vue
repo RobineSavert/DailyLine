@@ -1,53 +1,49 @@
 <template>
   <Alert />
   <div class="mb-4">
-    <h1>{{ $t('account.title')}}</h1>
+    <h1>{{ $t('account.title') }}</h1>
   </div>
 
-
-<!--  <div class="img-circle mx-auto my-4">-->
-<!--    <img :src="user.photoURL" alt="..." />-->
-<!--  </div>-->
-
-<div class="row">
-  <div class="col-12 col-md-6" v-for="(accountItem, index) in accountItems" :key="index">
-    <Card :panel-collapsable="false" :variant="'none'">
-      <template v-slot:title>
-        <div class="d-flex justify-content-between">
-          <span>{{ t(accountItem.title) }}</span>
-          <RouterLink :to="{ name: accountItem.link, params: {locale: route.params.locale} }">
-            <BootstrapIcon :icon="'vector-pen'" />
-          </RouterLink>
-        </div>
-      </template>
-      <template v-slot:body>
-        {{ accountItem.body }}
-      </template>
-    </Card>
+  <div class="row">
+    <div class="col-12 col-md-6" v-for="(accountItem, index) in accountItems" :key="index">
+      <Card :panel-collapsable="false" :variant="'none'">
+        <template v-slot:title>
+          <div class="d-flex justify-content-between">
+            <span>{{ t(accountItem.title) }}</span>
+            <RouterLink
+                :to="{ name: accountItem.link, params: { locale: route.params.locale } }"
+            >
+              <BootstrapIcon :icon="'vector-pen'" />
+            </RouterLink>
+          </div>
+        </template>
+        <template v-slot:body>
+          {{ accountItem.body }}
+        </template>
+      </Card>
+    </div>
   </div>
-
-</div>
-
 
   <div class="d-flex justify-content-center my-4">
-    <a @click="onLogout" class="text-danger btn-link">{{ $t('account.logout')}}</a>
+    <a @click="onLogout" class="text-danger btn-link">{{ $t('account.logout') }}</a>
   </div>
 </template>
+
 <script setup>
-import {useAuthStore} from "@/stores/AuthStore";
-import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
+import { useAuthStore } from "@/stores/AuthStore";
+import { BootstrapIcon } from "@dvuckovic/vue3-bootstrap-icons";
 import Alert from "@/components/Alert.vue";
-import {useAccountStore} from "@/stores/AccountStore";
+import { useAccountStore } from "@/stores/AccountStore";
 import Card from "@/components/Card.vue";
-import {computed} from "vue";
-import {useI18n} from "vue-i18n";
-import {useRoute} from "vue-router";
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 
 const { getUser } = useAccountStore();
-const { t } = useI18n()
+const { t } = useI18n();
 const authStore = useAuthStore();
 const { user } = useAuthStore();
-const route = useRoute()
+const route = useRoute();
 
 getUser();
 
@@ -55,35 +51,35 @@ const onLogout = () => {
   authStore.logoutUser();
 };
 
-
 const accountItems = computed(() => [
   {
     key: 'email-card',
     title: 'account.email',
-    link: 'editEmail',
+    link: 'editEmail',  // Gebruik de naam van de subroute
     body: user.email
   },
   {
     key: 'displayname-card',
     title: 'account.display_name',
-    link: 'editDisplayName',
+    link: 'editDisplayName',  // Gebruik de naam van de subroute
     body: user.displayName
   },
   {
     key: 'password-card',
     title: 'account.password',
-    link: 'editPassword',
+    link: 'editPassword',  // Gebruik de naam van de subroute
     body: '******'
   },
   {
     key: 'stats-card',
     title: 'account.stats',
-    link: 'stats',
+    link: 'stats',  // Gebruik de naam van de subroute
     body: t('account.view_stats')
   },
 ]);
-
 </script>
+
+
 
 <style>
 .img-circle {

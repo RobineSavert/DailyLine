@@ -15,17 +15,16 @@
 <script setup>
 import eventBus from '@/eventBus'
 import { onMounted } from 'vue';
-import NavBar from './components/Layout/NavBar.vue';
 import { useAuthStore } from './stores/AuthStore';
 import Modal from "@/components/Modal.vue";
 import {storeToRefs} from "pinia";
-import Alert from "@/components/Alert.vue"
-import Card from "@/components/Card.vue"
-import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
 import AuthLayout from './layouts/AuthLayout.vue';
 import MainLayout from './layouts/MainLayout.vue';
+import AccountLayout from './layouts/AccountLayout.vue';
+import LinesLayout from "@/layouts/LinesLayout.vue";
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+
 
 const authStore = useAuthStore();
 const { isLoggedIn } = storeToRefs(useAuthStore())
@@ -40,6 +39,16 @@ onMounted(() => {
 const route = useRoute();
 
 const layoutComponent = computed(() => {
-  return route.meta.layout === 'auth' ? AuthLayout : MainLayout;
+  switch (true) {
+    case route.path.startsWith('/' + route.params.locale + '/account'):
+      return AccountLayout;
+    case route.path.startsWith('/' + route.params.locale + '/lines'):
+      return LinesLayout;
+    case route.meta.layout === 'auth':
+      return AuthLayout;
+    default:
+      return MainLayout;
+  }
 });
+
 </script>

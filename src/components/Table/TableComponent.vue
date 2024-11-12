@@ -318,7 +318,6 @@ const cFields = computed(() => {
 });
 
 function getSortType(key) {
-  console.log(key)
     if (key == '')
         return;
     const fields = props.fields.filter(field => field.key == key);

@@ -5,7 +5,7 @@
 
     <textarea
         class="form-control"
-        :placeholder="$t(placeholder)"
+        :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         maxlength="300"
@@ -19,7 +19,7 @@
         {{ $t('countdown.description')}} {{ countdown }}
       </p>
 
-        <slot name="button"></slot>
+  <slot name="button"></slot>
 
 </template>
 

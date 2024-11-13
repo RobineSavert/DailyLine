@@ -6,8 +6,8 @@
     ]"
     >
         <span class="icon" :class="[circle ? '' : 'text-white-50', variant === 'btn-light' ? 'text-gray-900' : '']">
-            <BootstrapIcon v-if="animation == undefined" :icon="icon" />
-            <BootstrapIcon v-else :icon="icon" :animation="animation" />
+          <i v-if="animation == undefined" :class="'bi-' + icon"></i>
+          <i v-else :class="'bi-' + icon" :animation="animation"></i>
         </span>
         <span v-if="!circle && shouldTranslateButtonText" class="text" :class="variant === 'btn-light' ? 'text-gray-900' : ''">{{ $t(content) }}</span>
         <span v-else-if="!circle && !shouldTranslateButtonText" class="text" :class="variant === 'btn-light' ? 'text-gray-900' : ''">{{ content }}</span>

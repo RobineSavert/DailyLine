@@ -1,8 +1,8 @@
 <template>
   <Alert />
-  <div class="mb-4">
-    <h1>{{ $t('account.title') }}</h1>
-  </div>
+
+  <TitleComponent :title="'account.title'">
+  </TitleComponent>
 
   <div class="row">
     <div class="col-12 col-md-6" v-for="(accountItem, index) in accountItems" :key="index">
@@ -13,7 +13,7 @@
             <RouterLink
                 :to="{ name: accountItem.link, params: { locale: route.params.locale } }"
             >
-              <BootstrapIcon :icon="'vector-pen'" />
+              <i class="bi-vector-pen"></i>
             </RouterLink>
           </div>
         </template>
@@ -31,13 +31,13 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/AuthStore";
-import { BootstrapIcon } from "@dvuckovic/vue3-bootstrap-icons";
 import Alert from "@/components/Alert.vue";
 import { useAccountStore } from "@/stores/AccountStore";
 import Card from "@/components/Card.vue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
+import TitleComponent from "@/components/TitleComponent.vue";
 
 const { getUser } = useAccountStore();
 const { t } = useI18n();

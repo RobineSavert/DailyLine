@@ -1,13 +1,13 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center">
-    <h1>{{ $t('account.stats')}}</h1>
-    <RouterLink :to="{ name: 'account', params: {locale: route.params.locale} }">
-      <BootstrapIcon :icon="'x-lg'" />
-    </RouterLink>
-  </div>
+  <TitleComponent :title="'account.stats'">
+    <template v-slot:buttons>
+      <RouterLink :to="{ name: 'account', params: {locale: route.params.locale} }">
+        <i class="bi-x-lg me-2" style="font-size: 1.5rem;"></i>
+      </RouterLink>
+    </template>
+  </TitleComponent>
+
   <div class="mt-3">
-
-
     <TableCard
         :items="statItems"
         :panel-i-d="'lineTable'"
@@ -49,11 +49,11 @@
   import { useLinesStore } from '@/stores/LinesStore';
   import { useCharactersLimit } from '@/composables/useCharactersLimit';
   import {computed, ref} from 'vue';
-  import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
   import {useRoute} from "vue-router";
   import TableComponent from "@/components/Table/TableComponent.vue";
   import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComponent.vue";
   import TableCard from "@/components/Table/TableCard.vue";
+  import TitleComponent from "@/components/TitleComponent.vue";
   import {useI18n} from "vue-i18n";
   const route = useRoute()
   const linesStore = useLinesStore();

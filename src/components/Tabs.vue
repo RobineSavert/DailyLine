@@ -7,10 +7,10 @@
           @click="currentTab = index">
           <RouterLink v-if="isRoute" :to="{ name: tab.key }" class="nav-link justify-content-center" :class="[{ active: currentTab === index }]" >
             <template v-if="tab.hasOwnProperty('isValid')">
-              <BootstrapIcon v-if="tab.isValid" :icon="tab.icon" />
-              <BootstrapIcon v-else :icon="'exclamation-circle-fill'" :variant="'danger'" />
+              <i v-if="tab.isValid" :class="'bi-' + tab.icon"></i>
+              <i v-else class="exclamation-circle-fill text-danger"></i>
             </template>
-            <BootstrapIcon v-else :icon="tab.icon" />
+            <i v-else  :class="'bi-' + tab.icon"></i>
           <span>{{ $t(tab.translation) }}</span>
         </RouterLink>
         <button
@@ -25,7 +25,7 @@
           :aria-controls="tab.key + '-tab-pane'"
           aria-selected="true"
         >
-          <BootstrapIcon :icon="tab.icon" />
+          <i :class="'bi-' + tab.icon"></i>
           <span>{{ $t(tab.translation) }}</span>
         </button>
       </li>

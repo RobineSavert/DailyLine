@@ -9,7 +9,8 @@
                :aria-label="$t('datepicker.placeholder')"
                :aria-describedby="id"
                v-model="keyDate">
-        <BootstrapIcon :icon="'calendar-fill'" class="position-absolute input-icon" />
+
+        <i class="bi-calendar-fill position-absolute input-icon"></i>
       </div>
     </div>
   </div>

@@ -29,15 +29,9 @@
                                         <slot :name="'HEAD_' + field.key" :label="field.label">
                                             {{ label(field) }}
                                         </slot>
-                                        <BootstrapIcon icon='chevron-expand'
-                                            v-if="field.key !== dSortBy" class="ms-2" />
-                                        <BootstrapIcon :icon='getSortIcon("ascending")'
-                                            v-else-if="field.key === dSortBy && !dSortDesc"
-                                            class="ms-2" />
-                                        <BootstrapIcon :icon='getSortIcon("descending")'
-                                            v-else-if="field.key === dSortBy && dSortDesc"
-                                            class="ms-2" />
-
+                                      <i class="bi-chevron-expand ms-2" v-if="field.key !== dSortBy"></i>
+                                      <i :class="getSortIcon('ascending')" class="ms-2" v-else-if="field.key === dSortBy && !dSortDesc"></i>
+                                      <i :class="getSortIcon('descending')" class="ms-2" v-else-if="field.key === dSortBy && dSortDesc"></i>
                                     </th>
                                 </template>
                             </template>
@@ -610,21 +604,21 @@ function numberSort() {
 function getSortIcon(direction) {
     if (sortType == undefined) {
         if (direction == 'descending') {
-            return 'sort-alpha-up'
+            return 'bi-sort-alpha-up'
         } else {
-            return 'sort-alpha-down';
+            return 'bi-sort-alpha-down';
         }
     } else if (sortType == 'number' || sortType == 'datetime') {
         if (direction == 'descending') {
-            return 'sort-numeric-up'
+            return 'bi-sort-numeric-up'
         } else {
-            return 'sort-numeric-down';
+            return 'bi-sort-numeric-down';
         }
     } else {
         if (direction == 'descending') {
-            return 'sort-up'
+            return 'bi-sort-up'
         } else {
-            return 'sort-down';
+            return 'bi-sort-down';
         }
     }
 }
@@ -801,7 +795,7 @@ const isDisabled = (item) => {
   }
 
   td {
-    max-width: 25vw;
+    max-width: 20vw;
     height: 57px;
     line-break: auto;
   }

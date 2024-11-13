@@ -3,7 +3,7 @@
     <label class="visually-hidden" :for="'dropdownTableFilters-' + randomSelectId">Filter</label>
     <div class="input-group">
       <div class="input-group-text bg-light border-0 text-gray-800">
-        <BootstrapIcon icon="funnel-fill" />
+        <i class="funnel-fill"></i>
       </div>
     <select class="form-select bg-light border-0 small" :id="'dropdownTableFilters-' + randomSelectId" @change="setSelectFilter">
       <option v-for="(option, index) in item.options" :value="option.value" :key="index">

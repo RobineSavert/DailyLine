@@ -1,10 +1,13 @@
 <template>
   <Alert />
 
-  <div class="d-flex justify-content-between align-items-center">
-    <h1>{{ $t('lines.title') }}</h1>
-    <BootstrapIcon :icon="'search'" @click="showSearch()" size="2x" class="me-2" />
-  </div>
+  <TitleComponent :title="'lines.title'">
+    <template v-slot:buttons>
+      <div class="d-flex flex-nowrap justify-content-end">
+        <i class="bi-search me-2" @click="showSearch()"></i>
+      </div>
+    </template>
+  </TitleComponent>
 
   <Spinner v-if="!linesLoaded" />
 
@@ -63,18 +66,13 @@ import TableCard from "@/components/Table/TableCard.vue";
 import DateComponent from "@/components/Table/DateComponent.vue";
 import { useI18n } from "vue-i18n";
 import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComponent.vue";
-import eventBus from "@/eventBus";
 import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
-import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
+import TitleComponent from "@/components/TitleComponent.vue";
 
   const linesStore = useLinesStore();
   const { lines, linesLoaded } = storeToRefs(linesStore);
   const newLine = ref('');
-  const isDisabled = ref(false);
-  const countdown = ref('');
-  const selectedDate = ref('')
-  const lineContent = ref('');
   const { t } = useI18n();
 const route = useRoute()
 let showSearchBar = ref(false)

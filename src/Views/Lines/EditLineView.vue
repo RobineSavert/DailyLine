@@ -1,10 +1,13 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>{{ $t('lines.edit_line_title')}}</h1>
-    <RouterLink :to="{ name: 'lines', params: {locale: route.params.locale} }">
-      <BootstrapIcon :icon="'x-lg'" />
-    </RouterLink>
-  </div>
+  <TitleComponent :title="'lines.edit_line_title'">
+    <template v-slot:buttons>
+      <div class="d-flex flex-nowrap justify-content-end">
+        <RouterLink :to="{ name: 'lines', params: {locale: route.params.locale} }">
+          <i class="bi-x-lg me-2" style="font-size: 1.5rem;"></i>
+        </RouterLink>
+      </div>
+    </template>
+  </TitleComponent>
 
   <AddEditLine
     v-model="lineContent"
@@ -31,9 +34,9 @@
   import { useLinesStore } from '@/stores/LinesStore';
   import eventBus from "@/eventBus";
   import {useI18n} from "vue-i18n";
-  import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
   import Button from "@/components/Buttons/Button.vue";
   import ButtonSave from "@/components/Buttons/ButtonSave.vue";
+  import TitleComponent from "@/components/TitleComponent.vue";
 
   const route = useRoute();
   const router = useRouter();

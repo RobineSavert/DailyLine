@@ -1,10 +1,15 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center">
-    <h1>{{ $t('account.edit_display_name_title')}}</h1>
-    <RouterLink :to="{ name: 'account', params: {locale: route.params.locale} }">
-      <BootstrapIcon :icon="'x-lg'" />
-    </RouterLink>
-  </div>
+
+  <TitleComponent :title="'account.edit_display_name_title'">
+    <template v-slot:buttons>
+      <div class="d-flex flex-nowrap justify-content-end">
+        <RouterLink :to="{ name: 'account', params: {locale: route.params.locale} }">
+          <i class="bi-x-lg me-2" style="font-size: 1.5rem;"></i>
+        </RouterLink>
+      </div>
+    </template>
+  </TitleComponent>
+
 
   <form @submit.prevent="onSubmit">
       <div class="form-floating mb-3">
@@ -33,9 +38,10 @@ import {useAuthStore} from "@/stores/AuthStore";
 import ButtonPrimary from '@/components/Buttons/ButtonPrimary.vue'
 import {useMessageStore} from "@/stores/MessagesStore";
 import Alert from "@/components/Alert.vue";
-import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
+import TitleComponent from "@/components/TitleComponent.vue";
 import {useI18n} from "vue-i18n";
 import {useRoute} from "vue-router";
+
 const route = useRoute()
 
 const { user } = useAuthStore();

@@ -64,6 +64,9 @@
     "add": "Add",
     "settings": "Settings"
   },
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "lines": {
     "title": "Lines",
     "no_lines": "No lines added here yet!",
@@ -136,6 +139,6 @@
     "title": "Settings",
     "language": "Language",
     "app_version": "App version",
-    "latest_change": "Laatste wijzigingen"
+    "latest_change": "Latest changes"
   }
 }

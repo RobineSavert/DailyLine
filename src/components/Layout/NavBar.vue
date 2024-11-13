@@ -12,7 +12,7 @@
             :class="{ active: isActive(navItem.name) }"
         >
           <div class="nav-icon">
-            <BootstrapIcon :icon="navItem.icon" :variant="'primary'" size="2x" />
+            <i :class="'bi-' + navItem.icon" class="text-primary"></i>
           </div>
           <span class="text-xs text-primary">
             {{ t(navItem.translation) }}
@@ -89,7 +89,7 @@ const isActive = (name) => {
             var(--rs-secondary) 90%
         );
 
-        svg {
+        i {
           color: #fff;
         }
 

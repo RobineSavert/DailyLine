@@ -1,8 +1,6 @@
 <template>
     <div>
-      <div class="mb-4">
-        <h1 v-if="!isEdit">{{ $t('lines.add_line') }}</h1>
-      </div>
+      <TitleComponent :title="'lines.add_line'" v-if="!isEdit"></TitleComponent>
 
       <textarea
           class="form-control"
@@ -25,6 +23,7 @@
 import { ref } from 'vue';
 import { vAutofocus } from '@/directives/vAutofocus';
 import {useI18n} from "vue-i18n";
+import TitleComponent from "@/components/TitleComponent.vue";
 
 const { t } = useI18n()
 const props = defineProps({

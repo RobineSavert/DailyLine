@@ -1,6 +1,6 @@
 <template>
   <div class="overlay-spinner d-flex align-items-center position-fixed flex-column justify-content-center">
-    <BootstrapIcon icon="gear-wide-connected" size="5x" animation="spin" class="mx-auto position-relative" />
+    <i class="gear-wide-connected mx-auto position-relative"></i>
   </div>
 </template>
 

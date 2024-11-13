@@ -5,12 +5,12 @@
         <button v-if="isDismissible" class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
         <div class="alert-icon-aside">
           <template v-if="hasIcon">
-            <BootstrapIcon :icon="icon" />
+            <i :class="'bi-' + icon" ></i>
           </template>
           <template v-else>
-            <BootstrapIcon v-if="standardIcon(alert)" icon="check-circle-fill" />
-            <BootstrapIcon v-if="alert.type === 'danger'" icon="exclamation-triangle-fill" />
-            <BootstrapIcon v-if="alert.type === 'info'" icon="info-circle-fill" />
+            <i v-if="standardIcon(alert)" class="bi-check-circle-fill"></i>
+            <i v-if="alert.type === 'danger'" class="bi-exclamation-triangle-fill"></i>
+            <i v-if="alert.type === 'info'" class="bi-info-circle-fill"></i>
           </template>
 
         </div>

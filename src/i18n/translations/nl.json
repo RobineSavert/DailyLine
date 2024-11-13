@@ -64,6 +64,9 @@
     "add": "Toevoegen",
     "settings": "Instellingen"
   },
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "lines": {
     "title": "Regels",
     "no_lines": "Nog geen regels toegevoegd!",

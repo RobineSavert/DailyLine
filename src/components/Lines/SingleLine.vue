@@ -12,12 +12,11 @@
     <template v-slot:footer>
       <div class="d-flex justify-content-between">
       <a href="#" class="text-sm" @click.prevent="openModal">
-<!--        {{ $t('lines.delete') }}-->
-        <BootstrapIcon :icon="'trash-fill'" />
+
+        <i class="trash-fill"></i>
       </a>
         <RouterLink :to="{ name: 'editLine', params: { id: line.id } }" class="text-sm">
-          <!--        {{ $t('lines.edit') }}-->
-          <BootstrapIcon :icon="'pencil-fill'" />
+          <i class="bi-pencil-fill"></i>
         </RouterLink>
       </div>
     </template>
@@ -31,7 +30,6 @@ import { useLinesStore } from '@/stores/LinesStore';
 import eventBus from "@/eventBus";
 import { useI18n } from 'vue-i18n';
 import Card from "@/components/Card.vue";
-import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
 
 const props = defineProps({
   line: {

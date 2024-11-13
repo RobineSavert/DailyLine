@@ -9,11 +9,11 @@
                         aria-describedby="basic-addon2">
                     <button @click="emptyFilter" v-if="filter.length !== 0" class="btn btn-light"
                         type="button">
-                        <BootstrapIcon icon="x" />
+                        <i class="bi-x"></i>
                     </button>
                     <div class="input-group-append">
                         <button class="btn btn-primary text-white" type="button">
-                            <BootstrapIcon icon="search" />
+                          <i class="bi-search"></i>
                         </button>
                     </div>
                 </div>

@@ -12,6 +12,7 @@
     "@vueuse/core": "^10.2.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "core-js": "^3.39.0",
     "firebase": "^9.23.0",
     "js-datepicker": "^5.18.3",
     "pinia": "^2.1.3",

@@ -6,6 +6,8 @@ import i18n from './i18n'
 import { createPinia } from 'pinia';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import "@/assets/scss/styles.scss"
+import 'core-js/es/array/includes';
+
 
 const app = createApp(App);
 

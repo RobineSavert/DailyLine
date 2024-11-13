@@ -7,7 +7,7 @@ const Trans = {
   },
 
   get supportedLocales() {
-    return import.meta.env.VITE_APP_SUPPORTED_LOCALES
+    return import.meta.env.VITE_APP_SUPPORTED_LOCALES.split(",")
   },
 
   get currentLocale() {
@@ -43,8 +43,8 @@ const Trans = {
 
   getUserLocale() {
     const locale = window.navigator.language ||
-      window.navigator.userLanguage ||
-      Trans.defaultLocale
+        window.navigator.userLanguage ||
+        Trans.defaultLocale
 
     return {
       locale: locale,

@@ -18,7 +18,6 @@
           <TableSearchFilterComponent
               v-if="showSearchBar"
               :items="lines"
-              :can-filter="false"
               :search-placeholder="'table.placeholder'"
               @SearchInput="searchInput"
               @SearchFilters="searchFilters"
@@ -38,7 +37,7 @@
         >
           <template v-slot:date="row">
             <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
-            <DateComponent :value="row.value" />
+              <DateComponent :value="row.value" />
             </RouterLink>
           </template>
 
@@ -88,7 +87,8 @@ const fields = computed(() => [
   {
     key: "date",
     label: t("table.columnHeaders.date"),
-    sortable: true
+    sortable: true,
+    sortType: 'datetime',
   },
   {
     key: "content",
@@ -107,10 +107,9 @@ function searchFilters(filtersForSearch){
   appliedFilters.value = filtersForSearch
 }
 
-const emit = defineEmits(['delete-line'])
 
 function showSearch() {
-  showSearchBar.value = !showSearchBar.value; // Verander dit naar =
+  showSearchBar.value = !showSearchBar.value;
 }
 
 </script>

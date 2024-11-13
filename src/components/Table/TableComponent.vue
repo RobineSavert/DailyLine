@@ -413,6 +413,7 @@ function updateList(updatedItemRange, page) {
 }
 
 function searchOnTable(filter) {
+
     searched.value = [...searchTable(props.items, filter)];
 
     Object.keys(props.appliedFilters).forEach(key => {

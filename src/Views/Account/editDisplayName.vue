@@ -31,7 +31,7 @@ import {computed, reactive} from "vue";
 import {useAccountStore} from "@/stores/AccountStore";
 import {useAuthStore} from "@/stores/AuthStore";
 import ButtonPrimary from '@/components/Buttons/ButtonPrimary.vue'
-import {useMessageStore} from "@/stores/store-messages";
+import {useMessageStore} from "@/stores/MessagesStore";
 import Alert from "@/components/Alert.vue";
 import {BootstrapIcon} from "@dvuckovic/vue3-bootstrap-icons";
 import {useI18n} from "vue-i18n";

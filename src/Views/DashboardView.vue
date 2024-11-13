@@ -4,7 +4,7 @@
   <Spinner v-if="!linesLoaded" />
 
   <template v-else>
-    <LatestLines />
+    <LatestLines v-if="lines" />
     <hr/>
     <DashboardStats />
     <hr/>
@@ -20,6 +20,6 @@ import Quotes from "@/Views/Dashboard/Quotes.vue";
 import LatestLines from "@/Views/Dashboard/LatestLines.vue";
 import DashboardStats from "@/Views/Dashboard/DashboardStats.vue";
 const linesStore = useLinesStore();
-const { linesLoaded } = storeToRefs(linesStore);
+const { linesLoaded, lines } = storeToRefs(linesStore);
 </script>
 

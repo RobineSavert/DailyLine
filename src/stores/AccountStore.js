@@ -1,8 +1,7 @@
 
 import { defineStore } from 'pinia';
 import {auth, db} from '../js/firebase';
-import { ref } from 'vue';
-import {useMessageStore} from "@/stores/store-messages";
+import {useMessageStore} from "@/stores/MessagesStore";
 import {getAuth, updateProfile, updateEmail, updatePassword} from "firebase/auth";
 import {useRouter} from "vue-router";
 import {useAuthStore} from "@/stores/AuthStore";

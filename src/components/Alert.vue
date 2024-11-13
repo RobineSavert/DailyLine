@@ -29,7 +29,7 @@
 
 <script setup>
 import { Transition } from "vue"
-import { useMessageStore } from '@/stores/store-messages'
+import {useMessageStore} from "@/stores/MessagesStore";
 import { storeToRefs } from 'pinia'
 import {useI18n} from "vue-i18n";
 const { t } = useI18n()

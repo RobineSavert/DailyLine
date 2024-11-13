@@ -13,12 +13,8 @@
           v-autofocus
           ref="textareaRef"
           rows="5"
-          :disabled="isDisabled"
       ></textarea>
 
-      <p v-if="isDisabled" class="has-text-warning">
-        {{ $t('countdown.description') }} {{ countdown }}
-      </p>
 
       <slot name="button"></slot>
     </div>
@@ -36,14 +32,12 @@ const props = defineProps({
   bgColor: { type: String, default: 'danger' },
   label: { type: String },
   placeholderTextarea: { type: String, default: 'lines.placeholder' },
-  isDisabled: { type: Boolean, default: false },
   countdown: { type: String, default: '' },
   isEdit: { type: Boolean, default: false }
 });
 
 const emit = defineEmits(['update:modelValue']);
 const textareaRef = ref(null);
-const isDisabled = ref(false);
 
 const focusTextArea = () => {
   textareaRef.value.focus();

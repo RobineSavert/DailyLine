@@ -10,7 +10,7 @@ import { auth } from '../js/firebase';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useLinesStore } from './LinesStore';
-import {useMessageStore} from "@/stores/store-messages";
+import {useMessageStore} from "@/stores/MessagesStore";
 
 
 export const useAuthStore = defineStore('authStore', () => {

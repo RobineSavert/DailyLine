@@ -15,7 +15,7 @@ import {
 } from 'firebase/firestore';
 import {auth, db} from '../js/firebase';
 import { useAuthStore } from './AuthStore';
-import {useMessageStore} from "@/stores/store-messages";
+import {useMessageStore} from "@/stores/MessagesStore";
 
 export const useLinesStore = defineStore('linesStore', () => {
   const lines = ref([]);
@@ -82,20 +82,15 @@ export const useLinesStore = defineStore('linesStore', () => {
   });
 
   const addLine = async (lineContent) => {
-    const currentDate = new Date().getTime().toString();
-    linesLoaded.value = false
-    // const note = {
-    //   id: currentDate,
-    //   content: noteContent
-    // };
-
-    //notes.value.unshift(note);
+    const currentDate = new Date().toISOString();
+    linesLoaded.value = false;
 
     await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
       messageStore.addMessage({ title: 'lines.add_line_success' });
-      linesLoaded.value = true
-    })
+      linesLoaded.value = true;
+    });
   };
+
 
   const deleteLine = async (lineId) => {
     linesLoaded.value = false

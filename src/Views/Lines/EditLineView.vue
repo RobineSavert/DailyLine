@@ -12,7 +12,7 @@
     bgColor="link"
     class="mt-4"
     label="Edit line"
-    placeholder="Edit line"
+    :placeholderTextarea="'lines.placeholder'"
     :is-edit="true"
   >
     <template #button>

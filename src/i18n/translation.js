@@ -7,7 +7,7 @@ const Trans = {
   },
 
   get supportedLocales() {
-    return import.meta.env.VITE_APP_SUPPORTED_LOCALES.split(",")
+    return import.meta.env.VITE_APP_SUPPORTED_LOCALES
   },
 
   get currentLocale() {

@@ -12,7 +12,7 @@
             :class="{ active: isActive(navItem.name) }"
         >
           <div class="nav-icon">
-            <i :class="'bi-' + navItem.icon" class="text-primary"></i>
+            <i :class="'bi-' + navItem.icon"></i>
           </div>
           <span class="text-xs text-primary">
             {{ t(navItem.translation) }}
@@ -68,6 +68,7 @@ const isActive = (name) => {
       .nav-icon {
         padding: 0.5rem;
         border-radius: 1.25rem;
+        color: var(--rs-primary);
       }
 
       &.active .nav-icon,
@@ -90,7 +91,7 @@ const isActive = (name) => {
         );
 
         i {
-          color: #fff;
+          color: var(--rs-white);
         }
 
       }

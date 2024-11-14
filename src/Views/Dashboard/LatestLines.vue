@@ -22,8 +22,7 @@ const limit = 5;
 const route = useRoute()
 
 
-
 const computedObj = computed(() => {
-  return lines.value.slice(-limit);
+  return lines.value.slice(0, limit);
 });
 </script>

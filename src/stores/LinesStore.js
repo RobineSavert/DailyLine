@@ -36,14 +36,6 @@ export const useLinesStore = defineStore('linesStore', () => {
     linesCollectionRef = collection(db, 'users', authStore.user.uid, 'lines');
     linesCollectionQuery = query(linesCollectionRef, orderBy('date', 'desc'));
 
-    // const querySnapshot = await getDocs(collection(db, 'notes'));
-    // querySnapshot.forEach((doc) => {
-    //   let note = {
-    //     id: doc.id,
-    //     content: doc.data().content
-    //   };
-    //   notes.value.push(note);
-    // });
 
 
 

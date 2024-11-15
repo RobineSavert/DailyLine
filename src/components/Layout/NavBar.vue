@@ -69,6 +69,7 @@ const isActive = (name) => {
         padding: 0.5rem;
         border-radius: 1.25rem;
         color: var(--rs-primary);
+        font-size: 1.5em;
       }
 
       &.active .nav-icon,

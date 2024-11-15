@@ -17,6 +17,7 @@
     label="Edit line"
     :placeholderTextarea="'lines.placeholder'"
     :is-edit="true"
+    :line-i-d="currentLine"
   >
     <template #button>
       <div class="d-flex align-items-center justify-content-between mt-4">
@@ -43,6 +44,9 @@
   const { t } = useI18n()
   const linesStore = useLinesStore();
   const lineContent = ref('');
+  let currentLine = ref(route.params.id)
+
+  console.log(currentLine.value)
 
   lineContent.value = linesStore.getLineContentById(route.params.id);
 

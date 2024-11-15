@@ -1,11 +1,16 @@
 export default {
   en: {
-    shortFormat: {
-      dateStyle: "short"
+    short: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
     },
-    longFormat: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      weekday: 'short', hour: 'numeric', minute: 'numeric'
-    }
-  }
+  },
+  nl: {
+    short: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    },
+  },
 }

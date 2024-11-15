@@ -1,6 +1,5 @@
 <template>
   <TitleComponent :title="'settings.title'"></TitleComponent>
-
   <ul class="list-group list-group-flush">
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <span>{{ $t('settings.app_version')}}</span>

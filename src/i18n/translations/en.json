@@ -74,6 +74,8 @@
     "delete": "delete",
     "edit_line_title": "Edit line",
     "remaining_chars": "characters left",
+    "today": "Today is {today} & you still have {chars} characters left.. ",
+    "today_edit": "This line was written on {today} & you still have {chars} characters left.. ",
     "delete_modal": {
       "title": "Delete line",
       "body": "Are you sure you want to delete this line?"

@@ -2,9 +2,10 @@
   <AddEditLine
       v-model="newLine"
       ref="addEditLineRef"
+      :is-disabled="isDisabled"
   >
     <template #button>
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-center">
         <ButtonPrimary
             icon="send-fill"
             :disabled="!newLine"
@@ -17,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import AddEditLine from '@/components/Lines/AddEditLine.vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import { useCharactersLimit } from '@/composables/useCharactersLimit';
@@ -38,4 +39,13 @@ const addLine = () => {
 };
 
 useCharactersLimit(newLine);
+
+const latestLine = computed(() => linesStore.lines[0]?.date || null);
+const isDisabled = computed(() => {
+  if (!latestLine.value) return false;
+  const lastTime = new Date(latestLine.value).getTime();
+  const now = Date.now();
+  return now - lastTime < 24 * 60 * 60 * 1000;
+});
+
 </script>

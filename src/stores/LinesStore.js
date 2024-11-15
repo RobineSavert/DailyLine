@@ -26,6 +26,13 @@ export const useLinesStore = defineStore('linesStore', () => {
   let linesCollectionQuery;
   let linesSnapshot = null;
 
+
+  const getLineById = computed(() => {
+    return (id) => {
+      return lines.value.find(line => line.id === id);
+    };
+  });
+
   const getLineContentById = computed(() => {
     return (id) => {
       return lines.value.find((line) => line.id === id).content;
@@ -124,6 +131,7 @@ export const useLinesStore = defineStore('linesStore', () => {
     getLines,
     getLineByDate,
     linesLoaded,
-    clearLines
+    clearLines,
+    getLineById
   };
 });

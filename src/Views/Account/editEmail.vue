@@ -39,8 +39,8 @@ import Alert from "@/components/Alert.vue";
 import {useI18n} from "vue-i18n";
 import {useRoute} from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
-const route = useRoute()
 
+const route = useRoute()
 const { user } = useAuthStore();
 const accountStore = useAccountStore();
 const { addMessage } = useMessageStore()

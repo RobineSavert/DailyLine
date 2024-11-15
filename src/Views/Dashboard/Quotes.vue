@@ -1,5 +1,4 @@
 <template v-if="quotes.length">
-
     <figure class="text-center" :key="currentQuote.key">
       <blockquote class="blockquote">
         <p>{{ currentQuote.quote }}</p>
@@ -10,7 +9,6 @@
     </figure>
 </template>
 <script setup>
-
 import {computed, onMounted, onUnmounted, ref} from "vue";
 
 const quotes = ref([
@@ -52,7 +50,6 @@ const quotes = ref([
   },
 ]);
 
-
 const currentQuoteIndex = ref(0);
 const currentQuote = computed(() => quotes.value[currentQuoteIndex.value]);
 
@@ -71,16 +68,3 @@ onMounted(() => {
   onUnmounted(() => clearInterval(interval));
 });
 </script>
-
-<style lang="css">
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>

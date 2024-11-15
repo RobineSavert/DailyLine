@@ -39,6 +39,7 @@ import Alert from "@/components/Alert.vue";
 import {useI18n} from "vue-i18n";
 import {useRoute} from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
+
 const { t } = useI18n()
 const { user } = useAuthStore();
 const accountStore = useAccountStore();
@@ -48,12 +49,7 @@ const newPassword = reactive({
   password: user.password
 });
 
-
-
-
 const onSubmit = () => {
     accountStore.updateUserPassword(newPassword.password);
 };
-
-
 </script>

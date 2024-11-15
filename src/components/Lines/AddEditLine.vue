@@ -30,10 +30,6 @@ import {computed, ref} from 'vue';
 import { vAutofocus } from '@/directives/vAutofocus';
 import {useI18n} from "vue-i18n";
 import TitleComponent from "@/components/TitleComponent.vue";
-import AccountLayout from "@/layouts/AccountLayout.vue";
-import LinesLayout from "@/layouts/LinesLayout.vue";
-import AuthLayout from "@/layouts/AuthLayout.vue";
-import MainLayout from "@/layouts/MainLayout.vue";
 
 const { t } = useI18n()
 const props = defineProps({

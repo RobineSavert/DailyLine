@@ -25,7 +25,6 @@ import {useI18n} from 'vue-i18n'
 
 const {t} = useI18n()
 
-
 const tabs = computed(() => [
   {key: 'login-tab', component: LoginView, icon: 'key-fill', translation: 'auth.login.title'},
   {key: 'register-tab', component: RegisterView, icon: 'person-fill', translation: 'auth.register.title'},

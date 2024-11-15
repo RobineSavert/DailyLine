@@ -12,30 +12,21 @@
             class="my-4"
             :content="'buttons.add_new'" />
       </div>
-
     </template>
   </AddEditLine>
-
-
-
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import AddEditLine from '@/components/Lines/AddEditLine.vue';
 import { useLinesStore } from '@/stores/LinesStore';
-import { storeToRefs } from 'pinia';
 import { useCharactersLimit } from '@/composables/useCharactersLimit';
 import ButtonPrimary from "@/components/Buttons/ButtonPrimary.vue";
 import {useRoute, useRouter} from "vue-router";
 
 const linesStore = useLinesStore();
 const addEditLineRef = ref(null);
-const { lines } = storeToRefs(linesStore);
 const newLine = ref('');
-const isDisabled = ref(false);
-const countdown = ref('');
-
 const router = useRouter();
 const route = useRoute();
 
@@ -46,7 +37,5 @@ const addLine = () => {
   router.push({name: 'lines', params: {locale: route.params.locale} })
 };
 
-
 useCharactersLimit(newLine);
-
 </script>

@@ -1,8 +1,7 @@
 <template>
   <Alert />
 
-  <TitleComponent :title="'account.title'">
-  </TitleComponent>
+  <TitleComponent :title="'account.title'" />
 
   <div class="row">
     <div class="col-12 col-md-6" v-for="(accountItem, index) in accountItems" :key="index">
@@ -55,31 +54,29 @@ const accountItems = computed(() => [
   {
     key: 'email-card',
     title: 'account.email',
-    link: 'editEmail',  // Gebruik de naam van de subroute
+    link: 'editEmail',
     body: user.email
   },
   {
     key: 'displayname-card',
     title: 'account.display_name',
-    link: 'editDisplayName',  // Gebruik de naam van de subroute
+    link: 'editDisplayName',
     body: user.displayName
   },
   {
     key: 'password-card',
     title: 'account.password',
-    link: 'editPassword',  // Gebruik de naam van de subroute
+    link: 'editPassword',
     body: '******'
   },
   {
     key: 'stats-card',
     title: 'account.stats',
-    link: 'stats',  // Gebruik de naam van de subroute
+    link: 'stats',
     body: t('account.view_stats')
   },
 ]);
 </script>
-
-
 
 <style>
 .img-circle {

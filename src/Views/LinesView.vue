@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted, computed} from 'vue';
+import {ref, computed} from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import { storeToRefs } from 'pinia';
 import { useCharactersLimit } from '@/composables/useCharactersLimit';
@@ -70,16 +70,14 @@ import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
 
-  const linesStore = useLinesStore();
-  const { lines, linesLoaded } = storeToRefs(linesStore);
-  const newLine = ref('');
-  const { t } = useI18n();
+const linesStore = useLinesStore();
+const { lines, linesLoaded } = storeToRefs(linesStore);
+const newLine = ref('');
+const { t } = useI18n();
 const route = useRoute()
 let showSearchBar = ref(false)
 
-  useCharactersLimit(newLine);
-
-
+useCharactersLimit(newLine);
 
 const fields = computed(() => [
   {
@@ -105,9 +103,7 @@ function searchFilters(filtersForSearch){
   appliedFilters.value = filtersForSearch
 }
 
-
 function showSearch() {
   showSearchBar.value = !showSearchBar.value;
 }
-
 </script>

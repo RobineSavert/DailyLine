@@ -18,7 +18,7 @@
 </template>
 <script setup lang="ts">
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
-import {versions} from "/src/composables/version";
+import {versions} from "@/composables/version";
 import TitleComponent from "@/components/TitleComponent.vue";
 
 let appversion = versions.appversion

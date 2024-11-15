@@ -26,19 +26,12 @@ import Spinner from "@/components/Spinner.vue";
 import Quotes from "@/Views/Dashboard/Quotes.vue";
 import LatestLines from "@/Views/Dashboard/LatestLines.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
-import {computed, ref} from "vue";
-
+import {computed} from "vue";
 
 const linesStore = useLinesStore();
-
-
 const { linesLoaded, lines } = storeToRefs(linesStore);
-
 const totalLines = computed(() => lines.value.length);
 const decimal = computed(() => totalLines.value / 7);
-
-
-
 
 </script>
 

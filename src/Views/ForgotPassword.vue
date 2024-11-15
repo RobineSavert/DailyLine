@@ -24,7 +24,7 @@ import { useAuthStore } from '@/stores/AuthStore';
 import Alert from "@/components/Alert.vue"
 import Button from "@/components/Buttons/Button.vue";
 import {useI18n} from "vue-i18n";
-import {useRoute, useRouter} from "vue-router";
+import { useRouter} from "vue-router";
 
 const emit = defineEmits(['backtologin'])
 const router = useRouter();

@@ -55,23 +55,20 @@
   import TableCard from "@/components/Table/TableCard.vue";
   import TitleComponent from "@/components/TitleComponent.vue";
   import {useI18n} from "vue-i18n";
+
   const route = useRoute()
   const linesStore = useLinesStore();
   const feedback = ref('');
-
   const { t } = useI18n();
-
   const linesCount = linesStore.totalLinesCount;
   const totalCharactersCount = linesStore.totalCharactersCount;
 
   useCharactersLimit(feedback, 50);
 
-
   const statItems = computed(() => [
     { translation: 'stats.total_lines', value: linesCount },
     { translation: 'stats.total_chars', value: totalCharactersCount },
   ]);
-
 
   const fields = computed(() => [
     {

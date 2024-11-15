@@ -41,9 +41,7 @@
   const route = useRoute();
   const router = useRouter();
   const { t } = useI18n()
-
   const linesStore = useLinesStore();
-
   const lineContent = ref('');
 
   lineContent.value = linesStore.getLineContentById(route.params.id);

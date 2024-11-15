@@ -43,7 +43,7 @@ export const useAuthStore = defineStore('authStore', () => {
           const user = userCredential.user;
         })
         .catch((error) => {
-          messageStore.addMessage( { title: error.message, type: 'danger' });
+          messageStore.addMessage( 1,{ title: error.message, type: 'danger' });
         });
   };
 
@@ -53,7 +53,7 @@ export const useAuthStore = defineStore('authStore', () => {
           const user = userCredential.user;
         })
         .catch((error) => {
-          messageStore.addMessage({ title: error.message, type: 'danger' });
+          messageStore.addMessage(1,{ title: error.message, type: 'danger' });
         });
   };
 
@@ -73,12 +73,12 @@ export const useAuthStore = defineStore('authStore', () => {
   const resetPassword = (email) => {
     sendPasswordResetEmail(auth, email)
         .then(() => {
-          messageStore.addMessage({ title: 'auth.forgot_password_success' });
+          messageStore.addMessage(0,{ title: 'auth.forgot_password_success' });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          messageStore.addMessage({ title: errorMessage, type: 'danger' });
+          messageStore.addMessage(1,{ title: errorMessage, type: 'danger' });
         });
   }
 

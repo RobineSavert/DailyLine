@@ -16,6 +16,7 @@
       <component :is="eventBus.state.modalButton" />
     </template>
   </Modal>
+  <Toast />
 </template>
 <script setup>
 import NavBar from '@/components/Layout/NavBar.vue';

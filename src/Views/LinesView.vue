@@ -32,7 +32,7 @@
             :fields="fields"
             :key="lines"
             :pagination-name="'table.paginationName'"
-            :searchByKeys="['date']"
+            :searchByKeys="['date', 'content']"
             :sort-by="'date'"
             :empty-table-name="'table.no_data'"
             :filter="searchInputFilter"

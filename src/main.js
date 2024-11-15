@@ -7,6 +7,7 @@ import { createPinia } from 'pinia';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import "@/assets/scss/styles.scss"
 import 'core-js/es/array/includes';
+import Toast from '/src/components/Toast.vue'
 
 
 const app = createApp(App);
@@ -17,4 +18,5 @@ const pinia = createPinia();
 app.use(i18n)
 app.use(router);
 app.use(pinia);
+app.component('Toast', Toast)
 app.mount('#app');

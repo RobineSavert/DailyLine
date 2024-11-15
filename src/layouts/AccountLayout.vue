@@ -7,6 +7,7 @@
     </div>
   </div>
   <NavBar v-if="isLoggedIn" />
+  <Toast />
 </template>
 <script setup>
 import NavBar from '@/components/Layout/NavBar.vue';

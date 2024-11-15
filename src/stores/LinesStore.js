@@ -78,7 +78,7 @@ export const useLinesStore = defineStore('linesStore', () => {
     linesLoaded.value = false;
 
     await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
-      messageStore.addMessage({ title: 'lines.add_line_success' });
+      messageStore.addMessage(0,{ title: 'lines.add_line_success' });
       linesLoaded.value = true;
     });
   };
@@ -89,7 +89,7 @@ export const useLinesStore = defineStore('linesStore', () => {
 
     await deleteDoc(doc(linesCollectionRef, lineId)).then(() => {
       getLines().then(() => {
-        messageStore.addMessage({ title: 'lines.delete_line_success' });
+        messageStore.addMessage(0,{ title: 'lines.delete_line_success' });
         linesLoaded.value = true
       })
     })
@@ -101,7 +101,7 @@ export const useLinesStore = defineStore('linesStore', () => {
     await updateDoc(doc(linesCollectionRef, id), {
       content
     }).then(() => {
-      messageStore.addMessage({ title: 'lines.edit_line_success' });
+      messageStore.addMessage(0,{ title: 'lines.edit_line_success' });
       linesLoaded.value = true
     })
   };

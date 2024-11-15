@@ -60,7 +60,7 @@ const onSubmit = () => {
   if (!isDisabled.value) {
     accountStore.updateUserEmail(newMail.email);
   } else {
-    addMessage({ title: 'Please change something' });
+    addMessage(1,{ title: 'Please change something', type: 'danger' });
   }
 };
 

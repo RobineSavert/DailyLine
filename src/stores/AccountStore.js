@@ -1,15 +1,15 @@
-
 import { defineStore } from 'pinia';
 import {auth, db} from '../js/firebase';
 import {useMessageStore} from "@/stores/MessagesStore";
 import {getAuth, updateProfile, updateEmail, updatePassword} from "firebase/auth";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {useAuthStore} from "@/stores/AuthStore";
 
 
 export const useAccountStore = defineStore('accountStore', () => {
     const messageStore = useMessageStore();
     const router = useRouter();
+    const route = useRoute();
     const auth = getAuth();
     const user = auth.currentUser;
     const newPassword = '';
@@ -36,37 +36,31 @@ export const useAccountStore = defineStore('accountStore', () => {
             photoURL: newUser.photoURL
         }).then(() => {
             authStore.updateUser(newUser);
-            router.push({ name: 'account' });
-            messageStore.addMessage({ title: 'account.update_success' });
+            router.push({ name: 'account', params: {locale: route.params.locale} });
+            messageStore.addMessage(0,{ title: 'account.update_success' });
         }).catch((error) => {
-            messageStore.addMessage({ title: error.message, type: 'danger' });
+            messageStore.addMessage(1,{ title: error.message, type: 'danger' });
         });
     };
 
     const updateUserEmail = (email) => {
         updateEmail(auth.currentUser, email).then(() => {
             // authStore.updateUser(newUser);
-            router.push({ name: 'account' });
-            messageStore.addMessage({ title: 'account.update_success' });
+            router.push({ name: 'account', params: {locale: route.params.locale} });
+            messageStore.addMessage(0,{ title: 'account.update_success' });
         }).catch((error) => {
-            messageStore.addMessage({ title: error.message, type: 'danger' });
+            messageStore.addMessage(1,{ title: error.message, type: 'danger' });
         });
     }
 
     const updateUserPassword = (newPassword) => {
         updatePassword(user, newPassword).then(() => {
-            // authStore.updateUser(newUser);
-            router.push({ name: 'account' });
-            messageStore.addMessage({ title: 'account.update_success' });
+            router.push({ name: 'account', params: {locale: route.params.locale} });
+            messageStore.addMessage(0,{ title: 'account.update_success' });
         }).catch((error) => {
-            messageStore.addMessage({ title: error.message, type: 'danger' });
+            messageStore.addMessage(1,{ title: error.message, type: 'danger' });
         });
     }
-
-
-
-
-
 
     return {
         getUser,

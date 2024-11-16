@@ -7,41 +7,42 @@
     </template>
   </TitleComponent>
 
-  <div class="mt-3">
-    <TableCard
-        :items="statItems"
-        :panel-i-d="'lineTable'"
-        :table-name="'lines.title'"
-        :can-search="false"
-    >
-      <template v-slot:searchTableComponent>
-        <TableSearchFilterComponent
-            :items="statItems"
-            :can-filter="false"
-        />
+  <div class="row">
+    <div class="col mt-3">
+      <TableCard
+          :items="statItems"
+          :panel-i-d="'lineTable'"
+          :table-name="'lines.title'"
+          :can-search="false"
+      >
+        <template v-slot:searchTableComponent>
+          <TableSearchFilterComponent
+              :items="statItems"
+              :can-filter="false"
+          />
 
-      </template>
-      <template v-slot:mainTable>
-        <TableComponent
-            :items="statItems"
-            :fields="fields"
-            :key="statItems"
-            :pagination-name="'table.paginationName'"
-            :searchByKeys="['stat', 'value']"
-            :sort-by="'stat'"
-            :empty-table-name="'table.no_data'"
-        >
-          <template v-slot:translation="row">
-            {{ $t(row.value) }}
-          </template>
+        </template>
+        <template v-slot:mainTable>
+          <TableComponent
+              :items="statItems"
+              :fields="fields"
+              :key="statItems"
+              :pagination-name="'table.paginationName'"
+              :searchByKeys="['stat', 'value']"
+              :sort-by="'stat'"
+              :empty-table-name="'table.no_data'"
+          >
+            <template v-slot:translation="row">
+              {{ $t(row.value) }}
+            </template>
 
-          <template v-slot:value="row">
-            {{ row.value }}
-          </template>
-        </TableComponent>
-      </template>
-    </TableCard>
-
+            <template v-slot:value="row">
+              {{ row.value }}
+            </template>
+          </TableComponent>
+        </template>
+      </TableCard>
+    </div>
   </div>
 </template>
 

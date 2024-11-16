@@ -1,12 +1,16 @@
 <template v-if="quotes.length">
-    <figure class="text-center" :key="currentQuote.key">
-      <blockquote class="blockquote">
-        <p>{{ currentQuote.quote }}</p>
-      </blockquote>
-      <figcaption class="blockquote-footer">
-        {{ currentQuote.author }} in <cite title="Source Title">{{ currentQuote.media }}</cite>
-      </figcaption>
-    </figure>
+  <div class="row">
+    <div class="col">
+      <figure class="text-center" :key="currentQuote.key">
+        <blockquote class="blockquote">
+          <p>{{ currentQuote.quote }}</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          {{ currentQuote.author }} in <cite title="Source Title">{{ currentQuote.media }}</cite>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
 </template>
 <script setup>
 import {computed, onMounted, onUnmounted, ref} from "vue";

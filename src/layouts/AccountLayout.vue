@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="clearfix pt-3 pb-5 mb-5 account">
+    <div class="row clearfix pt-3 pb-5 mb-5 account">
+      <div class="col">
         <RouterView />
       </div>
     </div>

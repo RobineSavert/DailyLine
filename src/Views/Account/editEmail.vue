@@ -9,7 +9,9 @@
     </template>
   </TitleComponent>
 
-    <form @submit.prevent="onSubmit">
+  <div class="row">
+    <div class="col">
+      <form @submit.prevent="onSubmit">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="floatingInput" v-model="newMail.email">
         <label for="floatingInput">
@@ -27,6 +29,9 @@
             :content="'buttons.update_email'" />
       </div>
     </form>
+    </div>
+  </div>
+
 </template>
 
 <script setup>

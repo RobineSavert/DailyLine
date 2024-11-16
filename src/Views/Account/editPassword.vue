@@ -10,7 +10,9 @@
     </template>
   </TitleComponent>
 
-  <form @submit.prevent="onSubmit">
+  <div class="row">
+    <div class="col">
+      <form @submit.prevent="onSubmit">
     <input type="email" hidden v-model="user.email" autocomplete="user" />
     <div class="form-floating mb-3">
       <input type="password" class="form-control" id="floatingInput" v-model="newPassword.password" autocomplete="new-password">
@@ -28,6 +30,8 @@
           :content="'buttons.update_password'" />
     </div>
   </form>
+    </div>
+  </div>
 </template>
 
 <script setup>

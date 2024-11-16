@@ -1,23 +1,31 @@
 <template>
-  <Alert />
-
-  <TitleComponent :title="'lines.title'">
-    <template v-slot:buttons>
-      <div class="d-flex flex-nowrap justify-content-end">
-        <i class="bi-search me-2" @click="showSearch()"></i>
-      </div>
-    </template>
-  </TitleComponent>
-
-  <Spinner v-if="!linesLoaded" />
-
+  <template v-if="showInBetweenScreen">
+    <InBetweenScreen :duration="3000" @finished="handleFinished">
+      <template v-slot:image>
+        <img class="w-100 img-fluid" :src="img" />
+      </template>
+    </InBetweenScreen>
+  </template>
   <template v-else>
-    <TableCard
-        :items="lines"
-        :panel-i-d="'lineTable'"
-        :table-name="'lines.title'"
-    >
-      <template v-slot:searchTableComponent>
+    <Alert />
+
+    <TitleComponent :title="'lines.title'">
+      <template v-slot:buttons>
+        <div class="d-flex flex-nowrap justify-content-end">
+          <i class="bi-search me-2" @click="showSearch()"></i>
+        </div>
+      </template>
+    </TitleComponent>
+
+    <Spinner v-if="!linesLoaded" />
+
+    <template v-else>
+      <TableCard
+          :items="lines"
+          :panel-i-d="'lineTable'"
+          :table-name="'lines.title'"
+      >
+        <template v-slot:searchTableComponent>
           <TableSearchFilterComponent
               v-if="showSearchBar"
               :items="lines"
@@ -25,38 +33,40 @@
               @SearchInput="searchInput"
               @SearchFilters="searchFilters"
           />
-      </template>
-      <template v-slot:mainTable>
-        <TableComponent
-            :items="lines"
-            :fields="fields"
-            :key="lines"
-            :pagination-name="'table.paginationName'"
-            :searchByKeys="['date', 'content']"
-            :sort-by="'date'"
-            :empty-table-name="'table.no_data'"
-            :filter="searchInputFilter"
-            :appliedFilters="appliedFilters"
-        >
-          <template v-slot:date="row">
-            <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
-              <DateComponent :value="row.value" />
-            </RouterLink>
-          </template>
+        </template>
+        <template v-slot:mainTable>
+          <TableComponent
+              :items="lines"
+              :fields="fields"
+              :key="lines"
+              :pagination-name="'table.paginationName'"
+              :searchByKeys="['date', 'content']"
+              :sort-by="'date'"
+              :empty-table-name="'table.no_data'"
+              :filter="searchInputFilter"
+              :appliedFilters="appliedFilters"
+          >
+            <template v-slot:date="row">
+              <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
+                <DateComponent :value="row.value" />
+              </RouterLink>
+            </template>
 
-          <template v-slot:content="row">
-            <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
-            {{ row.value }}
-            </RouterLink>
-          </template>
-        </TableComponent>
-      </template>
-    </TableCard>
+            <template v-slot:content="row">
+              <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
+                {{ row.value }}
+              </RouterLink>
+            </template>
+          </TableComponent>
+        </template>
+      </TableCard>
+    </template>
   </template>
 </template>
 
+
 <script setup>
-import {ref, computed} from 'vue';
+import {ref, computed, onMounted} from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import { storeToRefs } from 'pinia';
 import { useCharactersLimit } from '@/composables/useCharactersLimit';
@@ -69,6 +79,8 @@ import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComp
 import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
+import InBetweenScreen from "@/Views/InBetweenScreen.vue";
+import img from '@/assets/img/img.png';
 
 const linesStore = useLinesStore();
 const { lines, linesLoaded } = storeToRefs(linesStore);
@@ -76,6 +88,12 @@ const newLine = ref('');
 const { t } = useI18n();
 const route = useRoute()
 let showSearchBar = ref(false)
+let showInBetweenScreen = ref(true)
+
+
+function handleFinished() {
+  showInBetweenScreen.value = false;
+}
 
 useCharactersLimit(newLine);
 

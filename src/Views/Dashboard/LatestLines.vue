@@ -1,13 +1,17 @@
 <template>
-  <h2>Latest 5 lines</h2>
-  <ul class="list-group list-group-flush">
-    <li v-for="line in computedObj" :key="line.id">
-      {{ line.content }}
-    </li>
-  </ul>
-  <RouterLink :to="{ name: 'lines', params: {locale: route.params.locale} }">
-    See more
-  </RouterLink>
+  <div class="row">
+    <div class="col">
+      <h2>Latest 5 lines</h2>
+      <ul class="list-group list-group-flush">
+        <li v-for="line in computedObj" :key="line.id">
+          {{ line.content }}
+        </li>
+      </ul>
+      <RouterLink :to="{ name: 'lines', params: {locale: route.params.locale} }">
+        See more
+      </RouterLink>
+    </div>
+  </div>
 </template>
 <script setup>
 import {useLinesStore} from "@/stores/LinesStore";

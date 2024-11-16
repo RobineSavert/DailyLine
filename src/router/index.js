@@ -79,7 +79,7 @@ const routes = [
     path: '/:locale?/settings',
     component: SettingsView,
     name: 'settings',
-    meta: { layout: 'main' }
+    meta: { layout: 'settings' }
   },
   {
     path: '/:locale?/add',

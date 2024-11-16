@@ -10,25 +10,30 @@
     </template>
   </TitleComponent>
 
+  <div class="row">
+    <div class="col">
+      <form @submit.prevent="onSubmit">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" v-model="newUser.displayName">
+          <label for="floatingInput">
+            {{ t('account.display_name') }}
+          </label>
+        </div>
 
-  <form @submit.prevent="onSubmit">
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" v-model="newUser.displayName">
-        <label for="floatingInput">
-          {{ t('account.display_name') }}
-        </label>
-      </div>
+        <Alert :variant="'danger'" />
 
-      <Alert :variant="'danger'" />
+        <div class="my-3 row justify-content-center">
+          <ButtonPrimary
+              class="w-auto"
+              :disabled="isDisabled"
+              :icon="'person-fill'"
+              :content="'buttons.update_display_name'" />
+        </div>
+      </form>
+    </div>
+  </div>
 
-      <div class="my-3 row justify-content-center">
-        <ButtonPrimary
-            class="w-auto"
-            :disabled="isDisabled"
-            :icon="'person-fill'"
-            :content="'buttons.update_display_name'" />
-      </div>
-    </form>
+
 </template>
 
 <script setup>

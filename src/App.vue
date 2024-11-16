@@ -22,6 +22,7 @@ import AuthLayout from './layouts/AuthLayout.vue';
 import MainLayout from './layouts/MainLayout.vue';
 import AccountLayout from './layouts/AccountLayout.vue';
 import LinesLayout from "@/layouts/LinesLayout.vue";
+import SettingsLayout from "@/layouts/SettingsLayout.vue";
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -44,6 +45,8 @@ const layoutComponent = computed(() => {
       return AccountLayout;
     case route.path.startsWith('/' + route.params.locale + '/lines'):
       return LinesLayout;
+    case route.path.startsWith('/' + route.params.locale + '/settings'):
+      return SettingsLayout;
     case route.meta.layout === 'auth':
       return AuthLayout;
     default:

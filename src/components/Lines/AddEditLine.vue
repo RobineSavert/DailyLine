@@ -13,26 +13,31 @@
     </div>
   </template>
   <template v-else>
+
     <TitleComponent :title="'lines.add_line'" v-if="!isEdit"></TitleComponent>
+    <div class="row">
+      <div class="col">
 
-    <textarea
-        class="form-control"
-        :placeholder="t(placeholderTextarea)"
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
-        maxlength="300"
-        autofocus
-        ref="textareaRef"
-        rows="5"
-        :disabled="isDisabled"
-    ></textarea>
+        <textarea
+            class="form-control"
+            :placeholder="t(placeholderTextarea)"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
+            maxlength="300"
+            autofocus
+            ref="textareaRef"
+            rows="5"
+            :disabled="isDisabled"
+        ></textarea>
 
-    <hr />
-    <div class="text-center my-5" v-if="isEdit">{{ $t("lines.today_edit", { today: currentLineDate, chars: remainingCharacters }) }}</div>
-    <div class="text-center my-5" v-else>{{ $t("lines.today", { today: showDateLong, chars: remainingCharacters }) }}</div>
-    <hr />
+        <hr />
+        <div class="text-center my-5" v-if="isEdit">{{ $t("lines.today_edit", { today: currentLineDate, chars: remainingCharacters }) }}</div>
+        <div class="text-center my-5" v-else>{{ $t("lines.today", { today: showDateLong, chars: remainingCharacters }) }}</div>
+        <hr />
 
-    <slot name="button"></slot>
+        <slot name="button"></slot>
+      </div>
+    </div>
   </template>
 </template>
 

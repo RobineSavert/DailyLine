@@ -93,7 +93,7 @@ const updateCountdown = () => {
     if (hours > 0) {
       countdownText += `${hours} ${t('countdown.hours')}, `;
     }
-    countdownText += `${minutes} ${t('countdown.minutes')} en ${seconds} ${t('countdown.seconds')}`;
+    countdownText += `${minutes} ${t('countdown.minutes')} ${t('countdown.and')} ${seconds} ${t('countdown.seconds')}`;
 
     countdown.value = countdownText;
     isLocked.value = true;

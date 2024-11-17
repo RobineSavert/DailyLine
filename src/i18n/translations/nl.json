@@ -119,7 +119,8 @@
   "countdown": {
     "hours": "uur",
     "minutes": "minuten",
-    "seconds": "seconden"
+    "seconds": "seconden",
+    "and": "&"
   },
   "stats": {
     "stat": "Statistiek",

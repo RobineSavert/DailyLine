@@ -1,4 +1,5 @@
 {
+  "loading": "loading...",
   "locale": {
     "en": "English",
     "nl": "Dutch"
@@ -35,6 +36,10 @@
   "title": "Daily Line",
   "intro": "Write a single line.. every day..",
   "auth": {
+    "placeholder": {
+      "email": "name@example.com",
+      "password": "*****"
+    },
     "login": {
       "title": "Log in",
       "button": "Log in",
@@ -52,6 +57,8 @@
       }
     },
     "forgot_password": {
+      "link": "forgot password",
+      "back_to_login": "back to login",
       "form": {
         "email": "E-mail address"
       }
@@ -70,12 +77,17 @@
   "lines": {
     "title": "Lines",
     "no_lines": "No lines added here yet!",
+    "you_have_written": "You have so far written { lines } beautiful lines..",
+    "you_have_written_average": "that's an average of { average } per week..",
+    "keep_it_up": "keep it up & soon you will have a beautiful collection of your own thoughts in writing...",
     "edit": "edit",
     "delete": "delete",
     "edit_line_title": "Edit line",
     "remaining_chars": "characters left",
     "today": "Today is {today} & you still have {chars} characters left.. ",
     "today_edit": "This line was written on {today} & you still have {chars} characters left.. ",
+    "locked_until": "until next line..",
+    "locked_because": "Writing a line is locked, because you can only write a line once a day..",
     "delete_modal": {
       "title": "Delete line",
       "body": "Are you sure you want to delete this line?"
@@ -85,7 +97,11 @@
     "no_lines_on_date": "There is no line added for this date..",
     "add_line_success": "The line has been added...",
     "edit_line_success": "The line has been updated..",
-    "delete_line_success": "The line has been deleted.."
+    "delete_line_success": "The line has been deleted..",
+    "recent_lines": {
+      "title": "Recent lines",
+      "button": "see more"
+    }
   },
   "account": {
     "title": "Account",
@@ -101,42 +117,15 @@
     "view_stats": "View your statistics"
   },
   "countdown": {
-    "description": "You can add another line in: "
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds"
   },
   "stats": {
     "stat": "Statistic",
     "value": "Count",
     "total_lines": "Lines",
     "total_chars": "Characters"
-  },
-
-    "weekdays": {
-      "sun": "Sun",
-      "mon": "Mon",
-      "tue": "Tue",
-      "wed": "Wed",
-      "thur": "Thu",
-      "fri": "Fri",
-      "sat": "Sat"
-    },
-    "months": {
-      "jan": "January",
-      "feb": "February",
-      "march": "March",
-      "april": "April",
-      "may": "May",
-      "june": "June",
-      "july": "July",
-      "aug": "August",
-      "sept": "September",
-      "oct": "October",
-      "nov": "November",
-      "dec": "December"
-    },
-    "pick_a_year": "Pick a year",
-    "pick": "Pick",
-  "datepicker": {
-    "placeholder": "Pick a date"
   },
   "settings": {
     "title": "Settings",

@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import LinesView from '../Views/LinesView.vue';
 import EditLineView from '../Views/Lines/EditLineView.vue';
 import AuthView from '../Views/AuthView.vue';
-import ForgotPassword from "@/Views/ForgotPassword.vue";
+import ForgotPassword from "@/Views/Auth/ForgotPassword.vue";
 import AccountView from "@/Views/AccountView.vue";
 import SettingsView from "@/Views/SettingsView.vue";
 import AddLine from "@/Views/Lines/AddLine.vue";
@@ -82,9 +82,9 @@ const routes = [
     meta: { layout: 'settings' }
   },
   {
-    path: '/:locale?/add',
+    path: '/:locale?/add-line',
     component: AddLine,
-    name: 'add',
+    name: 'add-line',
     meta: { layout: 'main' }
   }
 ];

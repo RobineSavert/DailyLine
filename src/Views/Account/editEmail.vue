@@ -13,8 +13,8 @@
     <div class="col">
       <form @submit.prevent="onSubmit">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" v-model="newMail.email">
-        <label for="floatingInput">
+        <input type="text" class="form-control" id="floatingInputemail" v-model="newMail.email">
+        <label for="floatingInputemail">
           {{ t('account.email') }}
         </label>
       </div>

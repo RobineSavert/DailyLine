@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="credentials.email">
+      <input type="email" class="form-control" id="floatingInput" :placeholder="'auth.placeholder.email'" v-model="credentials.email">
       <label for="floatingInput">
         {{ t('auth.register.form.email')}}
       </label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="credentials.password">
+      <input type="password" class="form-control" id="floatingPassword" :placeholder="'auth.placeholder.password'" v-model="credentials.password">
       <label for="floatingPassword">
         {{ t('auth.register.form.password')}}
       </label>

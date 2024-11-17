@@ -1,5 +1,4 @@
 <template>
-
   <TitleComponent :title="'account.edit_password_title'">
     <template v-slot:buttons>
       <div class="d-flex flex-nowrap justify-content-end">
@@ -13,13 +12,13 @@
   <div class="row">
     <div class="col">
       <form @submit.prevent="onSubmit">
-    <input type="email" hidden v-model="user.email" autocomplete="user" />
-    <div class="form-floating mb-3">
-      <input type="password" class="form-control" id="floatingInput" v-model="newPassword.password" autocomplete="new-password">
-      <label for="floatingInput">
-        {{ t('account.password') }}
-      </label>
-    </div>
+      <input type="email" hidden v-model="user.email" autocomplete="email" />
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="floatingInputpassword" v-model="newPassword.password" autocomplete="new-password">
+        <label for="floatingInputpassword">
+          {{ t('account.password') }}
+        </label>
+      </div>
 
     <Alert :variant="'danger'" />
 

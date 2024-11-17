@@ -17,7 +17,6 @@ import eventBus from '@/eventBus'
 import { onMounted } from 'vue';
 import { useAuthStore } from './stores/AuthStore';
 import Modal from "@/components/Modal.vue";
-import {storeToRefs} from "pinia";
 import AuthLayout from './layouts/AuthLayout.vue';
 import MainLayout from './layouts/MainLayout.vue';
 import AccountLayout from './layouts/AccountLayout.vue';
@@ -28,14 +27,10 @@ import { useRoute } from 'vue-router';
 
 
 const authStore = useAuthStore();
-const { isLoggedIn } = storeToRefs(useAuthStore())
 
 onMounted(() => {
   authStore.init();
 });
-
-
-
 
 const route = useRoute();
 

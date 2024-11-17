@@ -1,14 +1,14 @@
 <template>
   <div class="row">
     <div class="col">
-      <h2>Latest 5 lines</h2>
+      <h2>{{ $t('lines.recent_lines.title') }}</h2>
       <ul class="list-group list-group-flush">
         <li v-for="line in computedObj" :key="line.id">
           {{ line.content }}
         </li>
       </ul>
       <RouterLink :to="{ name: 'lines', params: {locale: route.params.locale} }">
-        See more
+        {{ $t('lines.recent_lines.button') }}
       </RouterLink>
     </div>
   </div>

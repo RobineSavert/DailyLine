@@ -34,7 +34,7 @@ const route = useRoute();
 
 const navItems = computed(() => [
   { key: 'line-button', icon: 'blockquote-right', name: 'lines', translation: 'navbar.lines' },
-  { key: 'add-line-button', icon: 'vector-pen', name: 'add', translation: 'navbar.add' },
+  { key: 'add-line-button', icon: 'vector-pen', name: 'add-line', translation: 'navbar.add' },
   { key: 'dashboard-button', icon: 'clipboard-data-fill', name: 'dashboard', translation: 'navbar.dashboard' },
   { key: 'settings-button', icon: 'gear-fill', name: 'settings', translation: 'navbar.settings' },
   { key: 'person-button', icon: 'person-fill', name: 'account', translation: 'navbar.account' },

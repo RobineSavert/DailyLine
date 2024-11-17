@@ -1,12 +1,5 @@
 <template>
-  <template v-if="showInBetweenScreen">
-    <InBetweenScreen :duration="3000" @finished="handleFinished">
-      <template v-slot:image>
-        <img class="w-100 img-fluid" :src="img" />
-      </template>
-    </InBetweenScreen>
-  </template>
-  <template v-else>
+
     <Alert />
 
     <TitleComponent :title="'lines.title'">
@@ -62,14 +55,12 @@
       </TableCard>
     </template>
   </template>
-</template>
 
 
 <script setup>
-import {ref, computed, onMounted} from 'vue';
+import {ref, computed} from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import { storeToRefs } from 'pinia';
-import { useCharactersLimit } from '@/composables/useCharactersLimit';
 import Spinner from "@/components/Spinner.vue";
 import TableComponent from "@/components/Table/TableComponent.vue";
 import TableCard from "@/components/Table/TableCard.vue";
@@ -79,23 +70,14 @@ import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComp
 import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
-import InBetweenScreen from "@/Views/InBetweenScreen.vue";
-import img from '@/assets/img/img.png';
 
 const linesStore = useLinesStore();
 const { lines, linesLoaded } = storeToRefs(linesStore);
-const newLine = ref('');
 const { t } = useI18n();
 const route = useRoute()
 let showSearchBar = ref(false)
 let showInBetweenScreen = ref(true)
 
-
-function handleFinished() {
-  showInBetweenScreen.value = false;
-}
-
-useCharactersLimit(newLine);
 
 const fields = computed(() => [
   {

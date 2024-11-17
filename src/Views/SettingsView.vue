@@ -1,5 +1,5 @@
 <template>
-  <TitleComponent :title="'settings.title'"></TitleComponent>
+  <TitleComponent :title="'settings.title'" />
   <div class="row">
     <div class="col">
       <ul class="list-group list-group-flush">

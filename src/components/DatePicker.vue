@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="input-group position-relative">
-        <label class="control-label" for="id"></label>
+        <label class="control-label" :for="id"></label>
         <input type="text"
                class="form-control"
                :id="id"

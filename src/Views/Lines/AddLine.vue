@@ -21,7 +21,6 @@
 import {computed, ref} from 'vue';
 import AddEditLine from '@/components/Lines/AddEditLine.vue';
 import { useLinesStore } from '@/stores/LinesStore';
-import { useCharactersLimit } from '@/composables/useCharactersLimit';
 import ButtonPrimary from "@/components/Buttons/ButtonPrimary.vue";
 import {useRoute, useRouter} from "vue-router";
 
@@ -37,8 +36,6 @@ const addLine = () => {
   addEditLineRef.value.focusTextArea();
   router.push({name: 'lines', params: {locale: route.params.locale} })
 };
-
-useCharactersLimit(newLine);
 
 const latestLine = computed(() => linesStore.lines[0]?.date || null);
 const isDisabled = computed(() => {

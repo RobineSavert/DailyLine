@@ -1,4 +1,5 @@
 {
+  "loading": "laden...",
   "locale": {
     "en": "Engels",
     "nl": "Nederlands"
@@ -35,6 +36,10 @@
   "title": "Daily Line",
   "intro": "Schrijf een enkele regel.. elke dag..",
   "auth": {
+    "placeholder": {
+      "email": "naam@voorbeeld.com",
+      "password": "*****"
+    },
     "login": {
       "title": "Inloggen",
       "button": "Inloggen",
@@ -52,6 +57,8 @@
       }
     },
     "forgot_password": {
+      "link": "wachtwoord vergeten",
+      "back_to_login": "terug naar inloggen",
       "form": {
         "email": "E-mail adres"
       }
@@ -70,12 +77,17 @@
   "lines": {
     "title": "Regels",
     "no_lines": "Nog geen regels toegevoegd!",
+    "you_have_written": "Je hebt tot nu toe { lines } prachtige regels geschreven..",
+    "you_have_written_average": "dat is gemiddeld { average } per week..",
+    "keep_it_up": "ga zo door & dan heb je binnenkort een mooie collectie van jouw eigen gedachten...",
     "edit": "bewerk",
     "delete": "verwijder",
     "edit_line_title": "Regel bewerken",
     "remaining_chars": "karakters over",
     "today": "Het is vandaag {today} & je hebt nog {chars} karakters over om in te vullen.. ",
     "today_edit": "Deze regel is geschreven op {today} & je hebt nog {chars} karakters over om in te vullen.. ",
+    "locked_until": "tot de volgende regel..",
+    "locked_because": "Het schrijven van een regel is geblokkeerd tot de volgende dag aanbreekt, je mag maar 1 regel per dag schrijven..",
     "delete_modal": {
       "title": "Regel verwijderen",
       "body": "Weet je zeker dat je deze regel wilt verwijderen?"
@@ -85,7 +97,11 @@
     "no_lines_on_date": "Er is geen regel op de gekozen datum.",
     "add_line_success": "De regel is toegevoegd..",
     "edit_line_success": "De regel is bewerkt..",
-    "delete_line_success": "De regel is verwijderd.."
+    "delete_line_success": "De regel is verwijderd..",
+    "recent_lines": {
+      "title": "Laatste regels",
+      "button": "lees meer"
+    }
   },
   "account": {
     "title": "Account",
@@ -101,42 +117,15 @@
     "view_stats": "Bekijk de statistieken"
   },
   "countdown": {
-    "description": "Je kunt een nieuwe regel schrijven over: "
+    "hours": "uur",
+    "minutes": "minuten",
+    "seconds": "seconden"
   },
   "stats": {
     "stat": "Statistiek",
     "value": "Aantal",
     "total_lines": "Regels",
     "total_chars": "Karakters"
-  },
-
-  "weekdays": {
-    "sun": "Zo",
-    "mon": "Ma",
-    "tue": "Di",
-    "wed": "Wo",
-    "thur": "Do",
-    "fri": "Vr",
-    "sat": "Za"
-  },
-  "months": {
-    "jan": "Januari",
-    "feb": "Februari",
-    "march": "Maart",
-    "april": "April",
-    "may": "Mei",
-    "june": "Juni",
-    "july": "Juli",
-    "aug": "Augustus",
-    "sept": "September",
-    "oct": "Oktober",
-    "nov": "November",
-    "dec": "December"
-  },
-  "pick_a_year": "Voer een jaar in",
-  "pick": "Kies",
-  "datepicker": {
-    "placeholder": "Kies een datum"
   },
   "settings": {
     "title": "Instellingen",

@@ -5,13 +5,13 @@
   <div v-else>
     <form @submit.prevent="onSubmit" >
       <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="credentials.email">
+        <input type="email" class="form-control" id="floatingInput" :placeholder="'auth.placeholder.email'" v-model="credentials.email">
         <label for="floatingInput">
           {{ t('auth.login.form.email')}}
         </label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="credentials.password">
+        <input type="password" class="form-control" id="floatingPassword" :placeholder="'auth.placeholder.password'"  v-model="credentials.password">
         <label for="floatingPassword">
           {{ t('auth.login.form.password')}}
         </label>
@@ -25,10 +25,10 @@
                 :content="'auth.login.button'" />
 
       </div>
-
-
     </form>
-    <a @click.prevent="showResetPW" class="cursor-pointer text-xs text-light">forgot password</a>
+    <a @click.prevent="showResetPW" class="cursor-pointer text-xs text-light">
+      {{ $t('auth.forgot_password.link') }}
+    </a>
   </div>
 </template>
 <script setup>
@@ -37,7 +37,7 @@ import { useAuthStore } from '@/stores/AuthStore';
 import Alert from "@/components/Alert.vue"
 import Button from "@/components/Buttons/Button.vue";
 import {useI18n} from "vue-i18n";
-import ForgotPassword from "@/Views/ForgotPassword.vue";
+import ForgotPassword from "@/Views/Auth/ForgotPassword.vue";
 import {useMessageStore} from "@/stores/MessagesStore";
 
 const { t } = useI18n()

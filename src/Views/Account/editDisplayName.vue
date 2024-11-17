@@ -14,8 +14,8 @@
     <div class="col">
       <form @submit.prevent="onSubmit">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" v-model="newUser.displayName">
-          <label for="floatingInput">
+          <input type="text" class="form-control" id="floatingInputdisplayName" v-model="newUser.displayName">
+          <label for="floatingInputdisplayName">
             {{ t('account.display_name') }}
           </label>
         </div>

@@ -48,7 +48,6 @@
 
 <script setup>
   import { useLinesStore } from '@/stores/LinesStore';
-  import { useCharactersLimit } from '@/composables/useCharactersLimit';
   import {computed, ref} from 'vue';
   import {useRoute} from "vue-router";
   import TableComponent from "@/components/Table/TableComponent.vue";
@@ -63,8 +62,6 @@
   const { t } = useI18n();
   const linesCount = linesStore.totalLinesCount;
   const totalCharactersCount = linesStore.totalCharactersCount;
-
-  useCharactersLimit(feedback, 50);
 
   const statItems = computed(() => [
     { translation: 'stats.total_lines', value: linesCount },

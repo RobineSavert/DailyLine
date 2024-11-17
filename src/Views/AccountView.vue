@@ -1,12 +1,4 @@
 <template>
-  <template v-if="showInBetweenScreen">
-    <InBetweenScreen :duration="3000" @finished="handleFinished">
-      <template v-slot:image>
-        <img class="w-100 img-fluid" :src="img" />
-      </template>
-    </InBetweenScreen>
-  </template>
-  <template v-else>
     <Alert />
 
     <TitleComponent :title="'account.title'" />
@@ -36,7 +28,6 @@
           <a @click="onLogout" class="text-danger btn btn-link">{{ $t('account.logout') }}</a>
       </div>
     </div>
-  </template>
 </template>
 
 <script setup>
@@ -48,20 +39,13 @@ import {computed, ref} from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
-import img from '@/assets/img/img.png';
-import InBetweenScreen from "@/Views/InBetweenScreen.vue";
 
 const { getUser } = useAccountStore();
 const { t } = useI18n();
 const authStore = useAuthStore();
 const { user } = useAuthStore();
 const route = useRoute();
-let showInBetweenScreen = ref(true)
 
-
-function handleFinished() {
-  showInBetweenScreen.value = false;
-}
 
 getUser();
 

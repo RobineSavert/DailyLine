@@ -52,7 +52,7 @@ const textareaRef = ref(null);
 const focusTextArea = () => textareaRef.value.focus();
 defineExpose({ focusTextArea });
 
-const longDate = new Date(2024, 10, 15);
+const longDate = new Date();
 const dateConfig = { year: 'numeric', month: 'long', day: 'numeric' };
 
 const linesStore = useLinesStore();

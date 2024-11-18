@@ -54,7 +54,7 @@
 
   const onLineSave = () => {
     linesStore.updateLine(route.params.id, lineContent.value);
-    router.push({ name: 'lines' });
+    router.push({name: 'lines', params: {locale: route.params.locale} })
   };
 
 

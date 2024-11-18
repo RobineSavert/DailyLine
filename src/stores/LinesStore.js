@@ -43,9 +43,6 @@ export const useLinesStore = defineStore('linesStore', () => {
     linesCollectionRef = collection(db, 'users', authStore.user.uid, 'lines');
     linesCollectionQuery = query(linesCollectionRef, orderBy('date', 'desc'));
 
-
-
-
     linesSnapshot = onSnapshot(linesCollectionQuery, (querySnapshot) => {
       let linesData = [];
       linesLoaded.value = false;
@@ -119,6 +116,7 @@ export const useLinesStore = defineStore('linesStore', () => {
       return lines.value.find((line) => parseInt(line.date) === timestamp) || null;
     };
   });
+
 
   return {
     lines,

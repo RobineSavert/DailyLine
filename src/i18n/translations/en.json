@@ -15,7 +15,8 @@
     "update_password": "Update password",
     "update_email": "Update e-mail address",
     "update_display_name": "Update display name",
-    "forgot_password": "Update password"
+    "forgot_password": "Update password",
+    "update_bookname": "Update book name"
   },
   "table": {
     "columnHeaders": {
@@ -35,6 +36,7 @@
   },
   "title": "Daily Line",
   "intro": "Write a single line.. every day..",
+  "please_enter_something": "Please enter something..",
   "auth": {
     "placeholder": {
       "email": "name@example.com",
@@ -62,7 +64,8 @@
       "form": {
         "email": "E-mail address"
       }
-    }
+    },
+    "please_enter": "Please enter email & password.."
   },
   "navbar": {
     "lines": "Lines",
@@ -76,6 +79,7 @@
   },
   "lines": {
     "title": "Lines",
+    "in": "in",
     "no_lines": "No lines added here yet!",
     "you_have_written": "You have so far written { lines } beautiful lines..",
     "you_have_written_average": "that's an average of { average } per week..",
@@ -110,11 +114,15 @@
     "edit_display_name_title": "Edit display name",
     "edit_email_title": "Edit e-mail address",
     "edit_password_title": "Edit password",
+    "edit_bookname_title": "Edit book name",
     "email": "E-mail address",
     "display_name": "Display name",
     "password": "Password",
+    "bookname": "Book Name",
     "stats": "Statistics",
-    "view_stats": "View your statistics"
+    "view_stats": "View your statistics",
+    "update_book_name_succes" : "Book name updated successfully!",
+    "update_book_name_failed" : "Failed to update book name.."
   },
   "countdown": {
     "hours": "hours",
@@ -131,7 +139,6 @@
   "settings": {
     "title": "Settings",
     "language": "Language",
-    "app_version": "App version",
-    "latest_change": "Latest changes"
+    "app_version": "App version"
   }
 }

@@ -52,7 +52,7 @@ const credentials = reactive({
 
 const onSubmit = () => {
   if (!credentials.email || !credentials.password) {
-    addMessage(1, { title: 'Please enter email and password', type: 'danger' })
+    addMessage(1, { title: 'auth.please_enter', type: 'danger' })
     return;
   }
   authStore.loginUser(credentials);

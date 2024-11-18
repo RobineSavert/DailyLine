@@ -43,11 +43,11 @@ const credentials = reactive({
 const onSubmit = () => {
   if (!credentials.email) {
     alert('Please enter email');
-    addMessage(1,{ title: 'Please change something', type: 'danger' });
+    addMessage(1,{ title: 'please_enter_something', type: 'danger' });
     return;
   }
   authStore.resetPassword(credentials.email).then(() => {
-    router.push({ name: 'auth' });
+    router.push({name: 'auth', params: {locale: route.params.locale} })
   })
 };
 

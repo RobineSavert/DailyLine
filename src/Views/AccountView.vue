@@ -3,7 +3,7 @@
 
     <TitleComponent :title="'account.title'" />
 
-    <div class="row">
+    <div class="row" v-if="accountItems">
       <div class="col-12 col-md-6" v-for="(accountItem, index) in accountItems" :key="index">
         <Card :panel-collapsable="false" :variant="'none'">
           <template v-slot:title>
@@ -17,7 +17,8 @@
             </div>
           </template>
           <template v-slot:body>
-            {{ accountItem.body }}
+            <span v-if="accountItem.body">{{ accountItem.body }}</span>
+            <span v-else>-</span>
           </template>
         </Card>
       </div>
@@ -39,6 +40,19 @@ import {computed, ref} from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
+import { useBookStore } from '@/stores/BookStore';
+import {storeToRefs} from "pinia";
+
+const { bookName } = storeToRefs(useBookStore())
+
+
+import { onMounted } from 'vue';
+
+const bookStore = useBookStore();
+
+onMounted(() => {
+  bookStore.fetchBookName();
+});
 
 const { getUser } = useAccountStore();
 const { t } = useI18n();
@@ -65,6 +79,12 @@ const accountItems = computed(() => [
     title: 'account.display_name',
     link: 'editDisplayName',
     body: user.displayName
+  },
+  {
+    key: 'bookname-card',
+    title: 'account.bookname',
+    link: 'editBookName',
+    body: bookName.value
   },
   {
     key: 'password-card',

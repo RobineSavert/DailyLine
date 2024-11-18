@@ -40,13 +40,14 @@ import {useAuthStore} from "@/stores/AuthStore";
 import ButtonPrimary from '@/components/Buttons/ButtonPrimary.vue'
 import Alert from "@/components/Alert.vue";
 import {useI18n} from "vue-i18n";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
 
 const { t } = useI18n()
 const { user } = useAuthStore();
 const accountStore = useAccountStore();
 const route = useRoute()
+const router = useRouter()
 
 const newPassword = reactive({
   password: user.password
@@ -54,5 +55,6 @@ const newPassword = reactive({
 
 const onSubmit = () => {
     accountStore.updateUserPassword(newPassword.password);
+  router.push({name: 'lines', params: {locale: route.params.locale} })
 };
 </script>

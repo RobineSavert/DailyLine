@@ -1,18 +1,17 @@
 <template>
-
-    <Alert />
-
-    <TitleComponent :title="'lines.title'">
-      <template v-slot:buttons>
-        <div class="d-flex flex-nowrap justify-content-end">
-          <i class="bi-search me-2" @click="showSearch()"></i>
-        </div>
-      </template>
-    </TitleComponent>
-
     <Spinner v-if="!linesLoaded" />
 
     <template v-else>
+      <Alert />
+
+      <TitleComponent :translation="false" :title="`${$t('lines.title')} ${$t('lines.in')} ${bookName}`">
+        <template v-slot:buttons>
+          <div class="d-flex flex-nowrap justify-content-end">
+            <i class="bi-search me-2" @click="showSearch()"></i>
+          </div>
+        </template>
+      </TitleComponent>
+
       <TableCard
           :items="lines"
           :panel-i-d="'lineTable'"
@@ -58,7 +57,7 @@
 
 
 <script setup>
-import {ref, computed} from 'vue';
+import {ref, computed, onMounted} from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import { storeToRefs } from 'pinia';
 import Spinner from "@/components/Spinner.vue";
@@ -70,13 +69,20 @@ import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComp
 import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
+import {useBookStore} from "@/stores/BookStore";
+
+const { bookName } = storeToRefs(useBookStore())
 
 const linesStore = useLinesStore();
 const { lines, linesLoaded } = storeToRefs(linesStore);
 const { t } = useI18n();
 const route = useRoute()
 let showSearchBar = ref(false)
-let showInBetweenScreen = ref(true)
+
+const bookStore = useBookStore();
+onMounted(() => {
+  bookStore.fetchBookName();
+});
 
 
 const fields = computed(() => [

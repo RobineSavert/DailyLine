@@ -13,6 +13,7 @@ import editPassword from "@/Views/Account/editPassword.vue"
 import StatsView from '../Views/Account/StatsView.vue';
 import Tr from "@/i18n/translation"
 import DashboardView from "@/Views/DashboardView.vue";
+import editBookName from "@/Views/Account/editBookName.vue";
 
 const routes = [
   {
@@ -49,6 +50,12 @@ const routes = [
     path: '/:locale?/account/edit-password',
     component: editPassword,
     name: 'editPassword',
+    meta: { layout: 'account' }
+  },
+  {
+    path: '/:locale?/account/edit-bookname',
+    component: editBookName,
+    name: 'editBookName',
     meta: { layout: 'account' }
   },
   {

@@ -42,10 +42,11 @@ import ButtonPrimary from '@/components/Buttons/ButtonPrimary.vue'
 import {useMessageStore} from "@/stores/MessagesStore";
 import Alert from "@/components/Alert.vue";
 import {useI18n} from "vue-i18n";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
 
 const route = useRoute()
+const router = useRouter()
 const { user } = useAuthStore();
 const accountStore = useAccountStore();
 const { addMessage } = useMessageStore()
@@ -64,8 +65,9 @@ const isDisabled = computed(() => {
 const onSubmit = () => {
   if (!isDisabled.value) {
     accountStore.updateUserEmail(newMail.email);
+    router.push({name: 'lines', params: {locale: route.params.locale} })
   } else {
-    addMessage(1,{ title: 'Please change something', type: 'danger' });
+    addMessage(1,{ title: 'please_enter_something', type: 'danger' });
   }
 };
 

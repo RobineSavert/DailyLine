@@ -12,8 +12,6 @@
   <AddEditLine
     v-model="lineContent"
     ref="addEditLineRef"
-    bgColor="link"
-    class="mt-4"
     label="Edit line"
     :placeholderTextarea="'lines.placeholder'"
     :is-edit="true"

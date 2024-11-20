@@ -11,18 +11,19 @@
             :disabled="!newLine"
             @click="addLine"
             class="my-4"
-            :content="'buttons.add_new'" />
+            :content="'buttons.add_new'"
+        />
       </div>
     </template>
   </AddEditLine>
 </template>
 
 <script setup>
-import {computed, ref} from 'vue';
+import { computed, ref } from 'vue';
 import AddEditLine from '@/components/Lines/AddEditLine.vue';
 import { useLinesStore } from '@/stores/LinesStore';
-import ButtonPrimary from "@/components/Buttons/ButtonPrimary.vue";
-import {useRoute, useRouter} from "vue-router";
+import ButtonPrimary from '@/components/Buttons/ButtonPrimary.vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const linesStore = useLinesStore();
 const addEditLineRef = ref(null);
@@ -30,19 +31,22 @@ const newLine = ref('');
 const router = useRouter();
 const route = useRoute();
 
+// Controleer of een regel is toegevoegd voor vandaag
+const todayUTC = new Date().toISOString().split('T')[0];
+const latestLine = computed(() => linesStore.lines[0]?.date || null);
+const isDisabled = computed(() => {
+  if (!latestLine.value) return false;
+  const lastEntryDate = new Date(latestLine.value).toISOString().split('T')[0];
+  return lastEntryDate === todayUTC;
+});
+
+// Voeg een nieuwe regel toe
 const addLine = () => {
   linesStore.addLine(newLine.value);
   newLine.value = '';
   addEditLineRef.value.focusTextArea();
-  router.push({name: 'lines', params: {locale: route.params.locale} })
+
+  // Navigeren na toevoegen
+  router.push({ name: 'lines', params: { locale: route.params.locale } });
 };
-
-const latestLine = computed(() => linesStore.lines[0]?.date || null);
-const isDisabled = computed(() => {
-  if (!latestLine.value) return false;
-  const lastTime = new Date(latestLine.value).getTime();
-  const now = Date.now();
-  return now - lastTime < 24 * 60 * 60 * 1000;
-});
-
 </script>

@@ -92,12 +92,6 @@ const accountItems = computed(() => [
     link: 'editPassword',
     body: '******'
   },
-  {
-    key: 'stats-card',
-    title: 'account.stats',
-    link: 'stats',
-    body: t('account.view_stats')
-  },
 ]);
 </script>
 

@@ -5,26 +5,7 @@
 
     <template v-else>
       <LatestLines v-if="lines" />
-      <div class="row">
-        <div class="col">
-          <hr v-if="lines" />
-          <div class="my-4 fst-italic text-center" v-if="lines">
-            <span v-if="totalLines === 0">{{ $t('lines.no_lines') }}</span>
-            <template v-else>
-              <span>
-                {{ t("lines.you_have_written", { lines: totalLines }) }}
-              </span>
-              <span v-if="totalLines >= 10">
-                 {{ t("lines.you_have_written_average", { average: decimal.toFixed(2) }) }}
-              </span>
-              <span>
-                {{ $t('lines.keep_it_up') }}
-              </span>
-            </template>
-          </div>
-          <hr/>
-        </div>
-      </div>
+      <Stats v-if="lines" />
       <Quotes />
     </template>
 </template>
@@ -36,13 +17,8 @@ import Spinner from "@/components/Spinner.vue";
 import Quotes from "@/Views/Dashboard/Quotes.vue";
 import LatestLines from "@/Views/Dashboard/LatestLines.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
-import {computed, ref} from "vue";
-import {useI18n} from "vue-i18n";
+import Stats from "@/Views/Dashboard/Stats.vue";
 
 const linesStore = useLinesStore();
 const { linesLoaded, lines } = storeToRefs(linesStore);
-const totalLines = computed(() => lines.value.length);
-const decimal = computed(() => totalLines.value / 7);
-const {t} = useI18n()
-
 </script>

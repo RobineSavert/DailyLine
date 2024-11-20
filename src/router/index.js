@@ -59,12 +59,6 @@ const routes = [
     meta: { layout: 'account' }
   },
   {
-    path: '/:locale?/account/stats',
-    component: StatsView,
-    name: 'stats',
-    meta: { layout: 'account' }
-  },
-  {
     path: "/:locale?",
     component: DashboardView,
     name: 'dashboard',

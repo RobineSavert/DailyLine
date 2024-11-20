@@ -90,7 +90,6 @@
     "remaining_chars": "characters left",
     "today": "Today is {today} & you still have {chars} characters left.. ",
     "today_edit": "This line was written on {today} & you still have {chars} characters left.. ",
-    "locked_until": "until next line..",
     "locked_because": "Writing a line is locked, because you can only write a line once a day..",
     "delete_modal": {
       "title": "Delete line",
@@ -123,18 +122,6 @@
     "view_stats": "View your statistics",
     "update_book_name_succes" : "Book name updated successfully!",
     "update_book_name_failed" : "Failed to update book name.."
-  },
-  "countdown": {
-    "hours": "hours",
-    "minutes": "minutes",
-    "seconds": "seconds",
-    "and": "&"
-  },
-  "stats": {
-    "stat": "Statistic",
-    "value": "Count",
-    "total_lines": "Lines",
-    "total_chars": "Characters"
   },
   "settings": {
     "title": "Settings",

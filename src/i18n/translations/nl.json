@@ -90,7 +90,6 @@
     "remaining_chars": "karakters over",
     "today": "Het is vandaag {today} & je hebt nog {chars} karakters over om in te vullen.. ",
     "today_edit": "Deze regel is geschreven op {today} & je hebt nog {chars} karakters over om in te vullen.. ",
-    "locked_until": "tot de volgende regel..",
     "locked_because": "Het schrijven van een regel is geblokkeerd tot de volgende dag aanbreekt, je mag maar 1 regel per dag schrijven..",
     "delete_modal": {
       "title": "Regel verwijderen",
@@ -123,18 +122,6 @@
     "view_stats": "Bekijk de statistieken",
     "update_book_name_succes" : "Naam van het boek is gewijzigd!",
     "update_book_name_failed" : "Het is niet gelukt om de boeknaam te wijzigen.."
-  },
-  "countdown": {
-    "hours": "uur",
-    "minutes": "minuten",
-    "seconds": "seconden",
-    "and": "&"
-  },
-  "stats": {
-    "stat": "Statistiek",
-    "value": "Aantal",
-    "total_lines": "Regels",
-    "total_chars": "Karakters"
   },
   "settings": {
     "title": "Instellingen",

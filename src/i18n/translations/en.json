@@ -80,6 +80,8 @@
   "lines": {
     "title": "Lines",
     "in": "in",
+    "no_line_for_today": "You haven't written a line yet for today.",
+    "no_line_for_today_button": "Add now",
     "no_lines": "No lines added here yet!",
     "you_have_written": "You have so far written { lines } beautiful lines..",
     "you_have_written_average": "that's an average of { average } per week..",

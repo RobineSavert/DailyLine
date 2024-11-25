@@ -4,11 +4,7 @@
     <Spinner v-if="!linesLoaded" />
 
     <template v-else>
-      <div v-if="noLineWrittenForToday">
-        You haven't written a line yet for today. <RouterLink :to="{ name: 'add-line', params: {locale: route.params.locale} }">
-        {{ $t('lines.recent_lines.button') }}
-      </RouterLink>
-      </div>
+      <NoLineForTodayYet v-if="noLineWrittenForToday" />
       <LatestLines v-if="lines" />
       <Stats v-if="lines" />
       <Quotes />
@@ -25,6 +21,7 @@ import TitleComponent from "@/components/TitleComponent.vue";
 import Stats from "@/Views/Dashboard/Stats.vue";
 import {computed, ref} from "vue";
 import {useRoute} from "vue-router";
+import NoLineForTodayYet from "@/Views/Dashboard/NoLineForTodayYet.vue";
 
 const linesStore = useLinesStore();
 const { linesLoaded, lines } = storeToRefs(linesStore);

@@ -31,22 +31,20 @@ const newLine = ref('');
 const router = useRouter();
 const route = useRoute();
 
-// Controleer of een regel is toegevoegd voor vandaag
+
 const todayUTC = new Date().toISOString().split('T')[0];
 const latestLine = computed(() => linesStore.lines[0]?.date || null);
+
 const isDisabled = computed(() => {
   if (!latestLine.value) return false;
   const lastEntryDate = new Date(latestLine.value).toISOString().split('T')[0];
   return lastEntryDate === todayUTC;
 });
 
-// Voeg een nieuwe regel toe
 const addLine = () => {
   linesStore.addLine(newLine.value);
   newLine.value = '';
   addEditLineRef.value.focusTextArea();
-
-  // Navigeren na toevoegen
   router.push({ name: 'lines', params: { locale: route.params.locale } });
 };
 </script>

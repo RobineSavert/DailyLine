@@ -112,4 +112,10 @@ function searchFilters(filtersForSearch){
 function showSearch() {
   showSearchBar.value = !showSearchBar.value;
 }
+
+const todayUTC = new Date().toISOString().split('T')[0];
+const latestLine = computed(() => linesStore.lines[0]?.date || null);
+
+
+
 </script>

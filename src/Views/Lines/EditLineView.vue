@@ -12,7 +12,6 @@
   <AddEditLine
     v-model="lineContent"
     ref="addEditLineRef"
-    label="Edit line"
     :placeholderTextarea="'lines.placeholder'"
     :is-edit="true"
     :line-i-d="currentLine"
@@ -43,8 +42,6 @@
   const linesStore = useLinesStore();
   const lineContent = ref('');
   let currentLine = ref(route.params.id)
-
-  console.log(currentLine.value)
 
   lineContent.value = linesStore.getLineContentById(route.params.id);
 

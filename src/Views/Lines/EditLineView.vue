@@ -17,8 +17,11 @@
     :line-i-d="currentLine"
   >
     <template #button>
-      <div class="d-flex align-items-center justify-content-between mt-4">
-        <Button :icon="'trash-fill'" :content="'buttons.delete'" @click="onShowDeleteModal" />
+      <div class="d-flex align-items-center mt-4" :class="{
+            'justify-content-between': isAutoFillDaysDisabled,
+            'justify-content-end': !isAutoFillDaysDisabled
+        }">
+        <Button :icon="'trash-fill'" :content="'buttons.delete'" @click="onShowDeleteModal" v-if="isAutoFillDaysDisabled" />
         <ButtonSave :content="'buttons.save_line'" :disabled="isDisabled" @click="onLineSave" />
       </div>
     </template>
@@ -26,53 +29,66 @@
 </template>
 
 <script setup>
-  import AddEditLine from '@/components/Lines/AddEditLine.vue';
-  import { useRoute, useRouter } from 'vue-router';
-  import {computed, ref} from 'vue';
-  import { useLinesStore } from '@/stores/LinesStore';
-  import eventBus from "@/eventBus";
-  import {useI18n} from "vue-i18n";
-  import Button from "@/components/Buttons/Button.vue";
-  import ButtonSave from "@/components/Buttons/ButtonSave.vue";
-  import TitleComponent from "@/components/TitleComponent.vue";
+import AddEditLine from '@/components/Lines/AddEditLine.vue';
+import { useRoute, useRouter } from 'vue-router';
+import {computed, onMounted, ref} from 'vue';
+import { useLinesStore } from '@/stores/LinesStore';
+import eventBus from "@/eventBus";
+import {useI18n} from "vue-i18n";
+import Button from "@/components/Buttons/Button.vue";
+import ButtonSave from "@/components/Buttons/ButtonSave.vue";
+import TitleComponent from "@/components/TitleComponent.vue";
+import {useSettingsStore} from "@/stores/SettingsStore";
+import {storeToRefs} from "pinia";
 
-  const route = useRoute();
-  const router = useRouter();
-  const { t } = useI18n()
-  const linesStore = useLinesStore();
-  const lineContent = ref('');
-  let currentLine = ref(route.params.id)
+const settingsStore = useSettingsStore();
+const { autoFillMissingDays } = storeToRefs(useSettingsStore())
 
-  lineContent.value = linesStore.getLineContentById(route.params.id);
+const route = useRoute();
+const router = useRouter();
+const { t } = useI18n()
+const linesStore = useLinesStore();
+const lineContent = ref('');
+let isAutoFillDaysDisabled = ref(false);
+let currentLine = ref(route.params.id)
 
-  let newLine = ref(lineContent.value)
+lineContent.value = linesStore.getLineContentById(route.params.id);
 
-  const onLineSave = () => {
-    linesStore.updateLine(route.params.id, lineContent.value);
+let newLine = ref(lineContent.value)
+
+const onLineSave = () => {
+  linesStore.updateLine(route.params.id, lineContent.value);
+  router.push({name: 'lines', params: {locale: route.params.locale} })
+};
+
+
+const emit = defineEmits(['delete-line'])
+
+function onShowDeleteModal() {
+  const title = t("lines.delete_modal.title");
+  const body = t("lines.delete_modal.body");
+  const buttonText = t("buttons.delete");
+  eventBus.showModal(title, body, null, buttonText, '', false, true, true, 'card-list', deleteLine);
+}
+
+const deleteLine = (e) => {
+  linesStore.deleteLine(route.params.id).then(() => {
+    eventBus.hideModal();
+    emit('delete-line', {e});
     router.push({name: 'lines', params: {locale: route.params.locale} })
-  };
-
-
-  const emit = defineEmits(['delete-line'])
-
-  function onShowDeleteModal() {
-    const title = t("lines.delete_modal.title");
-    const body = t("lines.delete_modal.body");
-    const buttonText = t("buttons.delete");
-    eventBus.showModal(title, body, null, buttonText, '', false, true, true, 'card-list', deleteLine);
-  }
-
-  const deleteLine = (e) => {
-    linesStore.deleteLine(route.params.id).then(() => {
-      eventBus.hideModal();
-      emit('delete-line', {e});
-      router.push({name: 'lines', params: {locale: route.params.locale} })
-    });
-  };
-
-  const isDisabled = computed(() => {
-    return (
-        lineContent.value === newLine.value || lineContent.value === ''
-    );
   });
+};
+
+const isDisabled = computed(() => {
+  return (
+      lineContent.value === newLine.value || lineContent.value === ''
+  );
+});
+
+
+onMounted(async () => {
+  await settingsStore.fetchAutoFillLines();
+
+  isAutoFillDaysDisabled.value = !autoFillMissingDays.value;
+});
 </script>

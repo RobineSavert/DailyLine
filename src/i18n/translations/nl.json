@@ -128,6 +128,9 @@
   "settings": {
     "title": "Instellingen",
     "language": "Taal",
-    "app_version": "Versie app"
+    "app_version": "Versie app",
+    "auto_lines": "Vul automatisch vergeten regels in",
+    "update_setting_success": "De instelling is opgeslagen",
+    "update_setting_failed": "Het is helaas niet gelukt om de instelling op te slaan.."
   }
 }

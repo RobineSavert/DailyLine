@@ -57,8 +57,9 @@
 
 
 <script setup>
-import {ref, computed, onMounted} from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
+import { useSettingsStore } from '@/stores/SettingsStore';
 import { storeToRefs } from 'pinia';
 import Spinner from "@/components/Spinner.vue";
 import TableComponent from "@/components/Table/TableComponent.vue";
@@ -69,21 +70,72 @@ import TableSearchFilterComponent from "@/components/Table/TableSearchFilterComp
 import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
-import {useBookStore} from "@/stores/BookStore";
+import { useBookStore } from "@/stores/BookStore";
 
-const { bookName } = storeToRefs(useBookStore())
 
 const linesStore = useLinesStore();
-const { lines, linesLoaded } = storeToRefs(linesStore);
-const { t } = useI18n();
-const route = useRoute()
-let showSearchBar = ref(false)
+const { lines, linesLoaded, addLine } = storeToRefs(linesStore);
+const settingsStore = useSettingsStore();
+const { autoFillMissingDays } = storeToRefs(useSettingsStore())
 
-const bookStore = useBookStore();
-onMounted(() => {
-  bookStore.fetchBookName();
+
+onMounted(async () => {
+  while (!linesLoaded.value) {
+    await new Promise(resolve => setTimeout(resolve, 100)); // Wacht 100ms
+  }
+
+  await settingsStore.fetchAutoFillLines();
+
+  if (autoFillMissingDays.value) {
+    await checkAndAddMissingDays();
+  }
 });
 
+
+
+async function checkAndAddMissingDays() {
+  if (!lines.value || lines.value.length === 0) {
+    return;
+  }
+
+  const existingDates = new Set(linesStore.lines.map(line =>
+      new Date(line.date).toISOString().split('T')[0]
+  ));
+
+  const firstLineDate = new Date(linesStore.lines[linesStore.lines.length - 1].date);
+  firstLineDate.setUTCHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+
+  let currentDate = new Date(firstLineDate);
+  while (currentDate <= today) {
+    const isoDate = currentDate.toISOString().split('T')[0]; // Alleen de datum zonder tijd
+
+    if (!existingDates.has(isoDate)) {
+      try {
+        await linesStore.addLine('-', `${isoDate}T00:00:00Z`); // Voeg gemiste dag toe in UTC
+        existingDates.add(isoDate);
+      } catch (error) {
+        console.error("Fout bij het toevoegen van dag:", isoDate, error);
+      }
+    } else {
+      console.log("Dag bestaat al, overslaan:", isoDate);
+    }
+
+    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  }
+}
+
+
+
+
+
+
+const { bookName } = storeToRefs(useBookStore());
+const { t } = useI18n();
+const route = useRoute();
+let showSearchBar = ref(false);
 
 const fields = computed(() => [
   {
@@ -96,26 +148,21 @@ const fields = computed(() => [
     key: "content",
     label: t("table.columnHeaders.content")
   },
-])
+]);
 
 let searchInputFilter = ref("");
 let appliedFilters = ref({});
 
-function searchInput(filter){
-  searchInputFilter.value = filter
+function searchInput(filter) {
+  searchInputFilter.value = filter;
 }
 
-function searchFilters(filtersForSearch){
-  appliedFilters.value = filtersForSearch
+function searchFilters(filtersForSearch) {
+  appliedFilters.value = filtersForSearch;
 }
 
 function showSearch() {
   showSearchBar.value = !showSearchBar.value;
 }
-
-const todayUTC = new Date().toISOString().split('T')[0];
-const latestLine = computed(() => linesStore.lines[0]?.date || null);
-
-
 
 </script>

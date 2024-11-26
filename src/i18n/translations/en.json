@@ -128,6 +128,9 @@
   "settings": {
     "title": "Settings",
     "language": "Language",
-    "app_version": "App version"
+    "app_version": "App version",
+    "auto_lines": "Automatically fill in lines for missed days",
+    "update_setting_success": "The setting has been saved",
+    "update_setting_failed": "Unfortunately there was an error.."
   }
 }

@@ -77,12 +77,22 @@ export const useLinesStore = defineStore('linesStore', () => {
     return count;
   });
 
-  const addLine = async (lineContent) => {
-    const currentDate = new Date().toISOString();
+  // const addLine = async (lineContent) => {
+  //   const currentDate = new Date().toISOString();
+  //   linesLoaded.value = false;
+  //
+  //   await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
+  //     messageStore.addMessage(0,{ title: 'lines.add_line_success' });
+  //     linesLoaded.value = true;
+  //   });
+  // };
+
+  const addLine = async (lineContent, optionalDate = null) => {
+    const dateToUse = optionalDate || new Date().toISOString();
     linesLoaded.value = false;
 
-    await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
-      messageStore.addMessage(0,{ title: 'lines.add_line_success' });
+    await addDoc(linesCollectionRef, { content: lineContent, date: dateToUse }).then(() => {
+      messageStore.addMessage(0, { title: 'lines.add_line_success' });
       linesLoaded.value = true;
     });
   };

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation">
+
     <select @change="switchLanguage" class="form-select w-auto text-sm" aria-label="Language switcher">
       <option
           v-for="sLocale in supportedLocales"
@@ -10,7 +10,7 @@
         {{ t(`locale.${sLocale}`) }}
       </option>
     </select>
-  </nav>
+
 </template>
 
 <script>

@@ -8,6 +8,7 @@
         <template v-slot:buttons>
           <div class="d-flex flex-nowrap justify-content-end">
             <i class="bi-search me-2" @click="showSearch()"></i>
+            <i class="bi-stars me-2" @click="fillMissingDays" v-if="autoFillMissingDays"></i>
           </div>
         </template>
       </TitleComponent>
@@ -71,13 +72,14 @@ import { useRoute } from "vue-router";
 import Alert from "@/components/Alert.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
 import { useBookStore } from "@/stores/BookStore";
+import {useMessageStore} from "@/stores/MessagesStore";
 
 
 const linesStore = useLinesStore();
 const { lines, linesLoaded, addLine } = storeToRefs(linesStore);
 const settingsStore = useSettingsStore();
 const { autoFillMissingDays } = storeToRefs(useSettingsStore())
-
+const {addMessage} = useMessageStore()
 
 onMounted(async () => {
   while (!linesLoaded.value) {
@@ -86,46 +88,62 @@ onMounted(async () => {
 
   await settingsStore.fetchAutoFillLines();
 
-  if (autoFillMissingDays.value) {
-    await checkAndAddMissingDays();
-  }
+  // if (autoFillMissingDays.value) {
+  //   await checkAndAddMissingDays();
+  // }
 });
 
 
+async function fillMissingDays() {
+  try {
+    await checkAndAddMissingDays();
+
+  } catch (error) {
+
+  }
+}
+
 
 async function checkAndAddMissingDays() {
-  if (!lines.value || lines.value.length === 0) {
-    return;
-  }
+  if (!lines.value || lines.value.length === 0) return;
 
-  const existingDates = new Set(linesStore.lines.map(line =>
-      new Date(line.date).toISOString().split('T')[0]
-  ));
+  // Haal alle bestaande datums op uit de lines
+  const existingDates = new Set(
+      linesStore.lines.map(line =>
+          new Date(line.date).toISOString().split('T')[0] // Alleen YYYY-MM-DD
+      )
+  );
 
+  // Eerste datum in de lijst (meest historische datum)
   const firstLineDate = new Date(linesStore.lines[linesStore.lines.length - 1].date);
-  firstLineDate.setUTCHours(0, 0, 0, 0);
+  firstLineDate.setUTCHours(0, 0, 0, 0); // Zet naar UTC middernacht
 
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0);
+  // Bepaal gisteren als UTC-datum
+  const yesterday = new Date(Date.now());
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  yesterday.setUTCHours(0, 0, 0, 0);
 
+  // Loop door de datums vanaf de eerste tot en met gisteren
   let currentDate = new Date(firstLineDate);
-  while (currentDate <= today) {
-    const isoDate = currentDate.toISOString().split('T')[0]; // Alleen de datum zonder tijd
+  while (currentDate <= yesterday) {
+    const isoDate = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD
 
+    // Controleer of de datum al bestaat
     if (!existingDates.has(isoDate)) {
       try {
-        await linesStore.addLine('-', `${isoDate}T00:00:00Z`); // Voeg gemiste dag toe in UTC
-        existingDates.add(isoDate);
+        await linesStore.addLine('-', `${isoDate}T00:00:00Z`); // Voeg de dag toe
+        existingDates.add(isoDate); // Voeg toe aan de set om dubbel werk te voorkomen
+
       } catch (error) {
-        console.error("Fout bij het toevoegen van dag:", isoDate, error);
+        addMessage(1, { title: 'lines.added_day_error: ' + isoDate + error })
       }
-    } else {
-      console.log("Dag bestaat al, overslaan:", isoDate);
     }
 
+    // Ga een dag verder
     currentDate.setUTCDate(currentDate.getUTCDate() + 1);
   }
 }
+
 
 
 

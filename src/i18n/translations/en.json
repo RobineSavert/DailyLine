@@ -100,7 +100,7 @@
     "placeholder": "Type something ....",
     "add_line": "Add new line",
     "no_lines_on_date": "There is no line added for this date..",
-    "add_line_success": "The line has been added...",
+    "add_line_success": "The line has been added",
     "edit_line_success": "The line has been updated..",
     "delete_line_success": "The line has been deleted..",
     "recent_lines": {
@@ -131,6 +131,8 @@
     "app_version": "App version",
     "auto_lines": "Automatically fill in lines for missed days",
     "update_setting_success": "The setting has been saved",
-    "update_setting_failed": "Unfortunately there was an error.."
+    "update_setting_failed": "Unfortunately there was an error..",
+    "settings_not_found": "Settings not found, switching to default settings..",
+    "autolines_error": "Something went wrong with this setting: "
   }
 }

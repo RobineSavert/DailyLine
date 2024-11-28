@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { db } from '../js/firebase';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useAuthStore } from "@/stores/AuthStore";
+import {useMessageStore} from "@/stores/MessagesStore";
 
 export const useBookStore = defineStore('bookStore', {
     state: () => ({
@@ -25,6 +26,7 @@ export const useBookStore = defineStore('bookStore', {
         async updateBookName(bookName) {
             const authStore = useAuthStore();
             const userId = authStore.user?.uid;
+            const messageStore = useMessageStore()
 
             if (!userId) return;
 
@@ -34,7 +36,7 @@ export const useBookStore = defineStore('bookStore', {
                 await setDoc(userDoc, { bookName }, { merge: true });
                 this.bookName = bookName;
             } catch (error) {
-                console.error("Error updating bookName:", error);
+                console.log(error)
             }
         }
     }

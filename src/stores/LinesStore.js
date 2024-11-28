@@ -16,6 +16,8 @@ import {
 import {auth, db} from '../js/firebase';
 import { useAuthStore } from './AuthStore';
 import {useMessageStore} from "@/stores/MessagesStore";
+import Tr from "@/i18n/translation";
+
 
 export const useLinesStore = defineStore('linesStore', () => {
   const lines = ref([]);
@@ -89,10 +91,19 @@ export const useLinesStore = defineStore('linesStore', () => {
 
   const addLine = async (lineContent, optionalDate = null) => {
     const dateToUse = optionalDate || new Date().toISOString();
+
+    const userLocale = Tr.currentLocale || 'en';
+
+    const dateWithoutTime = new Intl.DateTimeFormat(userLocale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(new Date(dateToUse));
+
     linesLoaded.value = false;
 
     await addDoc(linesCollectionRef, { content: lineContent, date: dateToUse }).then(() => {
-      messageStore.addMessage(0, { title: 'lines.add_line_success' });
+      messageStore.addMessage(0, { title: 'lines.add_line_success: ' + dateWithoutTime });
       linesLoaded.value = true;
     });
   };

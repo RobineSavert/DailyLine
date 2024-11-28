@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { db } from '../js/firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { useAuthStore } from "@/stores/AuthStore";
+import {useMessageStore} from "@/stores/MessagesStore";
 
 export const useSettingsStore = defineStore('settings', {
     state: () => ({
@@ -11,6 +12,7 @@ export const useSettingsStore = defineStore('settings', {
         async fetchAutoFillLines() {
             const authStore = useAuthStore();
             const userId = authStore.user?.uid;
+            const messageStore = useMessageStore();
 
             if (!userId) return;
 
@@ -21,13 +23,14 @@ export const useSettingsStore = defineStore('settings', {
                 // Load the value from Firestore, or use the default if not set
                 this.autoFillMissingDays = docSnapshot.data().autoFillMissingDays ?? true;
             } else {
-                console.log("Settings not found, using default values.");
+                messageStore.addMessage(1, { title: 'settings.settings_not_found' });
             }
         },
 
         async updateAutoFillDaysSetting(autoFillDays) {
             const authStore = useAuthStore();
             const userId = authStore.user?.uid;
+            const messageStore = useMessageStore();
 
             if (!userId) return;
             const settingsDoc = doc(db, "users", userId, "settings", "preferences");
@@ -36,7 +39,7 @@ export const useSettingsStore = defineStore('settings', {
                 await setDoc(settingsDoc, { autoFillMissingDays: autoFillDays }, { merge: true });
                 this.autoFillMissingDays = autoFillDays;
             } catch (error) {
-                console.error("Error updating autoFillDays:", error);
+                messageStore.addMessage(1, { title: 'settings.autolines_error: ' + error });
             }
         }
     }

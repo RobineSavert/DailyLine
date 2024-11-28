@@ -100,7 +100,7 @@
     "placeholder": "Typ iets ....",
     "add_line": "Voeg een regel toe",
     "no_lines_on_date": "Er is geen regel op de gekozen datum.",
-    "add_line_success": "De regel is toegevoegd..",
+    "add_line_success": "De regel is toegevoegd",
     "edit_line_success": "De regel is bewerkt..",
     "delete_line_success": "De regel is verwijderd..",
     "recent_lines": {
@@ -131,6 +131,8 @@
     "app_version": "Versie app",
     "auto_lines": "Vul automatisch vergeten regels in",
     "update_setting_success": "De instelling is opgeslagen",
-    "update_setting_failed": "Het is helaas niet gelukt om de instelling op te slaan.."
+    "update_setting_failed": "Het is helaas niet gelukt om de instelling op te slaan..",
+    "settings_not_found": "Instellingen niet gevonden, de standaardinstellingen worden gebruikt..",
+    "autolines_error": "Er ging iets fout met deze instelling: "
   }
 }

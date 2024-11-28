@@ -17,11 +17,8 @@
     :line-i-d="currentLine"
   >
     <template #button>
-      <div class="d-flex align-items-center mt-4" :class="{
-            'justify-content-between': isAutoFillDaysDisabled,
-            'justify-content-end': !isAutoFillDaysDisabled
-        }">
-        <Button :icon="'trash-fill'" :content="'buttons.delete'" @click="onShowDeleteModal" v-if="isAutoFillDaysDisabled" />
+      <div class="d-flex align-items-center mt-4 justify-content-between">
+        <Button :icon="'trash-fill'" :content="'buttons.delete'" @click="onShowDeleteModal" />
         <ButtonSave :content="'buttons.save_line'" :disabled="isDisabled" @click="onLineSave" />
       </div>
     </template>
@@ -86,9 +83,9 @@ const isDisabled = computed(() => {
 });
 
 
-onMounted(async () => {
-  await settingsStore.fetchAutoFillLines();
-
-  isAutoFillDaysDisabled.value = !autoFillMissingDays.value;
-});
+// onMounted(async () => {
+//   await settingsStore.fetchAutoFillLines();
+//
+//   isAutoFillDaysDisabled.value = !autoFillMissingDays.value;
+// });
 </script>

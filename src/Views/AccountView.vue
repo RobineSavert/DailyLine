@@ -17,7 +17,9 @@
             </div>
           </template>
           <template v-slot:body>
-            <span v-if="accountItem.body">{{ accountItem.body }}</span>
+            <span v-if="accountItem.key !== 'bookcover-card'">{{ accountItem.body }}</span>
+            <!-- Render the book cover image if it's the bookcover-card -->
+            <img v-else-if="accountItem.key === 'bookcover-card'" :src="bookCover" class="img-fluid" alt="Book Cover" />
             <span v-else>-</span>
           </template>
         </Card>
@@ -43,7 +45,7 @@ import TitleComponent from "@/components/TitleComponent.vue";
 import { useBookStore } from '@/stores/BookStore';
 import {storeToRefs} from "pinia";
 
-const { bookName } = storeToRefs(useBookStore())
+const { bookName, bookCover } = storeToRefs(useBookStore())
 
 
 import { onMounted } from 'vue';
@@ -52,6 +54,7 @@ const bookStore = useBookStore();
 
 onMounted(() => {
   bookStore.fetchBookName();
+  bookStore.fetchBookCover();
 });
 
 const { getUser } = useAccountStore();
@@ -91,6 +94,13 @@ const accountItems = computed(() => [
     title: 'account.password',
     link: 'editPassword',
     body: '******'
+  },
+  {
+    key: 'bookcover-card',
+    title: 'account.bookcover',
+    link: 'editBookCover',
+    body: bookCover.value ? `<img src="${bookCover.value}" class="img-fluid" alt="Book Cover">` : 'No cover available'
+
   },
 ]);
 </script>

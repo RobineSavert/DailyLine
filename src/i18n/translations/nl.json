@@ -85,6 +85,7 @@
     "no_line_for_today_button": "Voeg toe",
     "you_have_written": "Je hebt tot nu toe { lines } prachtige regels geschreven..",
     "you_have_written_average": "dat is gemiddeld { average } per week..",
+    "the_last_line_date": " je laatste regel schreef je op { date_line }...",
     "keep_it_up": "ga zo door & dan heb je binnenkort een mooie collectie van jouw eigen gedachten...",
     "edit": "bewerk",
     "delete": "verwijder",

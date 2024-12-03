@@ -62,11 +62,28 @@ export const useAccountStore = defineStore('accountStore', () => {
         });
     }
 
+    async function updatePhotoUrl(downloadUrl) {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            try {
+                await updateProfile(user, {
+                    photoURL: downloadUrl,
+                });
+                console.log("PhotoURL updated successfully:", downloadUrl);
+            } catch (error) {
+                console.error("Error updating photoURL:", error);
+            }
+        }
+    }
+
     return {
         getUser,
         updateAccount,
         updateUserEmail,
         updateUserPassword,
+        updatePhotoUrl,
         user
     };
 });

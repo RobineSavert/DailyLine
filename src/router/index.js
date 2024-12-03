@@ -10,7 +10,6 @@ import AddLine from "@/Views/Lines/AddLine.vue";
 import editDisplayName from "@/Views/Account/editDisplayName.vue";
 import editEmail from "@/Views/Account/editEmail.vue"
 import editPassword from "@/Views/Account/editPassword.vue"
-import editBookCover from "@/Views/Account/editBookCover.vue"
 import Tr from "@/i18n/translation"
 import DashboardView from "@/Views/DashboardView.vue";
 import editBookName from "@/Views/Account/editBookName.vue";
@@ -56,12 +55,6 @@ const routes = [
     path: '/:locale?/account/edit-bookname',
     component: editBookName,
     name: 'editBookName',
-    meta: { layout: 'account' }
-  },
-  {
-    path: '/:locale?/account/edit-bookcover',
-    component: editBookCover,
-    name: 'editBookCover',
     meta: { layout: 'account' }
   },
   {

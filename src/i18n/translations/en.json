@@ -85,6 +85,7 @@
     "no_lines": "No lines added here yet!",
     "you_have_written": "You have so far written { lines } beautiful lines..",
     "you_have_written_average": "that's an average of { average } per week..",
+    "the_last_line_date": " your last line was written on { date_line }...",
     "keep_it_up": "keep it up & soon you will have a beautiful collection of your own thoughts in writing...",
     "edit": "edit",
     "delete": "delete",

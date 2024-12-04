@@ -24,8 +24,10 @@ import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/AuthStore';
 import img from '@/assets/img/img.png';
 import InBetweenScreen from "@/Views/InBetweenScreen.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {useThemeStore} from "@/stores/ThemeStore";
 
+const themeStore = useThemeStore();
 let showInBetweenScreen = ref(true)
 
 
@@ -34,4 +36,8 @@ function handleFinished() {
 }
 
 const { isLoggedIn } = storeToRefs(useAuthStore());
+
+const currentTheme = computed(() => themeStore.themeName);
+
+
 </script>

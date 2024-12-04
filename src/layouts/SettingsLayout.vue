@@ -21,15 +21,23 @@
 
 <script setup>
 import NavBar from '@/components/Layout/NavBar.vue';
-import { storeToRefs } from 'pinia';
-import { useAuthStore } from '@/stores/AuthStore';
-import {ref} from "vue";
+import {storeToRefs} from 'pinia';
+import {useAuthStore} from '@/stores/AuthStore';
+import {computed, onMounted, ref, watch} from "vue";
 import img from '@/assets/img/img.png';
 import InBetweenScreen from "@/Views/InBetweenScreen.vue";
-const { isLoggedIn } = storeToRefs(useAuthStore());
-let showInBetweenScreen = ref(true)
+import {useThemeStore} from "@/stores/ThemeStore";
+
+const themeStore = useThemeStore();
+const {isLoggedIn} = storeToRefs(useAuthStore());
+let showInBetweenScreen = ref(true);
 
 function handleFinished() {
+  // Hide InBetweenScreen and trigger the layout change
   showInBetweenScreen.value = false;
 }
+
+const currentTheme = computed(() => themeStore.themeName);
+
+
 </script>

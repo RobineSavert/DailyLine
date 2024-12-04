@@ -5,8 +5,8 @@
 
   <div class="row">
     <div class="col justify-content-center d-flex">
-      <div class="img-circle" v-if="userPhoto">
-        <img :src="userPhoto" alt="Book Cover" class="border" />
+      <div class="img-circle border" v-if="userPhoto">
+        <img :src="userPhoto" alt="Book Cover" />
       </div>
       <span v-else>No cover available</span>
     </div>

@@ -1,5 +1,10 @@
 <template>
-  <div v-if="isVisible" class="fade" :class="{ show: show }">
+  <div
+      v-if="isVisible"
+      class="fade"
+      :class="{ show: show }"
+      v-bind="$attrs"
+  >
     <slot name="image"></slot>
   </div>
 </template>
@@ -12,6 +17,10 @@ const props = defineProps({
     type: Number,
     default: 3000, // Default visible duration in milliseconds
   },
+});
+
+defineOptions({
+  inheritAttrs: false, // Ignore extraneous attributes completely
 });
 
 const emit = defineEmits(['finished']); // Emit event when fade-out is complete

@@ -33,14 +33,20 @@ import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/AuthStore';
 import eventBus from "@/eventBus";
 import Modal from "@/components/Modal.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import img from '@/assets/img/img.png';
 import InBetweenScreen from "@/Views/InBetweenScreen.vue";
-
+import {useThemeStore} from "@/stores/ThemeStore";
+const themeStore = useThemeStore()
 const { isLoggedIn } = storeToRefs(useAuthStore());
 let showInBetweenScreen = ref(true)
 
 function handleFinished() {
   showInBetweenScreen.value = false;
 }
+
+const currentTheme = computed(() => themeStore.themeName);
+
+
+
 </script>

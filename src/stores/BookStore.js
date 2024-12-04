@@ -1,43 +1,46 @@
 import { defineStore } from 'pinia';
-import {db} from '../js/firebase';
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { useAuthStore } from "@/stores/AuthStore";
-import {useMessageStore} from "@/stores/MessagesStore";
+import { ref } from 'vue';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../js/firebase';
+import { useAuthStore } from '@/stores/AuthStore';
+import { useMessageStore } from '@/stores/MessagesStore';
 
-export const useBookStore = defineStore('bookStore', {
-    state: () => ({
-        bookName: '',
-    }),
-    actions: {
-        async fetchBookName() {
-            const authStore = useAuthStore();
-            const userId = authStore.user?.uid;
+export const useBookStore = defineStore('bookStore', () => {
+    const bookName = ref('');
+    const authStore = useAuthStore();
+    const messageStore = useMessageStore();
 
-            if (!userId) return;
+    const fetchBookName = async () => {
+        const userId = authStore.user?.uid;
 
-            const userDoc = doc(db, "users", userId);
-            const docSnapshot = await getDoc(userDoc);
+        if (!userId) return;
 
-            if (docSnapshot.exists()) {
-                this.bookName = docSnapshot.data().bookName || '';
-            }
-        },
+        const userDoc = doc(db, 'users', userId);
+        const docSnapshot = await getDoc(userDoc);
 
-        async updateBookName(bookName) {
-            const authStore = useAuthStore();
-            const userId = authStore.user?.uid;
-            const messageStore = useMessageStore()
+        if (docSnapshot.exists()) {
+            bookName.value = docSnapshot.data().bookName || '';
+        }
+    };
 
-            if (!userId) return;
+    const updateBookName = async (newBookName) => {
+        const userId = authStore.user?.uid;
 
-            const userDoc = doc(db, "users", userId);
+        if (!userId) return;
 
-            try {
-                await setDoc(userDoc, { bookName }, { merge: true });
-                this.bookName = bookName;
-            } catch (error) {
-                console.log(error)
-            }
-        },
-    }
+        const userDoc = doc(db, 'users', userId);
+
+        try {
+            await setDoc(userDoc, { bookName: newBookName }, { merge: true });
+            bookName.value = newBookName;
+        } catch (error) {
+            console.error('Error updating book name:', error);
+        }
+    };
+
+    return {
+        bookName,
+        fetchBookName,
+        updateBookName,
+    };
 });

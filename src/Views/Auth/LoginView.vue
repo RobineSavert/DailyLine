@@ -1,5 +1,5 @@
 <template>
-  <Alert />
+
   <ForgotPassword @backtologin="showLogin" v-if="forgotPassword"></ForgotPassword>
 
   <div v-else>

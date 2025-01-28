@@ -1,10 +1,12 @@
 <template>
   <template v-if="showInBetweenScreen">
-      <InBetweenScreen :duration="3000" @finished="handleFinished">
-        <template v-slot:image>
-          <img class="w-100 img-fluid absolute-height" :src="img" :alt="$t('loading')" />
-        </template>
-      </InBetweenScreen>
+    <InBetweenScreen :duration="3000" @finished="handleFinished">
+      <template v-slot:image>
+        <div class="fullscreen-image-container">
+          <img class="fullscreen-image" :src="img" :alt="$t('loading')" />
+        </div>
+      </template>
+    </InBetweenScreen>
     </template>
     <template v-else>
       <div class="container-fluid">
@@ -47,7 +49,20 @@ function handleFinished() {
 }
 </script>
 <style lang="scss">
-.absolute-height {
-  height: 100lvh;
+.fullscreen-image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; // Ensure it's on top of everything
 }
+
+.fullscreen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // This will cover the entire container while maintaining aspect ratio
+  object-position: center; // Center the image within the container
+}
+
 </style>

@@ -1,23 +1,18 @@
 <template>
-  <div :data-theme="currentTheme">
-    <component
-        :is="layoutComponent"
-    >
-    </component>
-  </div>
+  <component :is="layoutComponent"></component>
 </template>
 
 <script setup>
-import {onMounted, computed, watch} from 'vue';
-import {useAuthStore} from '@/stores/AuthStore';
-import {useThemeStore} from '@/stores/themeStore';
+import { onMounted, computed, watch, nextTick } from 'vue';
+import { useAuthStore } from '@/stores/AuthStore';
+import { useThemeStore } from '@/stores/themeStore';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import MainLayout from '@/layouts/MainLayout.vue'
 import AccountLayout from '@/layouts/AccountLayout.vue';
 import LinesLayout from "@/layouts/LinesLayout.vue";
 import SettingsLayout from "@/layouts/SettingsLayout.vue";
-import {useRoute} from 'vue-router';
-import {storeToRefs} from "pinia";
+import { useRoute } from 'vue-router';
+import { storeToRefs } from "pinia";
 
 const authStore = useAuthStore();
 const themeStore = useThemeStore();
@@ -45,7 +40,20 @@ const layoutComponent = computed(() => {
 
 const currentTheme = computed(() => themeStore.themeName);
 
+function updateBodyTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+}
+
 onMounted(async () => {
+  watch(
+      () => currentTheme.value,
+      async (newTheme) => {
+        await nextTick();
+        updateBodyTheme(newTheme);
+      },
+      {immediate: true}
+  );
+
   watch(
       () => authStore.user?.uid,
       async (uid) => {
@@ -53,7 +61,7 @@ onMounted(async () => {
           await themeStore.fetchUserTheme();
         }
       },
-      { immediate: true }
+      {immediate: true}
   );
 
   await authStore.init();

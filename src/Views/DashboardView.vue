@@ -19,16 +19,20 @@ import Quotes from "@/Views/Dashboard/Quotes.vue";
 import LatestLines from "@/Views/Dashboard/LatestLines.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
 import Stats from "@/Views/Dashboard/Stats.vue";
-import {computed, ref} from "vue";
-import {useRoute} from "vue-router";
+import {computed} from "vue";
 import NoLineForTodayYet from "@/Views/Dashboard/NoLineForTodayYet.vue";
+import {useAuthStore} from "@/stores/AuthStore";
 
 const linesStore = useLinesStore();
 const { linesLoaded, lines } = storeToRefs(linesStore);
-const route = useRoute()
+
 const today = new Date().toISOString().split("T")[0];
 
 const noLineWrittenForToday = computed(() => {
   return !lines.value.some(line => line.date.startsWith(today));
 });
+
+const {isLoggedIn} = storeToRefs(useAuthStore());
+
+console.log(isLoggedIn.value)
 </script>

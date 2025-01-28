@@ -4,10 +4,10 @@
       <div class="row align-items-center auth-tabs">
         <div class="text-center vertical-align p-5">
           <h1 class="h4 text-light mb-3">
-            {{ t('title') }}
+            {{ $t('title') }}
           </h1>
           <p class="text-sm text-light mb-5">
-            {{ t('intro') }}
+            {{ $t('intro') }}
           </p>
           <Tabs :id="'auth-tabs'" :tabs="tabs" />
         </div>

@@ -14,6 +14,7 @@
         </div>
       </div>
     </div>
+    {{ isLoggedIn}}
     <NavBar v-if="isLoggedIn" />
     <Toast />
   </template>
@@ -23,20 +24,16 @@
 import NavBar from '@/components/Layout/NavBar.vue';
 import {storeToRefs} from 'pinia';
 import {useAuthStore} from '@/stores/AuthStore';
-import {computed, onMounted, ref, watch} from "vue";
+import {ref} from "vue";
 import img from '@/assets/img/img.png';
 import InBetweenScreen from "@/Views/InBetweenScreen.vue";
-import {useThemeStore} from "@/stores/ThemeStore";
 
-const themeStore = useThemeStore();
 const {isLoggedIn} = storeToRefs(useAuthStore());
 let showInBetweenScreen = ref(true);
 
+console.log(isLoggedIn.value)
+
 function handleFinished() {
-  // Hide InBetweenScreen and trigger the layout change
   showInBetweenScreen.value = false;
 }
-
-const currentTheme = computed(() => themeStore.themeName);
-
 </script>

@@ -1,5 +1,5 @@
 import {
-  createUserWithEmailAndPassword, getAuth,
+  createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
@@ -8,93 +8,94 @@ import {
 import { defineStore } from 'pinia';
 import { auth } from '../js/firebase';
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { useLinesStore } from './LinesStore';
-import {useMessageStore} from "@/stores/MessagesStore";
-
+import { useMessageStore } from "@/stores/MessagesStore";
 
 export const useAuthStore = defineStore('authStore', () => {
-  const user = ref({}); // De gebruiker wordt opgeslagen als een `ref`
-  const router = useRouter();
+  const user = ref({});
+  const isLoggedIn = ref(false);
   const messageStore = useMessageStore();
   const linesStore = useLinesStore();
-  const isLoggedIn = ref(false)
-  const init = () => {
-    onAuthStateChanged(auth, (userDetails) => {
-      if (userDetails) {
-        const uid = userDetails.uid;
-        const displayName = userDetails.displayName;
-        const photoURL = userDetails.photoURL;
-        user.value = { email: userDetails.email, uid, displayName, photoURL };
-        isLoggedIn.value = true;
-        router.push({ name: 'dashboard'});
-        linesStore.getLines();
-      } else {
-        user.value = {};
-        isLoggedIn.value = false;
-        router.replace({ name: 'auth' });
-        linesStore.clearLines();
-      }
+
+  const checkAuthState = () => {
+    return new Promise((resolve) => {
+      const unsubscribe = onAuthStateChanged(auth, (userDetails) => {
+        if (userDetails) {
+          const { uid, displayName, photoURL, email } = userDetails;
+          user.value = { email, uid, displayName, photoURL };
+          isLoggedIn.value = true;
+          linesStore.getLines();
+        } else {
+          user.value = {};
+          isLoggedIn.value = false;
+          linesStore.clearLines();
+        }
+        unsubscribe();
+        resolve();
+      });
     });
   };
+
+  // Modify the init function
+  const init = async () => {
+    await checkAuthState();
+  };
+
+
   const registerUser = (credentials) => {
     createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
-          const user = userCredential.user;
+          // You might want to do something with userCredential.user here
         })
         .catch((error) => {
-          messageStore.addMessage( 1,{ title: error.message, type: 'danger' });
+          messageStore.addMessage(1, { title: error.message, type: 'danger' });
         });
   };
 
   const loginUser = (credentials) => {
     signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
-          const user = userCredential.user;
+          // You might want to do something with userCredential.user here
         })
         .catch((error) => {
-          messageStore.addMessage(1,{ title: error.message, type: 'danger' });
+          messageStore.addMessage(1, { title: error.message, type: 'danger' });
         });
   };
 
   const logoutUser = () => {
     signOut(auth)
-      .then(() => {
-        user.value = null;
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+        .then(() => {
+          user.value = null;
+          isLoggedIn.value = false;
+        })
+        .catch((error) => {
+          messageStore.addMessage(1, { title: error.message, type: 'danger' });
+        });
   };
-
-  const auth = getAuth();
 
   const resetPassword = (email) => {
     sendPasswordResetEmail(auth, email)
         .then(() => {
-          messageStore.addMessage(0,{ title: 'auth.forgot_password_success' });
+          messageStore.addMessage(0, { title: 'auth.forgot_password_success' });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          messageStore.addMessage(1,{ title: errorMessage, type: 'danger' });
+          messageStore.addMessage(1, { title: error.message, type: 'danger' });
         });
-  }
+  };
 
   const updateUser = (newUserData) => {
     user.value = { ...user.value, ...newUserData };
   };
 
-
   return {
+    user,
+    isLoggedIn,
+    init,
     registerUser,
     loginUser,
     logoutUser,
     resetPassword,
     updateUser,
-    init,
-    user,
-    isLoggedIn
+    checkAuthState
   };
 });

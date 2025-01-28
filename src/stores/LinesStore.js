@@ -37,7 +37,8 @@ export const useLinesStore = defineStore('linesStore', () => {
 
   const getLineContentById = computed(() => {
     return (id) => {
-      return lines.value.find((line) => line.id === id).content;
+      const line = lines.value.find((line) => line.id === id);
+      return line ? line.content : '';
     };
   });
 
@@ -79,35 +80,15 @@ export const useLinesStore = defineStore('linesStore', () => {
     return count;
   });
 
-  // const addLine = async (lineContent) => {
-  //   const currentDate = new Date().toISOString();
-  //   linesLoaded.value = false;
-  //
-  //   await addDoc(linesCollectionRef, { content: lineContent, date: currentDate }).then(() => {
-  //     messageStore.addMessage(0,{ title: 'lines.add_line_success' });
-  //     linesLoaded.value = true;
-  //   });
-  // };
-
   const addLine = async (lineContent, optionalDate = null) => {
     const dateToUse = optionalDate || new Date().toISOString();
-
-    const userLocale = Tr.currentLocale || 'en';
-
-    const dateWithoutTime = new Intl.DateTimeFormat(userLocale, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }).format(new Date(dateToUse));
-
     linesLoaded.value = false;
 
     await addDoc(linesCollectionRef, { content: lineContent, date: dateToUse }).then(() => {
-      messageStore.addMessage(0, { title: 'lines.add_line_success: ' + dateWithoutTime });
+      messageStore.addMessage(0, { title: 'lines.add_line_success'});
       linesLoaded.value = true;
     });
   };
-
 
   const deleteLine = async (lineId) => {
     linesLoaded.value = false
@@ -137,7 +118,6 @@ export const useLinesStore = defineStore('linesStore', () => {
       return lines.value.find((line) => parseInt(line.date) === timestamp) || null;
     };
   });
-
 
   return {
     lines,

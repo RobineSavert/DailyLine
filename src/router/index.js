@@ -1,111 +1,154 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
-import LinesView from '../Views/LinesView.vue';
-import EditLineView from '../Views/Lines/EditLineView.vue';
-import AuthView from '../Views/AuthView.vue';
-import ForgotPassword from "@/Views/Auth/ForgotPassword.vue";
-import AccountView from "@/Views/AccountView.vue";
-import SettingsView from "@/Views/SettingsView.vue";
-import AddLine from "@/Views/Lines/AddLine.vue";
-import editDisplayName from "@/Views/Account/editDisplayName.vue";
-import editEmail from "@/Views/Account/editEmail.vue"
-import editPassword from "@/Views/Account/editPassword.vue"
+import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from "@/stores/AuthStore"
 import Tr from "@/i18n/translation"
+import LoggedInLayout from "@/Views/LoggedInLayout.vue"
 import DashboardView from "@/Views/DashboardView.vue";
-import editBookName from "@/Views/Account/editBookName.vue";
 
-const routes = [
-  {
-    path: '/auth',
-    component: AuthView,
-    name: 'auth',
-    meta: { layout: 'auth' }
-  },
-  {
-    path: '/forgot-password',
-    component: ForgotPassword,
-    name: 'forgot-password',
-    meta: { layout: 'auth' }
-  },
-  {
-    path: '/:locale?/account',
-    component: AccountView,
-    name: 'account',
-    meta: {layout: 'account'}
-  },
-  {
-    path: '/:locale?/account/edit-display-name',
-    component: editDisplayName,
-    name: 'editDisplayName',
-    meta: { layout: 'account' }
-  },
-  {
-    path: '/:locale?/account/edit-email',
-    component: editEmail,
-    name: 'editEmail',
-    meta: { layout: 'account' }
-  },
-  {
-    path: '/:locale?/account/edit-password',
-    component: editPassword,
-    name: 'editPassword',
-    meta: { layout: 'account' }
-  },
-  {
-    path: '/:locale?/account/edit-bookname',
-    component: editBookName,
-    name: 'editBookName',
-    meta: { layout: 'account' }
-  },
-  {
-    path: "/:locale?/dashboard",
-    component: DashboardView,
-    name: 'dashboard',
-    meta: { layout: 'main' }
-  },
-  {
-    path: "/:locale?/lines",
-    component: LinesView,
-    name: 'lines',
-    meta: {layout: 'lines'}
-  },
-  {
-    path: '/:locale?/lines/edit-line/:id',
-    component: EditLineView,
-    name: 'editLine',
-    meta: { layout: 'main' }
-  },
-  {
-    path: '/:locale?/settings',
-    component: SettingsView,
-    name: 'settings',
-    meta: { layout: 'settings' }
-  },
-  {
-    path: '/:locale?/add-line',
-    component: AddLine,
-    name: 'add-line',
-    meta: { layout: 'main' }
-  }
-];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes
-});
+  history: createWebHistory('./'),
+  routes: [
+    {
+      path: "/:locale?",
+      beforeEnter: Tr.routeMiddleware,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('../Views/NotFound.vue'),
+    },
+    {
+      path: '/',
+      redirect: to => {
+        return { name: 'auth', params: { locale: Tr.defaultLocale } }
+      }
+    },
+    {
+      path: '/:locale/auth',
+      name: 'auth',
+      component: () => import('../Views/AuthView.vue'),
+    },
+    {
+      path: '/:locale/dashboard',
+      name: 'dashboard',
+      component: LoggedInLayout,
+      meta: { requiresAuth: true }, // Voegt duidelijkheid toe
+      children: [
+        {
+          path: '',
+          component: DashboardView
+        }
+      ]
+    },
+    {
+      path: '/Logout',
+      name: 'Logout',
+    },
+    {
+      path: '/:locale',
+      name: 'loggedin',
+      component: LoggedInLayout,
+      children: [
+
+        {
+          path: 'lines',
+          name: 'lines',
+          component: () => import('../Views/LinesView.vue'),
+        },
+        {
+          path: 'add-line',
+          name: 'add-line',
+          component: () => import('../Views/Lines/AddLine.vue'),
+        },
+        {
+          path: 'edit-line',
+          name: 'editLine',
+          component: () => import('../Views/Lines/EditLineView.vue'),
+        },
+        {
+          path: 'settings',
+          name: 'settings',
+          component: () => import('../Views/SettingsView.vue'),
+        },
+        {
+          path: 'account',
+          name: 'account',
+          component: () => import('../Views/AccountView.vue'),
+        },
+        {
+          path: 'account/edit-display-name',
+          name: 'editDisplayName',
+          component: () => import('../Views/Account/editDisplayName.vue'),
+        },
+        {
+          path: 'settings/edit-email',
+          name: 'editEmail',
+          component: () => import('../Views/Account/editEmail.vue'),
+        },
+        {
+          path: 'settings/edit-password',
+          name: 'editPassword',
+          component: () => import('../Views/Account/editPassword.vue'),
+        },
+        {
+          path: 'settings/edit-bookname',
+          name: 'editBookName',
+          component: () => import('../Views/Account/editBookName.vue'),
+        },
+      ]
+    },
+  ],
+})
 
 
 router.beforeEach(async (to, from, next) => {
-  console.log('Navigating to:', to.name, 'Meta:', to.meta);
+  const authStore = useAuthStore();
 
-  const locale = to.params.locale || Tr.defaultLocale;
-  if (!Tr.isLocaleSupported(locale)) {
-    next({ ...to, params: { ...to.params, locale: Tr.defaultLocale } });
-  } else {
-    await Tr.switchLanguage(locale);
-    next();
+  await authStore.checkAuthState();
+
+  const isAuthenticated = authStore.isLoggedIn;
+
+
+  if (!to.params.locale || to.params.locale === undefined || to.params.locale === '') {
+    to.params.locale = Tr.defaultLocale;
   }
-});
 
+  if (Tr.currentLocale !== to.params.locale) {
+    let isSupportedLocale = Tr.isLocaleSupported(to.params.locale);
+    if (isSupportedLocale) {
+      await Tr.switchLanguage(to.params.locale);
+    } else {
+      to.params.locale = Tr.defaultLocale;
+      await Tr.switchLanguage(Tr.defaultLocale);
+    }
+  }
+
+  // Handle authentication
+  if (to.name === 'auth' && isAuthenticated) {
+    console.log('Redirecting authenticated user from auth to dashboard');
+    return next({ name: 'dashboard', params: { locale: to.params.locale } });
+  }
+
+  if (to.name === 'Logout') {
+    console.log('Logging out user');
+    await authStore.logoutUser();
+    return next({ name: 'auth', params: { locale: to.params.locale } });
+  }
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    console.log('Unauthenticated user trying to access protected route');
+    return next({ name: 'auth', params: { locale: to.params.locale } });
+  }
+
+  if (to.path === '/') {
+    console.log('Root path accessed, redirecting based on auth status');
+    return next(isAuthenticated
+        ? { name: 'dashboard', params: { locale: to.params.locale } }
+        : { name: 'auth', params: { locale: to.params.locale } }
+    );
+  }
+
+  console.log('Proceeding with navigation');
+  next();
+});
 
 export default router

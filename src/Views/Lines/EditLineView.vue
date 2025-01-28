@@ -23,32 +23,36 @@
       </div>
     </template>
   </AddEditLine>
+  <Modal v-if="eventBus.state.showModal">
+    <template #title>{{ eventBus.state.modalTitle }}</template>
+    <template #body>
+      <component :is="eventBus.state.modalBody" />
+    </template>
+    <template #button>
+      <component :is="eventBus.state.modalButton" />
+    </template>
+  </Modal>
 </template>
 
 <script setup>
 import AddEditLine from '@/components/Lines/AddEditLine.vue';
 import { useRoute, useRouter } from 'vue-router';
-import {computed, onMounted, ref} from 'vue';
+import {computed, ref} from 'vue';
 import { useLinesStore } from '@/stores/LinesStore';
 import eventBus from "@/eventBus";
 import {useI18n} from "vue-i18n";
 import Button from "@/components/Buttons/Button.vue";
 import ButtonSave from "@/components/Buttons/ButtonSave.vue";
 import TitleComponent from "@/components/TitleComponent.vue";
-import {useSettingsStore} from "@/stores/SettingsStore";
-import {storeToRefs} from "pinia";
-
-const settingsStore = useSettingsStore();
-const { autoFillMissingDays } = storeToRefs(useSettingsStore())
+import Modal from "@/components/Modal.vue";
 
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n()
 const linesStore = useLinesStore();
 const lineContent = ref('');
-let isAutoFillDaysDisabled = ref(false);
 let currentLine = ref(route.params.id)
-
+console.log(route.params);
 lineContent.value = linesStore.getLineContentById(route.params.id);
 
 let newLine = ref(lineContent.value)
@@ -62,6 +66,8 @@ const onLineSave = () => {
 const emit = defineEmits(['delete-line'])
 
 function onShowDeleteModal() {
+  console.log(eventBus);
+  console.log("hier?")
   const title = t("lines.delete_modal.title");
   const body = t("lines.delete_modal.body");
   const buttonText = t("buttons.delete");

@@ -35,6 +35,7 @@ const router = createRouter({
       children: [
         {
           path: '',
+          name: 'dashboard',
           component: DashboardView
         }
       ]
@@ -48,7 +49,6 @@ const router = createRouter({
       name: 'loggedin',
       component: LoggedInLayout,
       children: [
-
         {
           path: 'lines',
           name: 'lines',
@@ -60,7 +60,7 @@ const router = createRouter({
           component: () => import('../Views/Lines/AddLine.vue'),
         },
         {
-          path: 'edit-line',
+          path: '/lines/edit-line/:id',
           name: 'editLine',
           component: () => import('../Views/Lines/EditLineView.vue'),
         },
@@ -106,9 +106,10 @@ router.beforeEach(async (to, from, next) => {
   await authStore.checkAuthState();
 
   const isAuthenticated = authStore.isLoggedIn;
+  console.log("Navigating to:", to.name, "Locale:", to.params.locale);
 
 
-  if (!to.params.locale || to.params.locale === undefined || to.params.locale === '') {
+  if (to.params.locale === undefined || to.params.locale === '') {
     to.params.locale = Tr.defaultLocale;
   }
 

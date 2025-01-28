@@ -22,6 +22,7 @@ import Stats from "@/Views/Dashboard/Stats.vue";
 import {computed} from "vue";
 import NoLineForTodayYet from "@/Views/Dashboard/NoLineForTodayYet.vue";
 import {useAuthStore} from "@/stores/AuthStore";
+import {useRoute} from "vue-router";
 
 const linesStore = useLinesStore();
 const { linesLoaded, lines } = storeToRefs(linesStore);
@@ -33,6 +34,10 @@ const noLineWrittenForToday = computed(() => {
 });
 
 const {isLoggedIn} = storeToRefs(useAuthStore());
-
+const route = useRoute()
 console.log(isLoggedIn.value)
+
+console.log("Route meta:", route.meta);
+console.log("Route path:", route.path);
+
 </script>

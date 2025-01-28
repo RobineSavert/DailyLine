@@ -14,7 +14,6 @@
         </div>
       </div>
     </div>
-    {{ isLoggedIn}}
     <NavBar v-if="isLoggedIn" />
     <Toast />
   </template>
@@ -36,4 +35,6 @@ console.log(isLoggedIn.value)
 function handleFinished() {
   showInBetweenScreen.value = false;
 }
+
+
 </script>

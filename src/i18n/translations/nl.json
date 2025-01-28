@@ -39,7 +39,7 @@
   "please_enter_something": "Vul iets in..",
   "auth": {
     "placeholder": {
-      "email": "naam@voorbeeld.com",
+      "email": "{naam}{'@'}{domain}",
       "password": "*****"
     },
     "login": {

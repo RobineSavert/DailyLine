@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="floatingInput" :placeholder="'auth.placeholder.email'" v-model="credentials.email">
+      <input type="email" class="form-control" id="floatingInput" :placeholder="$t('auth.placeholder.email')" v-model="credentials.email">
       <label for="floatingInput">
         {{ t('auth.register.form.email')}}
       </label>

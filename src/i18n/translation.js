@@ -32,6 +32,7 @@ const Trans = {
   async loadLocaleMessages(locale) {
     if(!i18n.global.availableLocales.includes(locale)) {
       const messages = await import(`@/i18n/translations/${locale}.json`)
+      console.log(messages);
       i18n.global.setLocaleMessage(locale, messages.default)
     }
 

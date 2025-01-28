@@ -3,17 +3,17 @@
   <ForgotPassword @backtologin="showLogin" v-if="forgotPassword"></ForgotPassword>
 
   <div v-else>
-    <form @submit.prevent="onSubmit" >
+    <form>
       <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" :placeholder="'auth.placeholder.email'" v-model="credentials.email">
+        <input type="email" class="form-control" id="floatingInput" :placeholder="$t('auth.placeholder.email')" v-model="credentials.email">
         <label for="floatingInput">
-          {{ t('auth.login.form.email')}}
+          {{ $t('auth.login.form.email')}}
         </label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" :placeholder="'auth.placeholder.password'"  v-model="credentials.password">
         <label for="floatingPassword">
-          {{ t('auth.login.form.password')}}
+          {{ $t('auth.login.form.password')}}
         </label>
       </div>
 
@@ -21,6 +21,7 @@
 
       <div class="my-3 row justify-content-center">
         <Button class="w-auto"
+                @click="onSubmit"
                 :icon="'key-fill'"
                 :content="'auth.login.button'" />
 

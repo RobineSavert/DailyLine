@@ -4,6 +4,13 @@ import numberFormats from "./numbers.js"
 import datetimeFormats from "./datetime.js"
 import messages from '@intlify/unplugin-vue-i18n/messages'
 
+console.log(messages);
+
+console.log('Default locale:', import.meta.env.VITE_APP_DEFAULT_LOCALE);
+console.log('Fallback locale:', import.meta.env.VITE_APP_FALLBACK_LOCALE);
+console.log('Supported locales:', import.meta.env.VITE_APP_SUPPORTED_LOCALES);
+
+
 export default createI18n({
   locale: import.meta.env.VITE_APP_DEFAULT_LOCALE,
   fallbackLocale: import.meta.env.VITE_APP_FALLBACK_LOCALE,

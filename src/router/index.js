@@ -140,6 +140,8 @@ router.beforeEach(async (to, from, next) => {
     return next({ name: 'auth', params: { locale: to.params.locale } });
   }
 
+  console.log(isAuthenticated)
+
   if (to.path === '/') {
     console.log('Root path accessed, redirecting based on auth status');
     return next(isAuthenticated

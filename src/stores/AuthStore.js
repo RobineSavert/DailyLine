@@ -53,9 +53,11 @@ export const useAuthStore = defineStore('authStore', () => {
   };
 
   const loginUser = (credentials) => {
+    console.log("hier")
     signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
-          // You might want to do something with userCredential.user here
+          console.log("succes")
+          isLoggedIn.value = true;
         })
         .catch((error) => {
           messageStore.addMessage(1, { title: error.message, type: 'danger' });

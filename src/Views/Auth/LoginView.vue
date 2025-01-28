@@ -3,7 +3,7 @@
   <ForgotPassword @backtologin="showLogin" v-if="forgotPassword"></ForgotPassword>
 
   <div v-else>
-    <form>
+    <form @submit.prevent="onSubmit">
       <div class="form-floating mb-3">
         <input type="email" class="form-control" id="floatingInput" :placeholder="$t('auth.placeholder.email')" v-model="credentials.email">
         <label for="floatingInput">
@@ -21,7 +21,6 @@
 
       <div class="my-3 row justify-content-center">
         <Button class="w-auto"
-                @click="onSubmit"
                 :icon="'key-fill'"
                 :content="'auth.login.button'" />
 
@@ -52,6 +51,7 @@ const credentials = reactive({
 });
 
 const onSubmit = () => {
+  console.log("hallo");
   if (!credentials.email || !credentials.password) {
     addMessage(1, { title: 'auth.please_enter', type: 'danger' })
     return;

@@ -1,11 +1,11 @@
 <template>
-  <component
-      :is="layoutComponent"
-      v-bind="layoutComponentProps"
-  >
-  </component>
+  <div :data-theme="currentTheme">
+    <component
+        :is="layoutComponent"
+    >
+    </component>
+  </div>
 </template>
-
 
 <script setup>
 import {onMounted, computed, watch} from 'vue';
@@ -45,34 +45,25 @@ const layoutComponent = computed(() => {
 
 const currentTheme = computed(() => themeStore.themeName);
 
-
 onMounted(async () => {
-
   watch(
       () => authStore.user?.uid,
       async (uid) => {
         if (uid) {
-          await themeStore.fetchUserTheme(); // Fetch and apply the user's theme
+          await themeStore.fetchUserTheme();
         }
       },
       { immediate: true }
   );
 
   await authStore.init();
-  await themeStore.fetchUserTheme(authStore.userId); // Load the saved theme for the user, but this might not work because userId is nothing in the auth store...
+  await themeStore.fetchUserTheme(authStore.userId);
 });
 
-const layoutComponentProps = computed(() => {
-  return {
-    'data-theme': currentTheme.value
-  };
-});
 const {isLoggedIn} = storeToRefs(useAuthStore());
 
 console.log(isLoggedIn.value)
 watch(() => isLoggedIn.value, (newValue) => {
   console.log("isLoggedIn changed:", newValue);
 });
-
 </script>
-

@@ -48,10 +48,10 @@ onMounted(() => {
 <style scoped>
 .fade {
   transition: opacity 0.5s ease-in-out;
-  opacity: 0; /* Start hidden */
+  opacity: 0;
 }
 
 .fade.show {
-  opacity: 1; /* Fully visible */
+  opacity: 1;
 }
 </style>

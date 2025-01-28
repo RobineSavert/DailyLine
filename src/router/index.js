@@ -29,13 +29,13 @@ const router = createRouter({
     },
     {
       path: '/:locale/dashboard',
-      name: 'dashboard',
+      name: 'dashboardLayout', // Change this name
       component: LoggedInLayout,
-      meta: { requiresAuth: true }, // Voegt duidelijkheid toe
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',
-          name: 'dashboard',
+          name: 'dashboard', // Keep this name
           component: DashboardView
         }
       ]
@@ -60,7 +60,7 @@ const router = createRouter({
           component: () => import('../Views/Lines/AddLine.vue'),
         },
         {
-          path: '/lines/edit-line/:id',
+          path: 'lines/edit-line/:id',
           name: 'editLine',
           component: () => import('../Views/Lines/EditLineView.vue'),
         },

@@ -21,6 +21,7 @@ const Trans = {
   async switchLanguage(newLocale) {
     if(newLocale != '' && newLocale != null && newLocale != undefined)
     {
+      console.log(newLocale) // logs
       await Trans.loadLocaleMessages(newLocale)
       Trans.currentLocale = newLocale
       document.querySelector("html").setAttribute("lang", newLocale)

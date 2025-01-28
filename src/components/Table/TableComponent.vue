@@ -1,11 +1,11 @@
 <template>
     <template v-if="items.length > 0">
         <div class="table-responsive" v-if="pagedItems.length > 0">
-          <table :data-cy="cy" class="table align-middle table-sm"
+          <table :data-cy="cy" class="table align-middle table-sm bg-transparent"
                 :class="{ 'table-hover': isTableHover, 'table-striped': isTableStriped }" ref="table">
                 <thead>
                     <tr>
-                        <th v-if="canMultiSelect || canSingleSelect">
+                        <th v-if="canMultiSelect || canSingleSelect" class="bg-transparent">
                             <div class="form-check" v-if="canMultiSelectAll">
                                 <input v-model="selectAll" @change="emitCheckedItems(true)"
                                     class="form-check-input" type="checkbox">
@@ -14,7 +14,7 @@
                         <template v-for="(field, index) in cFields" :key="index">
                             <template v-if="field.key">
                                 <template v-if="!field.sortable">
-                                    <th :class="{ 'text-center': (index > 0 && alignCenter) || field.centerColumn }"
+                                    <th class="bg-transparent" :class="{ 'text-center': (index > 0 && alignCenter) || field.centerColumn }"
                                         :key="field.key" scope="row">
                                         <slot :name="'HEAD_' + field.key" :label="field.label">
                                             {{ label(field) }}
@@ -23,7 +23,7 @@
                                 </template>
                                 <template v-else>
                                     <th :class="{ 'text-center': (index > 0 && alignCenter) || field.centerColumn }"
-                                        class="cursor-pointer" :key="field.key" scope="row"
+                                        class="cursor-pointer bg-transparent" :key="field.key" scope="row"
                                         @click="sort(field.key)">
 
                                         <slot :name="'HEAD_' + field.key" :label="field.label">
@@ -60,7 +60,7 @@
                                 </div>
                             </td>
                             <template v-for="(field, index) in cFields" :key="index">
-                                <td :class="[item[compareField] === undefined ? '' : item[compareField] == compareValue ? customClass : '',
+                                <td class="bg-transparent text-light" :class="[item[compareField] === undefined ? '' : item[compareField] == compareValue ? customClass : '',
                                 (
                                     (index > 0 && index < cFields.length - skipTextCenterColsFromRight && alignCenter)
                                     ||

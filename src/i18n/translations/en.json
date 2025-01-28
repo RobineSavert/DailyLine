@@ -129,6 +129,7 @@
   "settings": {
     "title": "Settings",
     "language": "Language",
+    "theme": "Choose a theme",
     "app_version": "App version",
     "auto_lines": "Automatically fill in lines for missed days",
     "update_setting_success": "The setting has been saved",

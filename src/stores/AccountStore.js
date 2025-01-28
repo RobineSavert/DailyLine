@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import {auth, db} from '../js/firebase';
 import {useMessageStore} from "@/stores/MessagesStore";
-import {getAuth, updateProfile, updateEmail, updatePassword} from "firebase/auth";
+import {getAuth, updateProfile, updateEmail, updatePassword, verifyBeforeUpdateEmail, signOut} from "firebase/auth";
 import {useRoute, useRouter} from "vue-router";
 import {useAuthStore} from "@/stores/AuthStore";
 
@@ -43,20 +43,28 @@ export const useAccountStore = defineStore('accountStore', () => {
         });
     };
 
+    // const updateUserEmail = (email) => {
+    //     updateEmail(auth.currentUser, email).then(() => {
+    //         messageStore.addMessage(0,{ title: 'account.update_email_success' });
+    //     }).catch((error) => {
+    //         messageStore.addMessage(1,{ title: error.message, type: 'danger' });
+    //     });
+    // }
     const updateUserEmail = (email) => {
-        updateEmail(auth.currentUser, email).then(() => {
-            // authStore.updateUser(newUser);
-            router.push({ name: 'account', params: {locale: route.params.locale} });
-            messageStore.addMessage(0,{ title: 'account.update_success' });
+        console.log(auth.currentUser)
+        console.log(email)
+        verifyBeforeUpdateEmail(auth.currentUser, email).then(() => {
+            authStore.logoutUser();
         }).catch((error) => {
             messageStore.addMessage(1,{ title: error.message, type: 'danger' });
         });
     }
 
     const updateUserPassword = (newPassword) => {
+        console.log(user)
+        console.log(newPassword)
         updatePassword(user, newPassword).then(() => {
-            router.push({ name: 'account', params: {locale: route.params.locale} });
-            messageStore.addMessage(0,{ title: 'account.update_success' });
+            messageStore.addMessage(0,{ title: 'account.update_password_success' });
         }).catch((error) => {
             messageStore.addMessage(1,{ title: error.message, type: 'danger' });
         });

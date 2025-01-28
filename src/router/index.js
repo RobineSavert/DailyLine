@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import LinesView from '../Views/LinesView.vue';
 import EditLineView from '../Views/Lines/EditLineView.vue';
@@ -58,7 +58,7 @@ const routes = [
     meta: { layout: 'account' }
   },
   {
-    path: "/:locale?",
+    path: "/:locale?/dashboard",
     component: DashboardView,
     name: 'dashboard',
     meta: { layout: 'main' }
@@ -90,30 +90,22 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 
 
-
 router.beforeEach(async (to, from, next) => {
+  console.log('Navigating to:', to.name, 'Meta:', to.meta);
+
   const locale = to.params.locale || Tr.defaultLocale;
-
-  if (Tr.currentLocale) {
-    const isSupportedLocale = Tr.isLocaleSupported(locale);
-
-    if (isSupportedLocale) {
-      await Tr.switchLanguage(locale);
-    } else {
-      to.params.locale = Tr.defaultLocale;
-      await Tr.switchLanguage(Tr.defaultLocale);
-    }
-  } else if (!to.params.locale) {
-    to.params.locale = Tr.defaultLocale;
-    await Tr.switchLanguage(to.params.locale);
+  if (!Tr.isLocaleSupported(locale)) {
+    next({ ...to, params: { ...to.params, locale: Tr.defaultLocale } });
+  } else {
+    await Tr.switchLanguage(locale);
+    next();
   }
-
-  next();
 });
+
 
 export default router

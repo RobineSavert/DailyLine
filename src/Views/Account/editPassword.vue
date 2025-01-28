@@ -1,4 +1,5 @@
 <template>
+  <Alert />
   <TitleComponent :title="'account.edit_password_title'">
     <template v-slot:buttons>
       <div class="d-flex flex-nowrap justify-content-end">
@@ -20,7 +21,6 @@
         </label>
       </div>
 
-    <Alert :variant="'danger'" />
 
     <div class="my-3 row justify-content-center">
       <ButtonPrimary
@@ -55,6 +55,5 @@ const newPassword = reactive({
 
 const onSubmit = () => {
     accountStore.updateUserPassword(newPassword.password);
-  router.push({name: 'lines', params: {locale: route.params.locale} })
 };
 </script>

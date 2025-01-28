@@ -129,6 +129,7 @@
   "settings": {
     "title": "Instellingen",
     "language": "Taal",
+    "theme": "Kies een thema",
     "app_version": "Versie app",
     "auto_lines": "Vul automatisch vergeten regels in",
     "update_setting_success": "De instelling is opgeslagen",

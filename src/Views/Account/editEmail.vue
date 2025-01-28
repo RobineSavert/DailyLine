@@ -1,4 +1,5 @@
 <template>
+  <Alert :dismissible="false" />
   <TitleComponent :title="'account.edit_email_title'">
     <template v-slot:buttons>
       <div class="d-flex flex-nowrap justify-content-end">
@@ -65,7 +66,6 @@ const isDisabled = computed(() => {
 const onSubmit = () => {
   if (!isDisabled.value) {
     accountStore.updateUserEmail(newMail.email);
-    router.push({name: 'lines', params: {locale: route.params.locale} })
   } else {
     addMessage(1,{ title: 'please_enter_something', type: 'danger' });
   }

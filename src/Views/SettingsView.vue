@@ -25,8 +25,8 @@
           <span>{{ $t('settings.language')}}</span>
           <LanguageSwitcher />
         </li>
-        <li>
-          <span>{{ $t('settings.theme') }}</span>
+        <li class="d-flex justify-content-center flex-column text-center">
+          <span class="my-4">{{ $t('settings.theme') }}</span>
           <div class="theme-selector">
             <div
                 v-for="theme in themes"
@@ -114,6 +114,7 @@ const themes = [
 .theme-selector {
   display: flex;
   gap: 15px;
+  justify-content: center;
 }
 
 .theme-preview {

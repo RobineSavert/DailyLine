@@ -1,12 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { useAuthStore } from "@/stores/AuthStore"
 import Tr from "@/i18n/translation"
 import LoggedInLayout from "@/Views/LoggedInLayout.vue"
 import DashboardView from "@/Views/DashboardView.vue";
 
-
 const router = createRouter({
-  history: createWebHistory('./'),
+  history: createWebHashHistory(),
   routes: [
     {
       path: "/:locale?",

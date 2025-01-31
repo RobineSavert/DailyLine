@@ -139,6 +139,14 @@ router.beforeEach(async (to, from, next) => {
     return next({ name: 'auth', params: { locale: to.params.locale } });
   }
 
+  // if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+  //   next('/login');
+  // } else if (to.path === '/login' && authStore.isLoggedIn) {
+  //   next('/');
+  // } else {
+  //   next();
+  // }
+
   console.log(isAuthenticated)
 
   if (to.path === '/') {

@@ -1,5 +1,4 @@
 <template>
-
   <ForgotPassword @backtologin="showLogin" v-if="forgotPassword"></ForgotPassword>
 
   <div v-else>
@@ -39,8 +38,10 @@ import Button from "@/components/Buttons/Button.vue";
 import {useI18n} from "vue-i18n";
 import ForgotPassword from "@/Views/Auth/ForgotPassword.vue";
 import {useMessageStore} from "@/stores/MessagesStore";
+import { useRouter } from "vue-router";
+import Tr from "@/i18n/translation";
 
-const { t } = useI18n()
+const router = useRouter()
 const authStore = useAuthStore();
 const forgotPassword = ref(false)
 const { addMessage } = useMessageStore()
@@ -50,6 +51,8 @@ const credentials = reactive({
   password: ''
 });
 
+const userLocale = Tr.currentLocale || 'en';
+
 const onSubmit = () => {
   console.log("hallo");
   if (!credentials.email || !credentials.password) {
@@ -57,6 +60,7 @@ const onSubmit = () => {
     return;
   }
   authStore.loginUser(credentials);
+  router.push('/' + userLocale + '/dashboard');
 };
 
 function showResetPW(){

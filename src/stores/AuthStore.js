@@ -20,6 +20,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const checkAuthState = () => {
     return new Promise((resolve) => {
       const unsubscribe = onAuthStateChanged(auth, (userDetails) => {
+        console.log("Auth state changed", user ? "User logged in" : "User logged out");
         if (userDetails) {
           const { uid, displayName, photoURL, email } = userDetails;
           user.value = { email, uid, displayName, photoURL };
@@ -65,14 +66,18 @@ export const useAuthStore = defineStore('authStore', () => {
   };
 
   const logoutUser = () => {
-    signOut(auth)
-        .then(() => {
-          user.value = null;
-          isLoggedIn.value = false;
-        })
-        .catch((error) => {
-          messageStore.addMessage(1, { title: error.message, type: 'danger' });
-        });
+    return new Promise((resolve, reject) => {
+      signOut(auth)
+          .then(() => {
+            user.value = null;
+            isLoggedIn.value = false;
+            resolve();
+          })
+          .catch((error) => {
+            messageStore.addMessage(1, { title: error.message, type: 'danger' });
+            reject(error);
+          });
+    });
   };
 
   const resetPassword = (email) => {

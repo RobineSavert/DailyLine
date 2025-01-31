@@ -1,23 +1,18 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import {
-  getDocs,
   collection,
   onSnapshot,
-  setDoc,
   doc,
   updateDoc,
   deleteDoc,
   addDoc,
   query,
-  orderBy,
-  limit
+  orderBy
 } from 'firebase/firestore';
 import {auth, db} from '../js/firebase';
 import { useAuthStore } from './AuthStore';
 import {useMessageStore} from "@/stores/MessagesStore";
-import Tr from "@/i18n/translation";
-
 
 export const useLinesStore = defineStore('linesStore', () => {
   const lines = ref([]);

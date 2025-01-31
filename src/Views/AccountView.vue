@@ -53,7 +53,7 @@ import { useAccountStore } from "@/stores/AccountStore";
 import Card from "@/components/Card.vue";
 import {computed, ref} from "vue";
 import { useI18n } from "vue-i18n";
-import { useRoute } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import TitleComponent from "@/components/TitleComponent.vue";
 import { useBookStore } from '@/stores/BookStore';
 import {storeToRefs} from "pinia";
@@ -61,6 +61,8 @@ import { onMounted } from 'vue';
 import {getAuth} from "firebase/auth";
 import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/js/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import Tr from "@/i18n/translation";
 
 const bookStore = useBookStore();
 const { bookName } = storeToRefs(useBookStore())
@@ -69,6 +71,7 @@ const { t } = useI18n();
 const authStore = useAuthStore();
 const { user } = useAuthStore();
 const route = useRoute();
+const router = useRouter();
 
 const auth = getAuth();
 const userPhoto = ref(auth.currentUser?.photoURL || null);
@@ -79,8 +82,19 @@ onMounted(() => {
 
 getUser();
 
-const onLogout = () => {
-  authStore.logoutUser();
+const userLocale = Tr.currentLocale || 'en';
+
+const onLogout = async () => {
+  console.log("Logout initiated");
+  try {
+    await authStore.logoutUser();
+    console.log("Signout successful");
+    // Redirect to the login page or home page
+    await router.push('/' + userLocale + '/auth'); // or router.push('/') depending on your route structure
+  } catch (error) {
+    console.error("Logout failed", error);
+  }
+  console.log("Logout process completed");
 };
 
 
@@ -112,13 +126,14 @@ const accountItems = computed(() => [
   },
 ]);
 
-import { onAuthStateChanged } from "firebase/auth";
+
 
 
 onMounted(() => {
   const auth = getAuth();
 
   onAuthStateChanged(auth, (user) => {
+
     if (user) {
       userPhoto.value = user.photoURL;
     }

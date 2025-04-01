@@ -25,7 +25,7 @@
 
       </div>
     </form>
-    <a @click.prevent="showResetPW" class="cursor-pointer text-xs text-light">
+    <a @click.prevent="showResetPW" class="cursor-pointer text-xs">
       {{ $t('auth.forgot_password.link') }}
     </a>
   </div>

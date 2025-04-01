@@ -40,13 +40,13 @@
               :appliedFilters="appliedFilters"
           >
             <template v-slot:date="row">
-              <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
+              <RouterLink class="text-decoration-none" :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
                 <DateComponent :value="row.value" />
               </RouterLink>
             </template>
 
             <template v-slot:content="row">
-              <RouterLink :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
+              <RouterLink class="text-decoration-none" :to="{ name: 'editLine', params: { id: row.item.id, locale: route.params.locale } }">
                 {{ row.value }}
               </RouterLink>
             </template>

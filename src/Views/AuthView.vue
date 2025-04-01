@@ -3,10 +3,10 @@
     <div class="container">
       <div class="row align-items-center auth-tabs">
         <div class="text-center vertical-align p-5">
-          <h1 class="h4 text-light mb-3">
+          <h1 class="h4 mb-3">
             {{ $t('title') }}
           </h1>
-          <p class="text-sm text-light mb-5">
+          <p class="text-sm mb-5">
             {{ $t('intro') }}
           </p>
           <Tabs :id="'auth-tabs'" :tabs="tabs" />
@@ -38,12 +38,8 @@ const tabs = computed(() => [
     .nav-link {
       border: 0 !important;
       background: transparent;
-      color: #fff;
-
       &.active {
         background: transparent;
-        color: #fff;
-        border-bottom: 1px solid #fff !important;
       }
     }
   }

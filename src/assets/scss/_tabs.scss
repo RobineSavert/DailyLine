@@ -1,26 +1,26 @@
 .nav {
     .nav-link {
-        color: $bip-gray-dark;
+        /* color: $bip-gray-dark; */
 
         &.active {
-            color: $primary
-        }
-    }
+/*   color: $primary*/
+}
+}
 
-    &.nav-pills .nav-link {
-        &.active {
-            @extend .text-white;
-        }
-    }
+&.nav-pills .nav-link {
+&.active {
+   @extend .text-white;
+}
+}
 
-    &.nav-icons {
-        .nav-link {
-            @extend .d-flex;
-            align-items: center;
+&.nav-icons {
+.nav-link {
+   @extend .d-flex;
+   align-items: center;
 
-            span {
-                @extend .ms-2;
-            }
-        }
-    }
+   span {
+       @extend .ms-2;
+   }
+}
+}
 }

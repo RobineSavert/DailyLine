@@ -60,7 +60,7 @@
                                 </div>
                             </td>
                             <template v-for="(field, index) in cFields" :key="index">
-                                <td class="bg-transparent text-light" :class="[item[compareField] === undefined ? '' : item[compareField] == compareValue ? customClass : '',
+                                <td class="bg-transparent" :class="[item[compareField] === undefined ? '' : item[compareField] == compareValue ? customClass : '',
                                 (
                                     (index > 0 && index < cFields.length - skipTextCenterColsFromRight && alignCenter)
                                     ||
@@ -790,31 +790,10 @@ const isDisabled = (item) => {
 
 <style lang="scss" scoped>
 .table {
-  > :not(caption) > * > *{
-    color: #6e707e;
-  }
-
   td {
     max-width: 20vw;
     height: 57px;
     line-break: auto;
-  }
-
-  .btn.btn-light {
-    outline: 0 !important;
-    margin-left: 0 !important;
-
-    &:hover,
-    &:active {
-      background: #f8f9fc !important;
-      border: 0 solid transparent !important;
-      outline: 0 !important;
-      margin-left: 0 !important;
-    }
-  }
-
-  > :not(caption)>*>* {
-    color: var(--bs-gray-700)
   }
 }
 

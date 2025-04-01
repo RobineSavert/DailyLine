@@ -41,7 +41,7 @@ const layoutComponent = computed(() => {
 const currentTheme = computed(() => themeStore.themeName);
 
 function updateBodyTheme(theme) {
-  document.body.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-bs-theme', theme);
 }
 
 onMounted(async () => {

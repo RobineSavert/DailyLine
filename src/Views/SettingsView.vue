@@ -79,7 +79,7 @@ const themeStore = useThemeStore();
 
 // Change this to trigger both the theme update and the UI change
 const applyTheme = async (theme) => {
-  document.body.setAttribute("data-theme", theme); // Update the UI theme
+  document.body.setAttribute("data-bs-theme", theme); // Update the UI theme
   await themeStore.updateUserTheme(theme); // Update the theme in Firestore
 };
 
@@ -95,17 +95,12 @@ const themes = [
   {
     value: 'wildflowers',
     name: 'Wildflowers',
-    previewImage: 'src/assets/img/wildflowers-preview.jpg', // Use appropriate image path
+    previewImage: 'src/assets/img/wildflowers-preview.jpg',
   },
   {
-    value: 'dark',
-    name: 'Dark',
-    previewImage: 'src/assets/img/dark-preview.jpg', // Use appropriate image path
-  },
-  {
-    value: 'stars',
-    name: 'Stars',
-    previewImage: 'src/assets/img/stars-preview.jpg', // Use appropriate image path
+    value: 'moon',
+    name: 'Moon',
+    previewImage: 'src/assets/img/moon-preview.jpg',
   },
 ];
 </script>
@@ -144,11 +139,7 @@ const themes = [
   background-color: #d6e0d1; /* Replace with a color or gradient for wildflowers theme */
 }
 
-.dark {
-  background-color: #333; /* Replace with a color or gradient for dark theme */
-}
-
-.stars {
-  background-color: yellow; /* Replace with a color or gradient for stars theme */
+.moon {
+  background-color: #333; /* Replace with a color or gradient for moon theme */
 }
 </style>

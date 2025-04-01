@@ -4,10 +4,10 @@
             <form class="form-inline">
                 <div class="input-group">
                     <input v-model="filter" @input="inputSearch(filter)" type="text"
-                        class="form-control bg-light border-0 small"
+                        class="form-control small"
                         :placeholder="$t(searchPlaceholder)" :aria-label="$t('table.placeholder')"
                         aria-describedby="basic-addon2">
-                    <button @click="emptyFilter" v-if="filter.length !== 0" class="btn btn-light"
+                    <button @click="emptyFilter" v-if="filter.length !== 0" class="btn"
                         type="button">
                         <i class="bi-x"></i>
                     </button>

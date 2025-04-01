@@ -2,7 +2,7 @@
   <template v-if="item.type === 'select'">
     <label class="visually-hidden" :for="'dropdownTableFilters-' + randomSelectId">Filter</label>
     <div class="input-group">
-      <div class="input-group-text bg-light border-0 text-gray-800">
+      <div class="input-group-text">
         <i class="funnel-fill"></i>
       </div>
     <select class="form-select bg-light border-0 small" :id="'dropdownTableFilters-' + randomSelectId" @change="setSelectFilter">

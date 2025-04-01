@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-white border navbar-expand fixed-bottom">
+  <nav class="navbar navbar-light border navbar-expand fixed-bottom">
     <ul class="navbar-nav nav-justified w-100">
       <li
           class="nav-item"
@@ -68,28 +68,11 @@ const isActive = (name) => {
       .nav-icon {
         padding: 0.5rem;
         border-radius: 1.25rem;
-        color: var(--rs-primary);
         font-size: 1.5em;
       }
 
       &.active .nav-icon,
       &:hover .nav-icon {
-        background: var(--rs-primary);
-        background: -moz-linear-gradient(
-            150deg,
-            var(--rs-primary) 20%,
-            var(--rs-secondary) 90%
-        );
-        background: -webkit-linear-gradient(
-            150deg,
-            var(--rs-primary) 20%,
-            var(--rs-secondary) 90%
-        );
-        background: linear-gradient(
-            150deg,
-            var(--rs-primary) 20%,
-            var(--rs-secondary) 90%
-        );
 
         i {
           color: var(--rs-white);

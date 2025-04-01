@@ -72,3 +72,9 @@ onMounted(() => {
   onUnmounted(() => clearInterval(interval));
 });
 </script>
+
+<style scoped>
+.blockquote-footer {
+  color: var(--bs-blockquote-color)
+}
+</style>

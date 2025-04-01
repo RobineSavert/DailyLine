@@ -4,7 +4,7 @@
           class="mb-4 w-25 img-fluid"
           :src="image"
           :alt="$t(text)" />
-        <h4 class="text-gray-800"> {{ $t(text)}} </h4>
+        <h4> {{ $t(text)}} </h4>
       </div>
 </template>
 

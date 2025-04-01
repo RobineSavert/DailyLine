@@ -8,8 +8,7 @@ import { createPinia } from 'pinia';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import '@/assets/scss/styles.scss'
 import '@/assets/themes/wildflowers.scss'
-import '@/assets/themes/dark.scss'
-import '@/assets/themes/stars.scss'
+import '@/assets/themes/moon.scss'
 import 'core-js/es/array/includes'
 import Toast from "@/components/Toast.vue"
 

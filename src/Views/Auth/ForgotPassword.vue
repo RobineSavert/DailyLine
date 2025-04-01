@@ -15,7 +15,7 @@
               :content="'buttons.forgot_password'" />
 
     </div>
-    <a @click.prevent="backToLogin" class="btn btn-link text-light text-sm">
+    <a @click.prevent="backToLogin" class="btn btn-link text-sm">
       {{ $t('auth.forgot_password.back_to_login') }}
     </a>
   </form>

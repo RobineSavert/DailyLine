@@ -16,7 +16,7 @@ export const useThemeStore = defineStore('themeStore', () => {
 
         if (!userId) {
             themeName.value = 'wildflowers';
-            document.body.setAttribute("data-theme", themeName.value);
+            document.body.setAttribute("data-bs-theme", themeName.value);
             return;
         }
 
@@ -30,7 +30,7 @@ export const useThemeStore = defineStore('themeStore', () => {
         }
 
         // Apply the theme globally
-        document.body.setAttribute("data-theme", themeName.value);
+        document.body.setAttribute("data-bs-theme", themeName.value);
     };
 
     // Update the user's theme in the database
@@ -40,7 +40,7 @@ export const useThemeStore = defineStore('themeStore', () => {
         if (!userId) {
             console.error('User ID is undefined');
             themeName.value = newThemeName;
-            document.body.setAttribute("data-theme", newThemeName);
+            document.body.setAttribute("data-bs-theme", newThemeName);
             return;
         }
 
@@ -49,7 +49,7 @@ export const useThemeStore = defineStore('themeStore', () => {
         try {
             await setDoc(settingsDoc, { themeName: newThemeName }, { merge: true });
             themeName.value = newThemeName;
-            document.body.setAttribute("data-theme", newThemeName);
+            document.body.setAttribute("data-bs-theme", newThemeName);
         } catch (error) {
             console.error('Error updating theme in Firestore:', error);
             messageStore.addMessage(1, { title: 'settings.theme_error: ' + error });

@@ -9,7 +9,7 @@
             {{ t("lines.you_have_written", { lines: totalLines }) }}
           </span>
           <span v-if="totalLines >= 10">
-             {{ t("lines.you_have_written_average", { average: decimal.toFixed(2) }) }}
+            {{ t("lines.you_have_written_average", { average: averageLinesPerWeek }) }}
           </span>
           <span>
              {{ t("lines.the_last_line_date", { date_line: lastLineDate }) }}..
@@ -30,12 +30,22 @@ import {useLinesStore} from "@/stores/LinesStore";
 import {computed} from "vue";
 import {useI18n} from "vue-i18n";
 import Tr from "@/i18n/translation";
+import { parseISO, differenceInWeeks } from "date-fns";
 
-const {t} = useI18n()
+
+const { t } = useI18n()
 const linesStore = useLinesStore();
 const { lines } = storeToRefs(linesStore);
 const totalLines = computed(() => lines.value.length);
-const decimal = computed(() => totalLines.value / 7);
+
+const weeksSinceFirstEntry = computed(() => {
+  if (lines.value.length === 0) return 1;
+  const firstDate = parseISO(lines.value[lines.value.length - 1].date);
+  const lastDate = parseISO(lines.value[0].date);
+  return Math.max(1, differenceInWeeks(lastDate, firstDate) + 1);
+});
+
+const averageLinesPerWeek = computed(() => (totalLines.value / weeksSinceFirstEntry.value).toFixed(2));
 
 const userLocale = Tr.currentLocale || 'en';
 

@@ -15,7 +15,7 @@ import { ref, onMounted } from 'vue';
 const props = defineProps({
   duration: {
     type: Number,
-    default: 3000, // Default visible duration in milliseconds
+    default: 5000, // Default visible duration in milliseconds
   },
 });
 
@@ -32,7 +32,7 @@ onMounted(() => {
   // Trigger fade-in
   setTimeout(() => {
     show.value = true; // Start fade-in
-  }, 500); // Small delay to ensure CSS transition works
+  }, 200); // Small delay to ensure CSS transition works
 
   // Trigger fade-out after the duration
   setTimeout(() => {
@@ -40,14 +40,14 @@ onMounted(() => {
     setTimeout(() => {
       isVisible.value = false; // Remove component after fade-out
       emit('finished'); // Notify parent
-    }, 500); // Matches the CSS transition duration
+    }, 200); // Matches the CSS transition duration
   }, props.duration);
 });
 </script>
 
 <style scoped>
 .fade {
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
   opacity: 0;
 }
 

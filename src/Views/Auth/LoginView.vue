@@ -54,7 +54,6 @@ const credentials = reactive({
 const userLocale = Tr.currentLocale || 'en';
 
 const onSubmit = () => {
-  console.log("hallo");
   if (!credentials.email || !credentials.password) {
     addMessage(1, { title: 'auth.please_enter', type: 'danger' })
     return;

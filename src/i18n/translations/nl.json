@@ -124,7 +124,8 @@
     "stats": "Statistieken",
     "view_stats": "Bekijk de statistieken",
     "update_book_name_succes" : "Naam van het boek is gewijzigd!",
-    "update_book_name_failed" : "Het is niet gelukt om de boeknaam te wijzigen.."
+    "update_book_name_failed" : "Het is niet gelukt om de boeknaam te wijzigen..",
+    "update_photo_success": "Afbeelding is gewijzigd!"
   },
   "settings": {
     "title": "Instellingen",

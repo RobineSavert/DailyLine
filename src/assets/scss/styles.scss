@@ -8,15 +8,6 @@
 @import "../../../node_modules/bootstrap/scss/utilities/_api.scss";
 
 
-$custom-colors: (
-  "tertiary": $purple
-);
-
-$theme-colors: map-merge($theme-colors, $custom-colors);
-
-.bg-tertiary{background-color: var(--bs-purple);}
-.btn-tertiary{background-color: var(--bs-purple);}
-.text-tertiary{color: var(--bs-purple);}
 
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

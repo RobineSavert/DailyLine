@@ -21,7 +21,6 @@ const Trans = {
   async switchLanguage(newLocale) {
     if(newLocale != '' && newLocale != null && newLocale != undefined)
     {
-      console.log(newLocale) // logs
       await Trans.loadLocaleMessages(newLocale)
       Trans.currentLocale = newLocale
       document.querySelector("html").setAttribute("lang", newLocale)
@@ -32,7 +31,6 @@ const Trans = {
   async loadLocaleMessages(locale) {
     if(!i18n.global.availableLocales.includes(locale)) {
       const messages = await import(`@/i18n/translations/${locale}.json`)
-      console.log(messages);
       i18n.global.setLocaleMessage(locale, messages.default)
     }
 

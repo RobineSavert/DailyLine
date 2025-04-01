@@ -124,18 +124,15 @@ router.beforeEach(async (to, from, next) => {
 
   // Handle authentication
   if (to.name === 'auth' && isAuthenticated) {
-    console.log('Redirecting authenticated user from auth to dashboard');
     return next({ name: 'dashboard', params: { locale: to.params.locale } });
   }
 
   if (to.name === 'Logout') {
-    console.log('Logging out user');
     await authStore.logoutUser();
     return next({ name: 'auth', params: { locale: to.params.locale } });
   }
 
   if (to.meta.requiresAuth && !isAuthenticated) {
-    console.log('Unauthenticated user trying to access protected route');
     return next({ name: 'auth', params: { locale: to.params.locale } });
   }
 
@@ -147,17 +144,13 @@ router.beforeEach(async (to, from, next) => {
   //   next();
   // }
 
-  console.log(isAuthenticated)
-
   if (to.path === '/') {
-    console.log('Root path accessed, redirecting based on auth status');
     return next(isAuthenticated
         ? { name: 'dashboard', params: { locale: to.params.locale } }
         : { name: 'auth', params: { locale: to.params.locale } }
     );
   }
 
-  console.log('Proceeding with navigation');
   next();
 });
 

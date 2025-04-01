@@ -35,9 +35,5 @@ const noLineWrittenForToday = computed(() => {
 
 const {isLoggedIn} = storeToRefs(useAuthStore());
 const route = useRoute()
-console.log(isLoggedIn.value)
-
-console.log("Route meta:", route.meta);
-console.log("Route path:", route.path);
 
 </script>

@@ -52,7 +52,7 @@ const { t } = useI18n()
 const linesStore = useLinesStore();
 const lineContent = ref('');
 let currentLine = ref(route.params.id)
-console.log(route.params);
+
 lineContent.value = linesStore.getLineContentById(route.params.id);
 
 let newLine = ref(lineContent.value)
@@ -66,8 +66,6 @@ const onLineSave = () => {
 const emit = defineEmits(['delete-line'])
 
 function onShowDeleteModal() {
-  console.log(eventBus);
-  console.log("hier?")
   const title = t("lines.delete_modal.title");
   const body = t("lines.delete_modal.body");
   const buttonText = t("buttons.delete");

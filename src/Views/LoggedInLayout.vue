@@ -19,7 +19,6 @@ const themeStore = useThemeStore();
 const route = useRoute();
 
 const layoutComponent = computed(() => {
-  console.log(route)
   switch (true) {
     case route.path.startsWith('/' + route.params.locale + '/account'):
       return AccountLayout;
@@ -70,7 +69,6 @@ onMounted(async () => {
 
 const {isLoggedIn} = storeToRefs(useAuthStore());
 
-console.log(isLoggedIn.value)
 watch(() => isLoggedIn.value, (newValue) => {
   console.log("isLoggedIn changed:", newValue);
 });

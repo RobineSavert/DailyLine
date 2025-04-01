@@ -1,16 +1,16 @@
 <template>
 
   <template v-if="showInBetweenScreen">
-    <InBetweenScreen :duration="3000" @finished="handleFinished">
+    <InBetweenScreen :duration="1000" @finished="handleFinished">
       <template v-slot:image>
         <div class="fullscreen-image-container">
-          <img class="fullscreen-image" :src="img" :alt="$t('loading')" />
+          <img class="fullscreen-image" :src="showImageBasedOnTheme" :alt="$t('loading')" />
         </div>
       </template>
     </InBetweenScreen>
   </template>
     <template v-else>
-      <div class="container-fluid">
+      <div class="container-fluid mb-5 pb-5">
         <div class="row clearfix pt-3 pb-5 mb-5 settings">
           <div class="col">
             <RouterView />
@@ -33,14 +33,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import NavBar from '@/components/Layout/NavBar.vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/AuthStore';
 import eventBus from "@/eventBus";
 import Modal from "@/components/Modal.vue";
-import img from '@/assets/img/img.png';
 import InBetweenScreen from "@/Views/InBetweenScreen.vue";
+import { useThemeStore } from '@/stores/ThemeStore';
+import moonWaiting from '@/assets/img/moon/waiting.png';
+import wildflowersWaiting from '@/assets/img/wildflowers/waiting.png';
+
+const themeStore = useThemeStore();
+
+const { themeName } = storeToRefs(themeStore);
+
+const showImageBasedOnTheme = computed(() => {
+  if(themeName.value === "moon"){
+    return moonWaiting
+  } else if(themeName.value === "wildflowers"){
+    return wildflowersWaiting
+  }
+});
+
 
 const { isLoggedIn } = storeToRefs(useAuthStore());
 let showInBetweenScreen = ref(true);

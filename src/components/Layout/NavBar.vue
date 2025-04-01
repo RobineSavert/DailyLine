@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-light border navbar-expand fixed-bottom">
-    <ul class="navbar-nav nav-justified w-100">
+  <nav class="navbar border-top bg-primary navbar-expand fixed-bottom">
+    <ul class="navbar-nav nav-justified w-100 bg-primary">
       <li
           class="nav-item"
           v-for="(navItem, index) in navItems"
@@ -14,7 +14,7 @@
           <div class="nav-icon">
             <i :class="'bi-' + navItem.icon"></i>
           </div>
-          <span class="text-xs text-primary">
+          <span class="text-xs text-tertiary">
             {{ t(navItem.translation) }}
           </span>
         </RouterLink>

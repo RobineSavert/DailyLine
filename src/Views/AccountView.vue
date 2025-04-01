@@ -1,4 +1,7 @@
 <template>
+  <Spinner v-if="loading" />
+
+  <template v-else>
   <Alert />
 
   <TitleComponent :title="'account.title'" />
@@ -44,6 +47,7 @@
         <a @click="onLogout" class="text-danger btn btn-link">{{ $t('account.logout') }}</a>
     </div>
   </div>
+  </template>
 </template>
 
 <script setup>
@@ -63,9 +67,12 @@ import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage
 import { storage } from "@/js/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Tr from "@/i18n/translation";
+import {useMessageStore} from "@/stores/MessagesStore";
+import Spinner from "../components/Spinner.vue";
 
 const bookStore = useBookStore();
 const { bookName } = storeToRefs(useBookStore())
+const { messageStore } = storeToRefs(useMessageStore())
 const { getUser } = useAccountStore();
 const { t } = useI18n();
 const authStore = useAuthStore();
@@ -83,18 +90,16 @@ onMounted(() => {
 getUser();
 
 const userLocale = Tr.currentLocale || 'en';
+let loading = ref(false);
 
 const onLogout = async () => {
-  console.log("Logout initiated");
   try {
     await authStore.logoutUser();
-    console.log("Signout successful");
     // Redirect to the login page or home page
     await router.push('/' + userLocale + '/auth'); // or router.push('/') depending on your route structure
   } catch (error) {
-    console.error("Logout failed", error);
+    messageStore.addMessage(0,{ title: error });
   }
-  console.log("Logout process completed");
 };
 
 
@@ -112,12 +117,6 @@ const accountItems = computed(() => [
     link: 'editPassword',
     body: '******'
   },
-  // {
-  //   key: 'displayname-card',
-  //   title: 'account.display_name',
-  //   link: 'editDisplayName',
-  //   body: user.displayName
-  // },
   {
     key: 'bookname-card',
     title: 'account.bookname',
@@ -154,14 +153,17 @@ function changePhoto() {
     const fileRef = storageRef(storage, storagePath);
 
     try {
+      loading.value = true;
       await uploadBytes(fileRef, file);
       const downloadURL = await getDownloadURL(fileRef);
 
       await accountStore.updatePhotoUrl(downloadURL);
 
       userPhoto.value = downloadURL;
+      loading.value = false;
     } catch (error) {
-      console.error("Error uploading photo:", error);
+      messageStore.addMessage(0,{ title: error });
+      loading.value = false;
     }
   };
 

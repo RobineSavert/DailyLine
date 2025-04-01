@@ -51,8 +51,6 @@ export const useAccountStore = defineStore('accountStore', () => {
     //     });
     // }
     const updateUserEmail = (email) => {
-        console.log(auth.currentUser)
-        console.log(email)
         verifyBeforeUpdateEmail(auth.currentUser, email).then(() => {
             authStore.logoutUser();
         }).catch((error) => {
@@ -61,8 +59,6 @@ export const useAccountStore = defineStore('accountStore', () => {
     }
 
     const updateUserPassword = (newPassword) => {
-        console.log(user)
-        console.log(newPassword)
         updatePassword(user, newPassword).then(() => {
             messageStore.addMessage(0,{ title: 'account.update_password_success' });
         }).catch((error) => {
@@ -79,9 +75,9 @@ export const useAccountStore = defineStore('accountStore', () => {
                 await updateProfile(user, {
                     photoURL: downloadUrl,
                 });
-                console.log("PhotoURL updated successfully:", downloadUrl);
+                messageStore.addMessage(0,{ title: 'account.update_photo_success' });
             } catch (error) {
-                console.error("Error updating photoURL:", error);
+                messageStore.addMessage(0,{ title: error });
             }
         }
     }

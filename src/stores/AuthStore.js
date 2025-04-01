@@ -20,8 +20,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const checkAuthState = () => {
     return new Promise((resolve) => {
       const unsubscribe = onAuthStateChanged(auth, (userDetails) => {
-        console.log("Auth state changed", user ? "User logged in" : "User logged out");
-        if (userDetails) {
+       if (userDetails) {
           const { uid, displayName, photoURL, email } = userDetails;
           user.value = { email, uid, displayName, photoURL };
           isLoggedIn.value = true;
@@ -54,10 +53,8 @@ export const useAuthStore = defineStore('authStore', () => {
   };
 
   const loginUser = (credentials) => {
-    console.log("hier")
     signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
-          console.log("succes")
           isLoggedIn.value = true;
         })
         .catch((error) => {

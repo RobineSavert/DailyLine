@@ -1,6 +1,6 @@
 <template>
   <div class="overlay-spinner d-flex align-items-center position-fixed flex-column justify-content-center">
-    <i class="gear-wide-connected mx-auto position-relative"></i>
+    <span class="gear-wide-connected mx-auto position-relative">LOADING</span>
   </div>
 </template>
 
@@ -17,5 +17,3 @@
   margin-top: 1rem;
 }
 </style>
-<script setup lang="ts">
-</script>

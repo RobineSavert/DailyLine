@@ -76,7 +76,7 @@ import {useMessageStore} from "@/stores/MessagesStore";
 
 
 const linesStore = useLinesStore();
-const { lines, linesLoaded, addLine } = storeToRefs(linesStore);
+const { lines, linesLoaded } = storeToRefs(linesStore);
 const settingsStore = useSettingsStore();
 const { autoFillMissingDays } = storeToRefs(useSettingsStore())
 const {addMessage} = useMessageStore()
@@ -88,9 +88,6 @@ onMounted(async () => {
 
   await settingsStore.fetchAutoFillLines();
 
-  // if (autoFillMissingDays.value) {
-  //   await checkAndAddMissingDays();
-  // }
 });
 
 

@@ -124,7 +124,8 @@
     "stats": "Statistics",
     "view_stats": "View your statistics",
     "update_book_name_succes" : "Book name updated successfully!",
-    "update_book_name_failed" : "Failed to update book name.."
+    "update_book_name_failed" : "Failed to update book name..",
+    "update_photo_success": "Profile picture updated successfully!"
   },
   "settings": {
     "title": "Settings",
